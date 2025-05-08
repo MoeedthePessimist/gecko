@@ -6,8 +6,9 @@ import { maritalStatusesEnum } from "@/enums/marital-statuses.enum";
 import { nationalitiesEnum } from "@/enums/nationalities.enum";
 import { raceEnum } from "@/enums/race.enum";
 import { rolesEnum } from "@/enums/roles.enum";
+import { BaseType } from "./base.type";
 
-export type User = {
+export type User = BaseType & {
   name: string;
   email: string;
   password?: string;
