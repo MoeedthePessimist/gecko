@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import QueryProvider from "../providers/query-provider";
 import { UserProvider } from "../context/user-context";
+import Header from "@/components/header";
+import { cn } from "@/lib/utils";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,9 +31,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <QueryProvider>
-          <UserProvider>{children}</UserProvider>
-        </QueryProvider>
+        <div className={cn("h-dvh max-h-dvh flex flex-col")}>
+          <Header />
+          <div className={cn("h-full")}>
+            <QueryProvider>
+              <UserProvider>{children}</UserProvider>
+            </QueryProvider>
+          </div>
+        </div>
       </body>
     </html>
   );
