@@ -1,24 +1,33 @@
+import { addressTypesEnum } from "@/enums/address-types.enum";
+import { countriesEnum } from "@/enums/countries.enum";
+import { gendersEnum } from "@/enums/genders.enum";
+import { identitiesEnum } from "@/enums/identities.enum";
+import { maritalStatusesEnum } from "@/enums/marital-statuses.enum";
+import { nationalitiesEnum } from "@/enums/nationalities.enum";
+import { raceEnum } from "@/enums/race.enum";
+import { rolesEnum } from "@/enums/roles.enum";
+
 export type User = {
   name: string;
   email: string;
-  password?: string; // not selected by default
+  password?: string;
   isEmailVerified: boolean;
   identityNumber: string;
-  identityType: string; // identitiesEnum
+  identityType: identitiesEnum | string;
   dateOfBirth: Date | null;
-  addressType: string; // addressTypesEnum
-  country: string; // countriesEnum
+  addressType: addressTypesEnum | string;
+  country: countriesEnum | string;
   address: string;
   postalCode: string;
   city: string;
   state: string;
-  gender: string; // gendersEnum
-  race: string; // raceEnum
+  gender: gendersEnum | string;
+  race: raceEnum | string;
   mobileNumber: string;
-  roles: string[]; // rolesEnum[]
+  roles: rolesEnum[] | string[];
   avatar: string;
-  nationality: string; // nationalitiesEnum
-  maritalStatus: string; // maritalStatusesEnum
+  nationality: nationalitiesEnum | string;
+  maritalStatus: maritalStatusesEnum | string;
   cpfNumber?: string;
   taxNumber?: string;
 
