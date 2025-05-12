@@ -22,11 +22,11 @@ const LoginForm = () => {
       .
       <form
         onSubmit={loginForm.handleSubmit(onSubmit)}
-        className=" w-[70%] px-8 py-8 flex flex-col gap-8"
+        className={cn("w-full px-8 py-8 flex flex-col gap-8", "md:w-[70%]")}
       >
         <div className="flex flex-col items-center gap-2 text-center">
           <h1 className="text-2xl font-bold">Login to your account</h1>
-          <p className="text-balance text-sm text-muted-foreground">
+          <p className={cn("text-sm text-muted-foreground", "md:text-balance")}>
             Enter your email below to login to your account
           </p>
         </div>

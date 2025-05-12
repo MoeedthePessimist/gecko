@@ -27,7 +27,7 @@ export default function RootLayout({
       <body className={`${poppins.className} antialiased`}>
         <div className={cn("h-dvh max-h-dvh flex flex-col")}>
           <Header />
-          <div className={cn("h-full")}>
+          <div className={cn("h-full mt-12")}>
             <QueryProvider>
               <UserProvider>{children}</UserProvider>
             </QueryProvider>
