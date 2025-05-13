@@ -15,6 +15,7 @@ import { industriesList } from "@/enums/industries.enum";
 import ControlledCheckbox from "../controlled-checkbox";
 import Link from "next/link";
 import ActivityIndicator from "../activity-indicatior";
+import AppButton from "../app-button";
 
 const RegisterForm = () => {
   const {
@@ -22,6 +23,7 @@ const RegisterForm = () => {
     companyRegisterForm,
     onSubmitCompany,
     onSubmitUser,
+    isLoading,
   } = useRegister();
   const [stepper, setStepper] = useState<number>(0);
 
@@ -29,12 +31,10 @@ const RegisterForm = () => {
   const { control: companyControl } = companyRegisterForm;
 
   const handleCompanyRegister = () => {
-    console.log("handle register company");
     companyRegisterForm.handleSubmit(onSubmitCompany)();
   };
 
   const handleUserRegister = () => {
-    console.log("handle register user");
     userRegisterForm.handleSubmit((data) =>
       onSubmitUser(data, () => handleStepper(1))
     )();
@@ -155,13 +155,22 @@ const RegisterForm = () => {
             </p>
           </ControlledCheckbox>
 
-          <Button className={cn("bg-dark")} onClick={() => handleStepper(-1)}>
-            Edit Personal Details
-          </Button>
+          <AppButton
+            buttonOptions={{
+              className: "bg-dark",
+              onClick: () => handleStepper(-1),
+            }}
+            title="Edit Personal Details"
+          />
 
-          <Button className={cn("bg-dark")} onClick={handleCompanyRegister}>
-            Register
-          </Button>
+          <AppButton
+            buttonOptions={{
+              className: "bg-dark",
+              onClick: handleCompanyRegister,
+            }}
+            title="Register"
+            isLoading={isLoading}
+          />
         </>
       );
     }

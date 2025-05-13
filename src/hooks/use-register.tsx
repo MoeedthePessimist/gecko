@@ -7,8 +7,12 @@ import {
 } from "@/schemas/register-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import useAuth from "./use-auth";
+import { RegisterApiRequestType } from "@/types/api.type";
 
 const useRegister = () => {
+  const { registerMutate, isRegisterPending: isLoading } = useAuth();
+
   const userRegisterForm = useForm<UserRegisterFormInputs>({
     resolver: zodResolver(userRegisterSchema),
     defaultValues: {
@@ -45,6 +49,18 @@ const useRegister = () => {
   const onSubmitCompany = (data: CompanyRegisterFormInputs) => {
     console.log("onSubmit called");
     console.log("company data:", data);
+
+    const { confirmPassword, ...user } = userRegisterForm.getValues();
+    const { termsAccepted, ...company } = companyRegisterForm.getValues();
+
+    onSubmit({
+      user,
+      company,
+    });
+  };
+
+  const onSubmit = (data: RegisterApiRequestType) => {
+    registerMutate(data);
   };
 
   return {
@@ -52,6 +68,7 @@ const useRegister = () => {
     companyRegisterForm,
     onSubmitCompany,
     onSubmitUser,
+    isLoading,
   };
 };
 

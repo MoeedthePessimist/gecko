@@ -10,12 +10,12 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import AppButton from "../app-button";
 
 const LoginForm = () => {
-  const { loginForm, onSubmit } = useLogin();
+  const { loginForm, onSubmit, isLoading } = useLogin();
 
   return (
     <Form {...loginForm}>
@@ -61,9 +61,14 @@ const LoginForm = () => {
         <Link href={""} className={cn("text-sm text-right hover:underline")}>
           Forgot Password?
         </Link>
-        <Button type="submit" className={cn("bg-dark")}>
-          Submit
-        </Button>
+        <AppButton
+          buttonOptions={{
+            type: "submit",
+            className: "bg-dark",
+          }}
+          title="Login"
+          isLoading={isLoading}
+        />
       </form>
     </Form>
   );

@@ -7,6 +7,7 @@ import { nationalitiesEnum } from "@/enums/nationalities.enum";
 import { raceEnum } from "@/enums/race.enum";
 import { rolesEnum } from "@/enums/roles.enum";
 import { BaseType } from "./base.type";
+import { Company } from "./company.type";
 
 export type User = BaseType & {
   name: string;
@@ -47,5 +48,5 @@ export type User = BaseType & {
   overtimes?: string[];
   todos?: string[];
   leaves?: string[];
-  company?: string;
+  company?: string | Company;
 };
