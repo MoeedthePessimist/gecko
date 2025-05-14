@@ -8,7 +8,7 @@ export type LoginApiRequestType = {
 
 export type LoginApiResponseType = {
   user: User;
-  token: string;
+  accessToken: string;
 };
 
 export type RegisterApiRequestType = {
