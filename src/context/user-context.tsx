@@ -1,6 +1,6 @@
 "use client";
 
-import { UserContextType } from "@/types/context.types";
+import { UserContextType } from "@/types/context.type";
 import React, { createContext, useContext, useState } from "react";
 
 type UserProviderProps = {

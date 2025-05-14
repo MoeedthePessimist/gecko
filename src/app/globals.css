@@ -112,11 +112,19 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+@theme {
+  --color-primary: #2d3142;
+  --color-secondary: #bfc0c0;
+  --color-light: #ffffff;
+  --color-accent: #ef8354;
+  --color-dark: #4f5d75;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-light text-foreground;
   }
 }
