@@ -1,3 +1,4 @@
+import AuthRedirect from "@/components/wrappers/auth-redirect";
 import { cn } from "@/lib/utils";
 import React from "react";
 
@@ -7,9 +8,11 @@ type AuthLayoutProps = {
 
 const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
   return (
-    <div className={cn("flex w-full h-full justify-center items-center")}>
-      {children}
-    </div>
+    <AuthRedirect>
+      <div className={cn("flex w-full h-full justify-center items-center")}>
+        {children}
+      </div>
+    </AuthRedirect>
   );
 };
 

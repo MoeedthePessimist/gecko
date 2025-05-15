@@ -1,6 +1,6 @@
 import { login, register } from "@/api/auth";
 import { locals } from "@/constants/locals";
-import { routes } from "@/constants/routes";
+import { ROUTES } from "@/constants/routes";
 import { useAuthContext } from "@/context/auth-context";
 import { LoginApiResponseType } from "@/types/api.type";
 import { useMutation } from "@tanstack/react-query";
@@ -23,7 +23,7 @@ const useAuth = () => {
       setUser(data.user);
       setIsLoggedIn(true);
       localStorage.setItem(locals.AUTH_TOKEN, data.accessToken);
-      router.replace(routes.COMPANY);
+      router.replace(ROUTES.COMPANY);
     },
     onError: (error: AxiosError) => {
       console.error(error);
@@ -39,7 +39,7 @@ const useAuth = () => {
     mutationFn: register,
     retry: 1,
     onSuccess: () => {
-      router.replace(routes.LOGIN);
+      router.replace(ROUTES.LOGIN);
     },
     onError: (error: AxiosError) => {
       console.error(error);

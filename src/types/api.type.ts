@@ -17,3 +17,7 @@ export type RegisterApiRequestType = {
 };
 
 export type RegisterApiResponseType = undefined;
+
+export type MeApiResponseType = {
+  user: User;
+};

@@ -1,6 +1,5 @@
 "use client";
 
-import { locals } from "@/constants/locals";
 import { rolesEnum } from "@/enums/roles.enum";
 import { AuthContextType } from "@/types/context.type";
 import { User } from "@/types/user.type";
@@ -23,11 +22,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [user, setUser] = useState<User | null>(null);
   const [role, setRole] = useState<rolesEnum | string>("");
-
-  React.useEffect(() => {
-    console.log(localStorage.getItem(locals.AUTH_TOKEN));
-    // add logic to verify user login status and redirect them to the specific route and also set the context states
-  }, []);
 
   return (
     <AuthContext.Provider

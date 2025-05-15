@@ -1,4 +1,5 @@
 import api from "@/configs/axios";
+import { API } from "@/constants/api";
 import {
   LoginApiRequestType,
   LoginApiResponseType,
@@ -9,13 +10,13 @@ import {
 export const login = async (
   data: LoginApiRequestType
 ): Promise<LoginApiResponseType> => {
-  const response = await api.post("/auth/login", data);
+  const response = await api.post(API.LOGIN, data);
   return response.data;
 };
 
 export const register = async (
   data: RegisterApiRequestType
 ): Promise<RegisterApiResponseType> => {
-  const response = await api.post("/auth/register", data);
+  const response = await api.post(API.REGISTER, data);
   return response.data;
 };
