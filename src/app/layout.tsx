@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import QueryProvider from "../providers/query-provider";
-import { UserProvider } from "../context/user-context";
+import { AuthProvider } from "../context/auth-context";
 import Header from "@/components/header";
 import { cn } from "@/lib/utils";
 
@@ -29,7 +29,7 @@ export default function RootLayout({
           <Header />
           <div className={cn("h-full mt-12")}>
             <QueryProvider>
-              <UserProvider>{children}</UserProvider>
+              <AuthProvider>{children}</AuthProvider>
             </QueryProvider>
           </div>
         </div>

@@ -1,12 +1,18 @@
 import { login, register } from "@/api/auth";
-import {
-  LoginApiResponseType,
-  RegisterApiResponseType,
-} from "@/types/api.type";
+import { locals } from "@/constants/locals";
+import { ROUTES } from "@/constants/routes";
+import { useAuthContext } from "@/context/auth-context";
+import { rolesEnum } from "@/enums/roles.enum";
+import { LoginApiResponseType } from "@/types/api.type";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
 
 const useAuth = () => {
+  const router = useRouter();
+
+  const { setIsLoggedIn, setUser, setRole } = useAuthContext();
+
   const {
     mutate: loginMutate,
     reset: loginReset,
@@ -15,10 +21,17 @@ const useAuth = () => {
     mutationFn: login,
     retry: 1,
     onSuccess: (data: LoginApiResponseType) => {
-      console.log(data);
+      const role = data.user.roles[0] as rolesEnum;
+      setUser(data.user);
+      setRole(role);
+      setIsLoggedIn(true);
+      localStorage.setItem(locals.AUTH_TOKEN, data.accessToken);
+      if (role === rolesEnum.ADMIN) router.replace(ROUTES.ADMIN);
+      else if (role === rolesEnum.EMPLOYEE) router.replace(ROUTES.EMPLOYEE);
     },
     onError: (error: AxiosError) => {
       console.error(error);
+      logout();
     },
   });
 
@@ -29,13 +42,21 @@ const useAuth = () => {
   } = useMutation({
     mutationFn: register,
     retry: 1,
-    onSuccess: (data: RegisterApiResponseType) => {
-      console.log(data);
+    onSuccess: () => {
+      router.replace(ROUTES.LOGIN);
     },
     onError: (error: AxiosError) => {
       console.error(error);
     },
   });
+
+  const logout = () => {
+    localStorage.clear();
+    setIsLoggedIn(false);
+    setUser(null);
+    setRole("");
+    router.replace(ROUTES.LOGIN);
+  };
 
   return {
     loginMutate,
@@ -44,6 +65,7 @@ const useAuth = () => {
     registerMutate,
     registerReset,
     isRegisterPending,
+    logout,
   };
 };
 
