@@ -1,9 +1,9 @@
 "use client";
 
 import { me } from "@/api/user";
-import { ROUTES } from "@/constants/routes";
 import { useAuthContext } from "@/context/auth-context";
 import { rolesEnum } from "@/enums/roles.enum";
+import useAuth from "@/hooks/use-auth";
 import { useTypedQuery } from "@/hooks/use-query";
 import { MeApiResponseType } from "@/types/api.type";
 import { useRouter } from "next/navigation";
@@ -17,6 +17,7 @@ const AuthProtectedRoute: React.FC<AuthProtectedRouteProps> = ({
   children,
 }) => {
   const { setIsLoggedIn, setRole, setUser } = useAuthContext();
+  const { logout } = useAuth();
   const router = useRouter();
 
   const { data, isError, isSuccess, isFetching } =
@@ -29,7 +30,7 @@ const AuthProtectedRoute: React.FC<AuthProtectedRouteProps> = ({
   // Handle auth state and redirect in an effect
   useEffect(() => {
     if (isError) {
-      router.replace(ROUTES.LOGIN);
+      logout();
     }
 
     if (isSuccess && data) {

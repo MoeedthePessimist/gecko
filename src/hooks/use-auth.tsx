@@ -54,6 +54,7 @@ const useAuth = () => {
     localStorage.clear();
     setIsLoggedIn(false);
     setUser(null);
+    router.replace(ROUTES.LOGIN);
   };
 
   return {
