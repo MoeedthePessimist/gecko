@@ -70,6 +70,7 @@ const RegisterForm = () => {
             label="Email"
             name="email"
             placeholder="Enter your email"
+            type={"email"}
           />
 
           <ControlledInput<UserRegisterFormInputs>
@@ -77,6 +78,7 @@ const RegisterForm = () => {
             label="Password"
             name="password"
             placeholder="Enter your password"
+            type={"password"}
           />
           <ControlledInput<UserRegisterFormInputs>
             control={userControl}

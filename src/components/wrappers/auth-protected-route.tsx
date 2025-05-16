@@ -8,6 +8,7 @@ import { useTypedQuery } from "@/hooks/use-query";
 import { MeApiResponseType } from "@/types/api.type";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
+import SpinnerLoader from "../ui/loader";
 
 type AuthProtectedRouteProps = {
   children: React.ReactNode;
@@ -41,7 +42,11 @@ const AuthProtectedRoute: React.FC<AuthProtectedRouteProps> = ({
   }, [isError, isSuccess, data, setIsLoggedIn, setRole, setUser, router]);
 
   if (isFetching) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex flex-1 h-full w-full justify-center items-center">
+        <SpinnerLoader variant="dots" size="md" text="Loading user data" />
+      </div>
+    );
   }
 
   // Only render children if user is authenticated

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { HTMLInputTypeAttribute } from "react";
 import {
   FormControl,
   FormField,
@@ -15,6 +15,8 @@ type ControlledInputProps<TFieldValues extends FieldValues> = {
   name: FieldPath<TFieldValues>;
   label?: string;
   placeholder: string;
+  classNames?: string;
+  type?: HTMLInputTypeAttribute;
 };
 
 const ControlledInput = <TFieldValues extends FieldValues>({
@@ -22,6 +24,8 @@ const ControlledInput = <TFieldValues extends FieldValues>({
   name,
   label,
   placeholder,
+  classNames,
+  type = "text",
 }: ControlledInputProps<TFieldValues>) => {
   return (
     <FormField
@@ -31,7 +35,12 @@ const ControlledInput = <TFieldValues extends FieldValues>({
         <FormItem>
           {label && <FormLabel>{label}</FormLabel>}
           <FormControl>
-            <Input placeholder={placeholder} {...field} />
+            <Input
+              placeholder={placeholder}
+              {...field}
+              className={`text-sm ${classNames}`}
+              type={type}
+            />
           </FormControl>
           <FormMessage />
         </FormItem>

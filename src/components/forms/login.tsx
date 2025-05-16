@@ -1,18 +1,12 @@
 "use client";
 import useLogin from "@/hooks/use-login";
 import React from "react";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../ui/form";
-import { Input } from "../ui/input";
+import { Form } from "../ui/form";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import AppButton from "../app-button";
+import ControlledInput from "../controlled-input";
+import { LoginFormInputs } from "@/schemas/login-schema";
 
 const LoginForm = () => {
   const { loginForm, onSubmit, isLoading } = useLogin();
@@ -31,31 +25,20 @@ const LoginForm = () => {
           </p>
         </div>
 
-        <FormField
+        <ControlledInput<LoginFormInputs>
           control={loginForm.control}
+          label="Email"
           name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          placeholder="Enter your email"
+          type={"email"}
         />
-        <FormField
+
+        <ControlledInput<LoginFormInputs>
           control={loginForm.control}
+          label="Password"
           name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn" {...field} className={cn("")} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          placeholder="Enter your password"
+          type={"password"}
         />
 
         <Link href={""} className={cn("text-sm text-right hover:underline")}>

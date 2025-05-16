@@ -1,6 +1,7 @@
 import React, { ButtonHTMLAttributes, HTMLAttributes } from "react";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
+import SpinnerLoader from "./ui/loader";
 
 type AppButtonProps = {
   buttonOptions?: ButtonHTMLAttributes<HTMLButtonElement>;
@@ -26,7 +27,11 @@ const AppButton: React.FC<AppButtonProps> = ({
       )}
       disabled={isLoading || buttonOptions?.disabled}
     >
-      {isLoading ? <p>Loading...</p> : <p {...textOptions}>{title}</p>}
+      {isLoading ? (
+        <SpinnerLoader size="sm" showText={false} />
+      ) : (
+        <p {...textOptions}>{title}</p>
+      )}
     </Button>
   );
 };
