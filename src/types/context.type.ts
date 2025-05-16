@@ -7,5 +7,5 @@ export type AuthContextType = {
   role: rolesEnum | string;
   setIsLoggedIn: (loggedIn: boolean) => void;
   setUser: (user: User | null) => void;
-  setRole: (role: rolesEnum) => void;
+  setRole: (role: rolesEnum | string) => void;
 };

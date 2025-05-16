@@ -21,7 +21,9 @@ const AuthRedirect: React.FC<AuthRedirectProps> = ({ children }) => {
     useTypedQuery<MeApiResponseType>({
       queryKey: ["me"],
       queryFn: me,
-      retry: 1,
+      staleTime: 0,
+      gcTime: 0,
+      refetchOnMount: true,
     });
 
   useEffect(() => {
