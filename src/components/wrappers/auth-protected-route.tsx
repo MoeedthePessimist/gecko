@@ -1,3 +1,5 @@
+"use client";
+
 import { me } from "@/api/user";
 import { ROUTES } from "@/constants/routes";
 import { useAuthContext } from "@/context/auth-context";
@@ -7,11 +9,13 @@ import { MeApiResponseType } from "@/types/api.type";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
-type ProtectedRouteProps = {
+type AuthProtectedRouteProps = {
   children: React.ReactNode;
 };
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
+const AuthProtectedRoute: React.FC<AuthProtectedRouteProps> = ({
+  children,
+}) => {
   const { setIsLoggedIn, setRole, setUser } = useAuthContext();
   const router = useRouter();
 
@@ -47,4 +51,4 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   return null;
 };
 
-export default ProtectedRoute;
+export default AuthProtectedRoute;

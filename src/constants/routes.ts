@@ -4,4 +4,5 @@ export const ROUTES = {
   COMPANY: "/company",
   ADMIN: "/admin",
   EMPLOYEE: "/employee",
+  UNAUTHORIZED: "/unauthorized",
 };
