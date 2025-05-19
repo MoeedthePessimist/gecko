@@ -50,7 +50,9 @@ const useRegister = () => {
     console.log("onSubmit called");
     console.log("company data:", data);
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { confirmPassword, ...user } = userRegisterForm.getValues();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { termsAccepted, ...company } = companyRegisterForm.getValues();
 
     onSubmit({
