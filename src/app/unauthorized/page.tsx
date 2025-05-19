@@ -1,13 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-type UnauthorizedPageProps = {
-  text?: string;
-};
-
-const UnauthorizedPage: React.FC<UnauthorizedPageProps> = ({
-  text = "You don't have access to these resources",
-}) => {
+const UnauthorizedPage = () => {
   return (
     <>
       <Image
@@ -17,7 +11,7 @@ const UnauthorizedPage: React.FC<UnauthorizedPageProps> = ({
         height={500}
         priority
       />
-      <p>{text}</p>
+      <p>{"You don't have access to these resources"}</p>
     </>
   );
 };
