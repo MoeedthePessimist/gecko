@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { Form } from "../ui/form";
-import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import useRegister from "@/hooks/use-register";
 import ControlledInput from "../controlled-input";
@@ -85,11 +84,16 @@ const RegisterForm = () => {
             label="Re-Enter Password"
             name="confirmPassword"
             placeholder="Re enter your password"
+            type={"password"}
           />
 
-          <Button className={cn("bg-dark")} onClick={handleUserRegister}>
-            Edit Company Details
-          </Button>
+          <AppButton
+            buttonOptions={{
+              className: "bg-dark",
+              onClick: handleUserRegister,
+            }}
+            title="Edit Company Details"
+          />
         </>
       );
     } else if (stepper === 1) {
@@ -157,22 +161,24 @@ const RegisterForm = () => {
             </p>
           </ControlledCheckbox>
 
-          <AppButton
-            buttonOptions={{
-              className: "bg-dark",
-              onClick: () => handleStepper(-1),
-            }}
-            title="Edit Personal Details"
-          />
+          <div className="flex flex-col gap-2">
+            <AppButton
+              buttonOptions={{
+                className: "bg-dark",
+                onClick: () => handleStepper(-1),
+              }}
+              title="Edit Personal Details"
+            />
 
-          <AppButton
-            buttonOptions={{
-              className: "bg-dark",
-              onClick: handleCompanyRegister,
-            }}
-            title="Register"
-            isLoading={isLoading}
-          />
+            <AppButton
+              buttonOptions={{
+                className: "bg-dark",
+                onClick: handleCompanyRegister,
+              }}
+              title="Register"
+              isLoading={isLoading}
+            />
+          </div>
         </>
       );
     }

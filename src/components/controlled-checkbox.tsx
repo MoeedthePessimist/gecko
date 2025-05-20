@@ -35,6 +35,7 @@ const ControlledCheckbox = <TFieldValues extends FieldValues>({
               <Checkbox
                 checked={field.value}
                 onCheckedChange={field.onChange}
+                className="cursor-pointer"
               />
             </FormControl>
             {label && (

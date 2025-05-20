@@ -41,7 +41,7 @@ const ControlledSelect = <TFieldValues extends FieldValues>({
           {label && <FormLabel>{label}</FormLabel>}
           <Select onValueChange={field.onChange} defaultValue={field.value}>
             <FormControl className="w-full">
-              <SelectTrigger>
+              <SelectTrigger className="cursor-pointer">
                 <SelectValue placeholder={placeholder || "Select"} />
               </SelectTrigger>
             </FormControl>
