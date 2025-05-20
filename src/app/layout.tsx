@@ -25,12 +25,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        <meta
-          http-equiv="Content-Security-Policy"
-          content="upgrade-insecure-requests"
-        />
-      </Head>
       <body className={`${poppins.className} antialiased`}>
         <div className={cn("h-dvh max-h-dvh flex flex-col")}>
           <Header />
