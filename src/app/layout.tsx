@@ -5,6 +5,7 @@ import QueryProvider from "../providers/query-provider";
 import { AuthProvider } from "../context/auth-context";
 import Header from "@/components/header";
 import { cn } from "@/lib/utils";
+import Head from "next/head";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -24,6 +25,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <meta
+          http-equiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        />
+      </Head>
       <body className={`${poppins.className} antialiased`}>
         <div className={cn("h-dvh max-h-dvh flex flex-col")}>
           <Header />
