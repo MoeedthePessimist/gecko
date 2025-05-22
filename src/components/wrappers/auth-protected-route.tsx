@@ -6,7 +6,6 @@ import { rolesEnum } from "@/enums/roles.enum";
 import useAuth from "@/hooks/use-auth";
 import { useTypedQuery } from "@/hooks/use-query";
 import { MeApiResponseType } from "@/types/api.type";
-import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import SpinnerLoader from "../ui/loader";
 
