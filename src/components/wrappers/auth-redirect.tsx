@@ -8,6 +8,7 @@ import { MeApiResponseType } from "@/types/api.type";
 import { useAuthContext } from "@/context/auth-context";
 import { rolesEnum } from "@/enums/roles.enum";
 import { ROUTES } from "@/constants/routes";
+import SpinnerLoader from "../ui/loader";
 
 type AuthRedirectProps = {
   children: React.ReactNode;
@@ -43,7 +44,15 @@ const AuthRedirect: React.FC<AuthRedirectProps> = ({ children }) => {
   }, [isSuccess, data, router, setIsLoggedIn, setRole, setUser]);
 
   if (isFetching) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex justify-center items-center w-full h-full">
+        <SpinnerLoader
+          showText={true}
+          variant="dots"
+          text="Getting User Data"
+        />
+      </div>
+    );
   }
 
   // Show children if not logged in or still fetching
