@@ -7,6 +7,8 @@ import React from "react";
 
 const AdminPage = () => {
   const { isLoggedIn, user, role } = useAuthContext();
+
+  console.log(isLoggedIn, "isLoggedIn");
   const { logout } = useAuth();
   return (
     <div>

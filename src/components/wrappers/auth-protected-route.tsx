@@ -19,7 +19,6 @@ const AuthProtectedRoute: React.FC<AuthProtectedRouteProps> = ({
 }) => {
   const { setIsLoggedIn, setRole, setUser } = useAuthContext();
   const { logout } = useAuth();
-  const router = useRouter();
 
   const { data, isError, isSuccess, isFetching } =
     useTypedQuery<MeApiResponseType>({
@@ -39,7 +38,7 @@ const AuthProtectedRoute: React.FC<AuthProtectedRouteProps> = ({
       setUser(data.user);
       setRole(data.user.roles[0] as rolesEnum);
     }
-  }, [isError, isSuccess, data, setIsLoggedIn, setRole, setUser, router]);
+  }, [isError, isSuccess]);
 
   if (isFetching) {
     return (

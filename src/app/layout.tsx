@@ -25,14 +25,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className} antialiased`}>
-        <div className={cn("h-dvh max-h-dvh flex flex-col")}>
-          <Header />
-          <div className={cn("h-full mt-12")}>
-            <QueryProvider>
-              <AuthProvider>{children}</AuthProvider>
-            </QueryProvider>
-          </div>
-        </div>
+        <QueryProvider>
+          <AuthProvider>
+            <div className={cn("h-dvh max-h-dvh flex flex-col")}>
+              <Header />
+              <div className={cn("h-full mt-12")}>{children}</div>
+            </div>
+          </AuthProvider>
+        </QueryProvider>
       </body>
     </html>
   );
