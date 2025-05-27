@@ -65,7 +65,7 @@ const Header = () => {
     );
 
   return (
-    <div className={cn("w-full border-b-2 px-5 h-12 fixed z-10")}>
+    <div className={cn("w-full border-b-2 px-5 h-12 fixed z-10 bg-white")}>
       <div className="w-full flex items-center justify-between relative h-full">
         <Logo />
         <div className="hidden md:flex gap-4 justify-center items-center absolute left-1/2 -translate-x-1/2">
