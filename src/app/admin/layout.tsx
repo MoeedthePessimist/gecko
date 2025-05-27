@@ -1,6 +1,7 @@
+import { AdminSidebar } from "@/components/sidebars/admin-sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import AuthProtectedRoute from "@/components/wrappers/auth-protected-route";
 import { AdminProtectedRoute } from "@/components/wrappers/roles-protected-route";
-import { cn } from "@/lib/utils";
 import React from "react";
 
 type AdminLayoutProps = {
@@ -11,9 +12,12 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   return (
     <AuthProtectedRoute>
       <AdminProtectedRoute>
-        <div className={cn("flex w-full h-full justify-center items-center")}>
-          {children}
-        </div>
+        <SidebarProvider>
+          <AdminSidebar />
+          <SidebarInset>
+            <main>{children}</main>
+          </SidebarInset>
+        </SidebarProvider>
       </AdminProtectedRoute>
     </AuthProtectedRoute>
   );
