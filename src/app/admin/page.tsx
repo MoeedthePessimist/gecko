@@ -50,9 +50,13 @@ const AdminPage = () => {
        */}
 
       <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card></Card>
+        <Card className="flex items-center justify-center">
+          Employee Salary for the month
+        </Card>
         <div className="flex flex-col gap-4">
-          <Card></Card>
+          <Card className="flex items-center justify-center">
+            Remaining Leave Balance
+          </Card>
           <Card className="flex justify-center items-center">
             <Calendar />
           </Card>
