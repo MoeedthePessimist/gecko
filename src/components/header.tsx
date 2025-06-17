@@ -32,11 +32,17 @@ const Header = () => {
     return (
       <Popover>
         <PopoverTrigger>
-          <Avatar />
+          <Avatar
+            name={user?.name || ""}
+            avatar={user?.avatar || "https://github.com/shadcn.png"}
+          />
         </PopoverTrigger>
         <PopoverContent className="space-y-2">
           <div className="flex gap-2 items-center">
-            <Avatar />
+            <Avatar
+              name={user?.name || ""}
+              avatar={user?.avatar || "https://github.com/shadcn.png"}
+            />
             <p>{user && user.name}</p>
           </div>
           <Separator />
