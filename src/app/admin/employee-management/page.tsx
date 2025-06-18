@@ -3,7 +3,9 @@
 import AppButton from "@/components/app-button";
 import EmployeeCard from "@/components/employee-card";
 import SearchBar from "@/components/search-bar";
+import { ADMIN_ROUTES } from "@/constants/routes";
 import { PlusCircle } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 const EmployeeManagementPage = () => {
@@ -12,14 +14,16 @@ const EmployeeManagementPage = () => {
       {/* searchbar and add button */}
       <div className="w-full flex gap-2">
         <SearchBar />
-        <AppButton
-          title="Add New Employee"
-          buttonOptions={{
-            className: "bg-accent text-white",
-          }}
-          icon={<PlusCircle />}
-          iconPosition="end"
-        />
+        <Link href={ADMIN_ROUTES.CREATE_EMPLOYEE}>
+          <AppButton
+            title="Add New Employee"
+            buttonOptions={{
+              className: "bg-accent text-white",
+            }}
+            icon={<PlusCircle />}
+            iconPosition="end"
+          />
+        </Link>
       </div>
       {/* Employee Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">

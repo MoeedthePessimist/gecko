@@ -5,9 +5,10 @@ import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import TitleValuePair from "./title-value-pair";
 import AppButton from "./app-button";
 import { EditIcon, Trash2 } from "lucide-react";
+import { User } from "@/types/user.type";
 
 type EmployeeCardProps = {
-  employee?: any;
+  employee?: User;
 };
 
 const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
@@ -25,18 +26,10 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
         "
         >
           <Avatar
-            name={employee?.name}
+            name={employee?.name || ""}
             avatar={employee?.avatar || "https://github.com/shadcn.png"}
             containerClasses="w-16 h-16 md:w-24 md:h-24"
           />
-          {/* <div className="flex md:gap-1 flex-col">
-            <p className="text-sm md:text-lg font-bold">
-              {employee?.name || "John Doe"}
-            </p>
-            <p className="text-xs md:text-sm font-light text-accent">
-              {employee?.job?.title || "Software Engineer"}
-            </p>
-          </div> */}
         </div>
       </CardHeader>
       <CardContent className="grid grid-cols-2 md:grid-cols-3 mt-10 gap-4">

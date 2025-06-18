@@ -17,4 +17,5 @@ export const ADMIN_ROUTES = {
   RESIGNATION_TERMINATION: "/admin/resignation",
   REPORTS: "/admin/reports",
   SETTINGS: "/admin/settings",
+  CREATE_EMPLOYEE: "/admin/employee-management/create",
 };
