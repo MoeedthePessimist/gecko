@@ -6,6 +6,7 @@ import {
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { rolesEnum } from "@/enums/roles.enum";
 
 const useEmployeeManagement = () => {
   const employeeForm = useForm<EmployeeFormInputs>({
@@ -35,7 +36,7 @@ const useEmployeeManagement = () => {
         country: "",
         maritalStatus: "",
         nationality: "",
-
+        role: rolesEnum.EMPLOYEE,
         state: "",
       },
       contactsInfo: [],

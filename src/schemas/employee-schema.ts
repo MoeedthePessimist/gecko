@@ -27,6 +27,7 @@ export const generalFormSchema = z.object({
   country: z.string().optional(),
   nationality: z.string().optional(),
   maritalStatus: z.string().optional(),
+  role: z.string().nonempty("Please select employee role"),
   bank: bankFormSchema,
 });
 
