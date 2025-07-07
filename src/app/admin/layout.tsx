@@ -15,7 +15,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
         <SidebarProvider>
           <AdminSidebar />
           <SidebarInset>
-            <main>{children}</main>
+            <main className="p-4">{children}</main>
           </SidebarInset>
         </SidebarProvider>
       </AdminProtectedRoute>

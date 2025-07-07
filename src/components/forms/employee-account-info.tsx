@@ -18,7 +18,7 @@ const EmployeeAccountInformationForm: React.FC<
   EmployeeAccountInformationFormProps
 > = ({ control }) => {
   return (
-    <Card>
+    <Card className="border-none shadow-none">
       <CardContent className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <ControlledInput<EmployeeFormInputs>
           control={control}

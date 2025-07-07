@@ -6,7 +6,7 @@ import { Control } from "react-hook-form";
 import { Card, CardContent } from "../ui/card";
 import ControlledInput from "../controlled-input";
 import ControlledSelect from "../controlled-select";
-import { cpfTablesList } from "../../../../gecko_be/src/enums/cpf-tables.enum";
+import { cpfTablesList } from "@/enums/cpf-tables.enum";
 
 type EmployeeSettingsInformationFormProps = {
   control: Control<EmployeeFormInputs>;
@@ -16,7 +16,7 @@ const EmployeeSettingsInformationForm: React.FC<
   EmployeeSettingsInformationFormProps
 > = ({ control }) => {
   return (
-    <Card>
+    <Card className="border-none shadow-none">
       <CardContent className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <ControlledSelect<EmployeeFormInputs>
           control={control}
