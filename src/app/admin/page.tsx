@@ -2,7 +2,6 @@
 
 import AccumulationCard from "@/components/dashboard-cards/accumulation-card";
 import LeaveCard from "@/components/dashboard-cards/leave-card";
-import { Calendar } from "@/components/ui/calendar";
 import { Card } from "@/components/ui/card";
 import React from "react";
 
@@ -58,7 +57,8 @@ const AdminPage = () => {
             Remaining Leave Balance
           </Card>
           <Card className="flex justify-center items-center">
-            <Calendar />
+            {/* <Calendar /> */}
+            Calendar
           </Card>
         </div>
       </div>
