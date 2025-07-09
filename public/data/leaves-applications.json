@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Abdul Moeed",
+    "from": "2023-10-05",
+    "to": "2023-10-01",
+    "status": "Approved",
+    "type": "Sick"
+  },
+  {
+    "name": "Abdul Moeed",
+    "from": "2023-11-15",
+    "to": "2023-11-17",
+    "status": "Approved",
+    "type": "Casual"
+  },
+  {
+    "name": "Abdul Moeed",
+    "from": "2024-01-10",
+    "to": "2024-01-12",
+    "status": "Pending",
+    "type": "Sick"
+  },
+  {
+    "name": "Abdul Moeed",
+    "from": "2024-02-20",
+    "to": "2024-02-25",
+    "status": "Rejected",
+    "type": "Annual"
+  },
+  {
+    "name": "Abdul Moeed",
+    "from": "2024-04-01",
+    "to": "2024-04-03",
+    "status": "Approved",
+    "type": "Casual"
+  }
+]

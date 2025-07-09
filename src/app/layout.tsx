@@ -3,7 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import QueryProvider from "../providers/query-provider";
 import { AuthProvider } from "../context/auth-context";
-import Header from "@/components/header";
+import Header from "@/components/headers/header";
 import { cn } from "@/lib/utils";
 
 const poppins = Poppins({
@@ -29,7 +29,7 @@ export default function RootLayout({
           <AuthProvider>
             <div className={cn("h-dvh max-h-dvh flex flex-col")}>
               <Header />
-              <div className={cn("h-full mt-12")}>{children}</div>
+              <div className={cn("h-full")}>{children}</div>
             </div>
           </AuthProvider>
         </QueryProvider>
