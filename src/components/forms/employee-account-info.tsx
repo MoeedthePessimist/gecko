@@ -9,6 +9,7 @@ import ControlledSelect from "../controlled-select";
 import { identitiesList } from "@/enums/identities.enum";
 import { gendersList } from "@/enums/genders.enum";
 import { raceList } from "@/enums/race.enum";
+import ControlledCheckbox from "../controlled-checkbox";
 
 type EmployeeAccountInformationFormProps = {
   control: Control<EmployeeFormInputs>;
@@ -90,6 +91,21 @@ const EmployeeAccountInformationForm: React.FC<
           label="Race"
           list={raceList}
         />
+
+        <div className="flex flex-col space-y-2">
+          <ControlledInput<EmployeeFormInputs>
+            control={control}
+            name={"accountInfo.optionalEmail"}
+            placeholder="Enter Optional Email"
+            label="Optional Email"
+            type="email"
+          />
+          <ControlledCheckbox<EmployeeFormInputs>
+            control={control}
+            name={"accountInfo.allowLogin"}
+            label="Allow Login"
+          />
+        </div>
       </CardContent>
     </Card>
   );

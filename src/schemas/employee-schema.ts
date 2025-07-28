@@ -17,6 +17,11 @@ export const accountFormSchema = z.object({
   email: z.string().email("Please enter a valid employee email"),
   password: z.string().min(6, "Password must be at least 6 characters"),
   repeatPassword: z.string(),
+  optionalEmail: z
+    .string()
+    .email("Please enter a valid optional email")
+    .optional(),
+  allowLogin: z.boolean().default(true),
 });
 
 export const generalFormSchema = z.object({
