@@ -4,7 +4,7 @@ export const employementFormSchema = z.object({
   department: z.string().optional(),
   employmentType: z.string().optional(),
   status: z.string().optional(),
-  directManager: z.string().optional(),
+  directManager: z.record(z.any()),
   dateJoined: z.date(),
   dateLeft: z.date().optional(),
   probationFrom: z.date().optional(),

@@ -26,6 +26,9 @@ export const accountFormSchema = z.object({
 
 export const generalFormSchema = z.object({
   addresstype: z.string().optional(),
+  houseNo: z.string().optional(),
+  levelNo: z.string().optional(),
+  unitNo: z.string().optional(),
   address: z.string().nonempty("Please enter employee address"),
   city: z.string().optional(),
   state: z.string().optional(),
@@ -33,15 +36,31 @@ export const generalFormSchema = z.object({
   nationality: z.string().optional(),
   maritalStatus: z.string().optional(),
   role: z.string().nonempty("Please select employee role"),
+  homeTelephoneNumber: z.string().optional(),
+  workTelephoneNumber: z.string().optional(),
+  isNonResidentialDirector: z.boolean().default(false),
   bank: bankFormSchema,
 });
 
 export const settingFormSchema = z.object({
   cpfTable: z.string().optional(),
+  employerPaysCpf: z.boolean().optional(),
+  prEffectiveDate: z.date().optional(),
   cpfNo: z.string().optional(),
   taxNo: z.string().optional(),
-  workTable: z.string().nonempty("Please select employee work table"),
-  leaveTable: z.string().nonempty("Please select employee leave table"),
+  workTable: z.record(z.any()),
+  leaveTable: z.record(z.any()),
+  levy: z.record(z.any()).optional(),
+  noSdlContribution: z.boolean().optional(),
+  noShgContribution: z.boolean().optional(),
+  useAttendanceRecords: z.boolean().optional(),
+  maxPayToCalculate: z.number().optional(),
+  allowanceCommission: z.number().optional(),
+  allowanceErrorFee: z.number().optional(),
+  deductionCdac: z.number().optional(),
+  deductionEcf: z.number().optional(),
+  deductionMbmf: z.number().optional(),
+  deductionEcfSinda: z.number().optional(),
 });
 
 export const employeeFormSchema = z.object({

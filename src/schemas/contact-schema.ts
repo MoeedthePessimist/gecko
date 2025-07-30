@@ -6,6 +6,8 @@ export const contactFormSchema = z.object({
   gender: z.string().optional(),
   mobileNumber: z.string().optional(),
   email: z.string().optional(),
+  homeTelephoneNumber: z.string().optional(),
+  workTelephoneNumber: z.string().optional(),
 });
 
 export type ContactFormInputs = z.infer<typeof contactFormSchema>;
