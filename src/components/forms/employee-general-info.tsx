@@ -12,6 +12,7 @@ import { nationalitiesList } from "@/enums/nationalities.enum";
 import { maritalStatusesList } from "@/enums/marital-statuses.enum";
 import { banksList } from "@/enums/banks.enum";
 import { rolesList } from "@/enums/roles.enum";
+import { BOOLEAN_OPTIONS } from "@/constants/options";
 
 type EmployeeGeneralInformationFormProps = {
   control: Control<EmployeeFormInputs>;
@@ -23,12 +24,6 @@ const EmployeeGeneralInformationForm: React.FC<
   return (
     <Card className="border-none shadow-none">
       <CardContent className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <ControlledInput<EmployeeFormInputs>
-          control={control}
-          name={"generalInfo.address"}
-          placeholder="Address"
-          label="Address"
-        />
         <ControlledSelect<EmployeeFormInputs>
           control={control}
           name={"generalInfo.addresstype"}
@@ -38,6 +33,30 @@ const EmployeeGeneralInformationForm: React.FC<
         />
         <ControlledInput<EmployeeFormInputs>
           control={control}
+          name={"generalInfo.houseNo"}
+          placeholder="Enter House Number"
+          label="House Number"
+        />
+        <ControlledInput<EmployeeFormInputs>
+          control={control}
+          name={"generalInfo.levelNo"}
+          placeholder="Enter Level Number"
+          label="Level Number"
+        />
+        <ControlledInput<EmployeeFormInputs>
+          control={control}
+          name={"generalInfo.unitNo"}
+          placeholder="Enter Unit Number"
+          label="Unit Number"
+        />
+        <ControlledInput<EmployeeFormInputs>
+          control={control}
+          name={"generalInfo.address"}
+          placeholder="Address"
+          label="Address"
+        />
+        <ControlledInput<EmployeeFormInputs>
+          control={control}
           name={"generalInfo.city"}
           placeholder="Enter City"
           label="City"
@@ -48,20 +67,6 @@ const EmployeeGeneralInformationForm: React.FC<
           placeholder="Enter State"
           label="State"
         />
-
-        <ControlledInput<EmployeeFormInputs>
-          control={control}
-          name={"generalInfo.city"}
-          placeholder="Enter City"
-          label="City"
-        />
-        <ControlledInput<EmployeeFormInputs>
-          control={control}
-          name={"generalInfo.state"}
-          placeholder="Enter State"
-          label="State"
-        />
-
         <ControlledSelect<EmployeeFormInputs>
           control={control}
           name={"generalInfo.country"}
@@ -69,7 +74,6 @@ const EmployeeGeneralInformationForm: React.FC<
           label="Country"
           list={countriesList}
         />
-
         <ControlledSelect<EmployeeFormInputs>
           control={control}
           name={"generalInfo.nationality"}
@@ -77,7 +81,6 @@ const EmployeeGeneralInformationForm: React.FC<
           label="Nationality"
           list={nationalitiesList}
         />
-
         <ControlledSelect<EmployeeFormInputs>
           control={control}
           name={"generalInfo.maritalStatus"}
@@ -85,7 +88,18 @@ const EmployeeGeneralInformationForm: React.FC<
           label="Marital Status"
           list={maritalStatusesList}
         />
-
+        <ControlledInput<EmployeeFormInputs>
+          control={control}
+          name={"generalInfo.homeTelephoneNumber"}
+          placeholder="Enter Home Telephone Number"
+          label="Home Telephone Number"
+        />
+        <ControlledInput<EmployeeFormInputs>
+          control={control}
+          name={"generalInfo.workTelephoneNumber"}
+          placeholder="Enter Work Telephone Number"
+          label="Work Telephone Number"
+        />
         <ControlledSelect<EmployeeFormInputs>
           control={control}
           name={"generalInfo.bank.bankName"}
@@ -93,7 +107,6 @@ const EmployeeGeneralInformationForm: React.FC<
           label="Bank Name"
           list={banksList}
         />
-
         <ControlledInput<EmployeeFormInputs>
           control={control}
           name={"generalInfo.bank.bankAccountNumber"}
@@ -101,7 +114,6 @@ const EmployeeGeneralInformationForm: React.FC<
           label="Bank Account Number"
           type="password"
         />
-
         <ControlledInput<EmployeeFormInputs>
           control={control}
           name={"generalInfo.bank.bankSwiftCode"}
@@ -109,7 +121,6 @@ const EmployeeGeneralInformationForm: React.FC<
           label="Bank Swift Code"
           type="password"
         />
-
         <ControlledSelect<EmployeeFormInputs>
           control={control}
           name={"generalInfo.role"}
@@ -117,49 +128,13 @@ const EmployeeGeneralInformationForm: React.FC<
           label="Role"
           list={rolesList}
         />
-        {/* <div>
-          <ControlledInput<EmployeeFormInputs>
-            control={control}
-            name={"generalInfo.address"}
-            placeholder="Address"
-            label="Address"
-          />
-          <ControlledSelect<EmployeeFormInputs>
-            control={control}
-            name={"generalInfo.addresstype"}
-            list={addressTypesList}
-            label="Address Type"
-            placeholder="Select Address Type"
-          />
-        </div>
-        <div>
-          <ControlledInput<EmployeeFormInputs>
-            control={control}
-            name={"generalInfo.city"}
-            placeholder="Enter City"
-            label="City"
-          />
-          <ControlledInput<EmployeeFormInputs>
-            control={control}
-            name={"generalInfo.state"}
-            placeholder="Enter State"
-            label="State"
-          />
-        </div>
-        <div>
-          <ControlledInput<EmployeeFormInputs>
-            control={control}
-            name={"generalInfo.city"}
-            placeholder="Enter City"
-            label="City"
-          />
-          <ControlledInput<EmployeeFormInputs>
-            control={control}
-            name={"generalInfo.state"}
-            placeholder="Enter State"
-            label="State"
-          />
-        </div> */}
+        <ControlledSelect<EmployeeFormInputs>
+          control={control}
+          name={"generalInfo.isNonResidentialDirector"}
+          placeholder="Select"
+          label="Non Resident-Director"
+          list={BOOLEAN_OPTIONS}
+        />
       </CardContent>
     </Card>
   );
