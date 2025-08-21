@@ -7,6 +7,7 @@ import { Card, CardContent } from "../ui/card";
 import ControlledInput from "../controlled-input";
 import ControlledSelect from "../controlled-select";
 import { cpfTablesList } from "@/enums/cpf-tables.enum";
+import ControlledCheckbox from "../controlled-checkbox";
 
 type EmployeeSettingsInformationFormProps = {
   control: Control<EmployeeFormInputs>;
@@ -17,14 +18,30 @@ const EmployeeSettingsInformationForm: React.FC<
 > = ({ control }) => {
   return (
     <Card className="border-none shadow-none">
-      <CardContent className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <ControlledSelect<EmployeeFormInputs>
+      <CardContent className="grid grid-cols-1 gap-4 md:grid-cols-2 items-start">
+        <div className="flex flex-col gap-2">
+          <ControlledSelect<EmployeeFormInputs>
+            control={control}
+            name={"settingsInfo.cpfTable"}
+            placeholder="Select CPF Table"
+            label="CPF Table"
+            list={cpfTablesList}
+          />
+          <ControlledCheckbox
+            control={control}
+            name={"settingsInfo.employerPaysCpf"}
+            label="CPF is fully paid by Employer"
+          />
+        </div>
+
+        <ControlledInput<EmployeeFormInputs>
           control={control}
-          name={"settingsInfo.cpfTable"}
-          placeholder="Select CPF Table"
-          label="CPF Table"
-          list={cpfTablesList}
+          name={"settingsInfo.prEffectiveDate"}
+          label="PR Effective Date"
+          placeholder="PR Effective Date"
+          type="date"
         />
+
         <ControlledInput<EmployeeFormInputs>
           control={control}
           name={"settingsInfo.cpfNo"}
