@@ -3,130 +3,33 @@ import {
   employeeFormSchema,
   EmployeeFormInputs,
 } from "@/schemas/employee-schema";
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { rolesEnum } from "@/enums/roles.enum";
-import { QualificationFormInputs } from "@/schemas/qualification-schema";
-import { ContactFormInputs } from "@/schemas/contact-schema";
-import { DocumentFormInputs } from "@/schemas/document-schema";
+import {
+  QualificationFormInputs,
+  qualificationFormSchema,
+} from "@/schemas/qualification-schema";
+import { ContactFormInputs, contactFormSchema } from "@/schemas/contact-schema";
+import {
+  DocumentFormInputs,
+  documentFormSchema,
+} from "@/schemas/document-schema";
 
 const useEmployeeManagement = () => {
-  const employeeForm = useForm<EmployeeFormInputs>({
+  const employeeForm = useForm({
     resolver: zodResolver(employeeFormSchema),
-    defaultValues: {
-      accountInfo: {
-        dateOfBirth: undefined,
-        email: "",
-        gender: "",
-        identityNumber: "",
-        identityType: "",
-        mobileNumber: "",
-        name: "",
-        password: "",
-        race: "",
-        repeatPassword: "",
-        allowLogin: false,
-        optionalEmail: "",
-      },
-      generalInfo: {
-        address: "",
-        addresstype: "",
-        bank: {
-          bankAccountNumber: "",
-          bankName: "",
-          bankSwiftCode: "",
-        },
-        city: "",
-        country: "",
-        maritalStatus: "",
-        nationality: "",
-        role: rolesEnum.EMPLOYEE,
-        state: "",
-        homeTelephoneNumber: "",
-        houseNo: "",
-        isNonResidentialDirector: false,
-        levelNo: "",
-        unitNo: "",
-        workTelephoneNumber: "",
-      },
-      contactsInfo: [],
-      documentsInfo: [],
-      employementInfo: {
-        dateJoined: undefined,
-        dateLeft: undefined,
-        department: "",
-        directManager: undefined,
-        employmentType: "",
-        probationFrom: undefined,
-        probationTo: undefined,
-        status: "",
-      },
-      jobInfo: {
-        basicRate: 0,
-        designation: "",
-        endDate: undefined,
-        jobCategory: "",
-        payBasis: "",
-        startDate: undefined,
-        title: "",
-      },
-      qualificationsInfo: [],
-      settingsInfo: {
-        cpfNo: "",
-        cpfTable: "",
-        leaveTable: undefined,
-        taxNo: "",
-        workTable: undefined,
-        allowanceCommission: 0,
-        allowanceErrorFee: 0,
-        deductionCdac: 0,
-        deductionEcf: 0,
-        deductionEcfSinda: 0,
-        deductionMbmf: 0,
-        employerPaysCpf: false,
-        levy: undefined,
-        maxPayToCalculate: 0,
-        noSdlContribution: false,
-        noShgContribution: false,
-        prEffectiveDate: undefined,
-        useAttendanceRecords: false,
-      },
-    },
   });
 
-  const qualificationForm = useForm<QualificationFormInputs>({
-    defaultValues: {
-      comment: "",
-      endDate: undefined,
-      expiryDate: undefined,
-      level: "",
-      nameOfInstitution: "",
-      startDate: undefined,
-      type: "",
-    },
+  const qualificationForm = useForm({
+    resolver: zodResolver(qualificationFormSchema),
   });
 
-  const contactForm = useForm<ContactFormInputs>({
-    defaultValues: {
-      email: "",
-      gender: "",
-      mobileNumber: "",
-      name: "",
-      relation: "",
-    },
+  const contactForm = useForm({
+    resolver: zodResolver(contactFormSchema),
   });
 
-  const documentForm = useForm<DocumentFormInputs>({
-    defaultValues: {
-      category: "",
-      endDate: undefined,
-      expiryDate: undefined,
-      fileName: "",
-      remarks: "",
-      startDate: undefined,
-      title: "",
-    },
+  const documentForm = useForm({
+    resolver: zodResolver(documentFormSchema),
   });
 
   const onSubmitDocumentForm = (data: DocumentFormInputs) => {

@@ -69,6 +69,95 @@ const EmployeeSettingsInformationForm: React.FC<
           label="Work Table"
           list={[]}
         />
+        <div className="flex flex-col space-y-2">
+          <ControlledSelect<EmployeeFormInputs>
+            control={control}
+            name={"settingsInfo.levy"}
+            placeholder="Select Levy"
+            label="Levy"
+            list={[]}
+          />
+          <ControlledCheckbox
+            control={control}
+            name={"settingsInfo.noSdlContribution"}
+            label="No SDL Contribution"
+          />
+          <ControlledCheckbox
+            control={control}
+            name={"settingsInfo.noShgContribution"}
+            label="No Self Help Group Contribution"
+          />
+          <ControlledCheckbox
+            control={control}
+            name={"settingsInfo.useAttendanceRecords"}
+            label="Use Attendance Records to Calculate Work Days"
+          />
+        </div>
+        <ControlledInput<EmployeeFormInputs>
+          control={control}
+          name={"settingsInfo.maxPayToCalculate"}
+          placeholder="Enter max pay"
+          label="Max Pay to Calculate OT"
+          type="number"
+        />
+
+        <div className="flex flex-col space-y-1">
+          <h2 className="font-semibold">Deduction</h2>
+          <Card>
+            <CardContent className="flex flex-col gap-2">
+              <ControlledInput<EmployeeFormInputs>
+                control={control}
+                name={"settingsInfo.deductionCdac"}
+                placeholder="Enter CDAC"
+                label="CDAC"
+                type="number"
+              />
+              <ControlledInput<EmployeeFormInputs>
+                control={control}
+                name={"settingsInfo.deductionEcf"}
+                placeholder="Enter ECF"
+                label="ECF"
+                type="number"
+              />
+              <ControlledInput<EmployeeFormInputs>
+                control={control}
+                name={"settingsInfo.deductionMbmf"}
+                placeholder="Enter MBMF"
+                label="MBMF"
+                type="number"
+              />
+              <ControlledInput<EmployeeFormInputs>
+                control={control}
+                name={"settingsInfo.deductionEcfSinda"}
+                placeholder="Enter SINDA"
+                label="SINDA"
+                type="number"
+              />
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="flex flex-col space-y-1">
+          <h2 className="font-semibold">Allowance</h2>
+          <Card>
+            <CardContent className="flex flex-col gap-2">
+              <ControlledInput<EmployeeFormInputs>
+                control={control}
+                name={"settingsInfo.allowanceCommission"}
+                placeholder="Enter commission"
+                label="Commission"
+                type="number"
+              />
+              <ControlledInput<EmployeeFormInputs>
+                control={control}
+                name={"settingsInfo.allowanceErrorFee"}
+                placeholder="Enter error fee"
+                label="Error Fee"
+                type="number"
+              />
+            </CardContent>
+          </Card>
+        </div>
       </CardContent>
     </Card>
   );
