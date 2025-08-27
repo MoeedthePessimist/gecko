@@ -1,5 +1,6 @@
 import { me } from "@/api/user";
 import { defaultQueryConfig } from "@/configs/default-query-config";
+import { QUERY_KEYS } from "@/constants/query-keys";
 import { useQuery } from "@tanstack/react-query";
 
 const useUser = () => {
@@ -14,7 +15,7 @@ const useUser = () => {
     isRefetching,
   } = useQuery({
     ...defaultQueryConfig,
-    queryKey: ["me"],
+    queryKey: QUERY_KEYS.ME,
     queryFn: me,
   });
 

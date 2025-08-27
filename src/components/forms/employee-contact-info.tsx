@@ -1,8 +1,5 @@
 "use client";
-
-import { ContactFormInputs } from "@/schemas/employee-schema";
 import React from "react";
-import { Control } from "react-hook-form";
 import ControlledInput from "../controlled-input";
 import ControlledSelect from "../controlled-select";
 import { gendersList } from "@/enums/genders.enum";
