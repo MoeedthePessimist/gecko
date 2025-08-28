@@ -9,7 +9,7 @@ import {
 
 export const getQualifications =
   async (): Promise<GetQualificationsApiResponseType> => {
-    const response = await api.get(API.GET_QUALIFICATIONS);
+    const response = await api.get(API.GET_QUALIFICATION);
     return response.data;
   };
 

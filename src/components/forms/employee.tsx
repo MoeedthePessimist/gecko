@@ -16,15 +16,23 @@ import EmployeeDocumentInformationForm from "./employee-document-info";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import AppButton from "../app-button";
 import ImageUploader from "../image-uploader";
+import { Control } from "react-hook-form";
+import { EmployeeFormInputs } from "@/schemas/employee-schema";
+import { QualificationFormInputs } from "@/schemas/qualification-schema";
+import { ContactFormInputs } from "@/schemas/contact-schema";
+import { DocumentFormInputs } from "@/schemas/document-schema";
 
 const EmployeeForm = () => {
-  const { employeeForm } = useEmployeeManagement();
+  const { employeeForm, qualificationForm, contactForm, documentForm } =
+    useEmployeeManagement();
 
   return (
     <Form {...employeeForm} handleSubmit={employeeForm.handleSubmit}>
       <ImageUploader />
       <div className="flex flex-col">
-        <EmployeeAccountInformationForm control={employeeForm.control} />
+        <EmployeeAccountInformationForm
+          control={employeeForm.control as Control<EmployeeFormInputs>}
+        />
         <Card>
           <Tabs defaultValue={tabs[0].value}>
             <CardHeader>
@@ -43,35 +51,39 @@ const EmployeeForm = () => {
             <CardContent>
               <TabsContent value={tabs[0].value}>
                 <EmployeeGeneralInformationForm
-                  control={employeeForm.control}
+                  control={employeeForm.control as Control<EmployeeFormInputs>}
                 />
               </TabsContent>
               <TabsContent value={tabs[1].value}>
                 <EmployeeSettingsInformationForm
-                  control={employeeForm.control}
+                  control={employeeForm.control as Control<EmployeeFormInputs>}
                 />
               </TabsContent>
               <TabsContent value={tabs[2].value}>
-                <EmployeeJobInformationForm control={employeeForm.control} />
+                <EmployeeJobInformationForm
+                  control={employeeForm.control as Control<EmployeeFormInputs>}
+                />
               </TabsContent>
               <TabsContent value={tabs[3].value}>
                 <EmployeeEmployementInformationForm
-                  control={employeeForm.control}
+                  control={employeeForm.control as Control<EmployeeFormInputs>}
                 />
               </TabsContent>
               <TabsContent value={tabs[4].value}>
                 <EmployeeQualificationInformationForm
-                  control={employeeForm.control}
+                  control={
+                    qualificationForm.control as Control<QualificationFormInputs>
+                  }
                 />
               </TabsContent>
               <TabsContent value={tabs[5].value}>
                 <EmployeeContactInformationForm
-                  control={employeeForm.control}
+                  control={contactForm.control as Control<ContactFormInputs>}
                 />
               </TabsContent>
               <TabsContent value={tabs[6].value}>
                 <EmployeeDocumentInformationForm
-                  control={employeeForm.control}
+                  control={documentForm.control as Control<DocumentFormInputs>}
                 />
               </TabsContent>
             </CardContent>

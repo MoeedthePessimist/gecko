@@ -1,6 +1,4 @@
 "use client";
-
-import { EmployeeFormInputs } from "@/schemas/employee-schema";
 import React from "react";
 import { Control } from "react-hook-form";
 import ControlledInput from "../controlled-input";
@@ -8,9 +6,10 @@ import AppButton from "../app-button";
 import { PlusCircle } from "lucide-react";
 import { Dialog, DialogContent, DialogFooter, DialogTitle } from "../ui/dialog";
 import CustomDialogTrigger from "../custom-dialog-trigger";
+import { DocumentFormInputs } from "@/schemas/document-schema";
 
 type EmployeeDocumentInformationFormProps = {
-  control: Control<EmployeeFormInputs>;
+  control: Control<DocumentFormInputs>;
 };
 
 const EmployeeDocumentInformationForm: React.FC<
@@ -27,42 +26,42 @@ const EmployeeDocumentInformationForm: React.FC<
       <DialogContent>
         <DialogTitle>Add Employee Document</DialogTitle>
         <div className="grid grid-cols-1 gap-4 my-4">
-          <ControlledInput<EmployeeFormInputs>
+          <ControlledInput<DocumentFormInputs>
             control={control}
-            name={`documentsInfo.${0}.title`}
+            name={`title`}
             placeholder="Enter Title"
             label="Title"
           />
-          <ControlledInput<EmployeeFormInputs>
+          <ControlledInput<DocumentFormInputs>
             control={control}
-            name={`documentsInfo.${0}.category`}
+            name={`category`}
             placeholder="Select Category"
             label="Category"
           />
-          <ControlledInput<EmployeeFormInputs>
+          <ControlledInput<DocumentFormInputs>
             control={control}
-            name={`documentsInfo.${0}.startDate`}
+            name={`startDate`}
             placeholder="Enter Start Date"
             type={"date"}
             label="Start Date"
           />
-          <ControlledInput<EmployeeFormInputs>
+          <ControlledInput<DocumentFormInputs>
             control={control}
-            name={`documentsInfo.${0}.endDate`}
+            name={`endDate`}
             placeholder="Enter End Date"
             label="End Date"
             type={"date"}
           />
-          <ControlledInput<EmployeeFormInputs>
+          <ControlledInput<DocumentFormInputs>
             control={control}
-            name={`documentsInfo.${0}.expiryDate`}
+            name={`expiryDate`}
             placeholder="Enter Expiry Date"
             label="Expiry Date"
             type={"date"}
           />
-          <ControlledInput<EmployeeFormInputs>
+          <ControlledInput<DocumentFormInputs>
             control={control}
-            name={`documentsInfo.${0}.fileName`}
+            name={`fileName`}
             placeholder="Select File Name"
             label="File Name"
           />

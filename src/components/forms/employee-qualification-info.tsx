@@ -8,14 +8,28 @@ import AppButton from "../app-button";
 import { PlusCircle } from "lucide-react";
 import { Dialog, DialogContent, DialogFooter, DialogTitle } from "../ui/dialog";
 import CustomDialogTrigger from "../custom-dialog-trigger";
+import useQualifications from "@/hooks/use-qualifications";
+import { QualificationFormInputs } from "@/schemas/qualification-schema";
 
 type EmployeeQualificationInformationFormProps = {
-  control: Control<EmployeeFormInputs>;
+  control: Control<QualificationFormInputs>;
 };
 
 const EmployeeQualificationInformationForm: React.FC<
   EmployeeQualificationInformationFormProps
 > = ({ control }) => {
+  const {
+    queryQualifications: { data: qualificationsData, isLoading, isError },
+    mutateQualification: {
+      mutate: createQualification,
+      isPending: isCreatingQualification,
+      isError: isCreateQualificationError,
+      data: createdQualificationData,
+    },
+  } = useQualifications();
+
+  console.log("qualificationsData", qualificationsData);
+
   return (
     <Dialog>
       <CustomDialogTrigger
@@ -27,42 +41,42 @@ const EmployeeQualificationInformationForm: React.FC<
       <DialogContent>
         <DialogTitle>Add Employee Qualification</DialogTitle>
         <div className="grid grid-cols-1 gap-4 my-4">
-          <ControlledInput<EmployeeFormInputs>
+          <ControlledInput<QualificationFormInputs>
             control={control}
-            name={`qualificationsInfo.${0}.nameOfInstitution`}
+            name={`nameOfInstitution`}
             placeholder="Enter Name of Institution"
             label="Name of Institution"
           />
-          <ControlledInput<EmployeeFormInputs>
+          <ControlledInput<QualificationFormInputs>
             control={control}
-            name={`qualificationsInfo.${0}.level`}
+            name={`level`}
             placeholder="Enter Level"
             label="Level"
           />
-          <ControlledInput<EmployeeFormInputs>
+          <ControlledInput<QualificationFormInputs>
             control={control}
-            name={`qualificationsInfo.${0}.type`}
+            name={`type`}
             placeholder="Enter Type"
             label="Type"
           />
-          <ControlledInput<EmployeeFormInputs>
+          <ControlledInput<QualificationFormInputs>
             control={control}
-            name={`qualificationsInfo.${0}.startDate`}
+            name={`startDate`}
             placeholder="Enter Start Date"
             label="Start Date"
             type={"date"}
           />
-          <ControlledInput<EmployeeFormInputs>
+          <ControlledInput<QualificationFormInputs>
             control={control}
-            name={`qualificationsInfo.${0}.endDate`}
+            name={`endDate`}
             placeholder="Enter End Date"
             label="End Date"
             type={"date"}
           />
 
-          <ControlledInput<EmployeeFormInputs>
+          <ControlledInput<QualificationFormInputs>
             control={control}
-            name={`qualificationsInfo.${0}.expiryDate`}
+            name={`expiryDate`}
             placeholder="Enter Expiry Date"
             label="Expiry Date"
             type={"date"}
