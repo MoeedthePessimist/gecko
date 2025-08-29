@@ -70,11 +70,7 @@ const EmployeeForm = () => {
                 />
               </TabsContent>
               <TabsContent value={tabs[4].value}>
-                <EmployeeQualificationInformationForm
-                  control={
-                    qualificationForm.control as Control<QualificationFormInputs>
-                  }
-                />
+                <EmployeeQualificationInformationForm />
               </TabsContent>
               <TabsContent value={tabs[5].value}>
                 <EmployeeContactInformationForm
