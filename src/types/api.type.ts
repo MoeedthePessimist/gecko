@@ -33,7 +33,7 @@ export type GetQualificationsApiResponseType = ApiResponseType<Qualification[]>;
 
 export type CreateQualificationApiRequestType = Omit<
   Qualification,
-  "id" | "isActive" | "isArchived" | "createDateTime" | "lastChangedDateTIme"
+  "id" | "isActive" | "isArchived" | "createDateTime" | "lastChangedDateTime"
 >;
 
 export type CreateQualificationApiResponseType = ApiResponseType<Qualification>;

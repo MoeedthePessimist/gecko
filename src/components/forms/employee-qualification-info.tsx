@@ -28,14 +28,12 @@ const EmployeeQualificationInformationForm: React.FC<
     },
   } = useQualifications();
 
-  console.log("qualificationsData", qualificationsData);
-
   const {
     qualificationForm: { control, handleSubmit, formState, watch },
   } = useEmployeeManagement();
 
   const onSubmit = (qualification: QualificationFormInputs) => {
-    console.log(qualification);
+    createQualification(qualification);
   };
 
   useEffect(() => {
@@ -99,6 +97,7 @@ const EmployeeQualificationInformationForm: React.FC<
               className: "bg-secondary text-white",
               onClick: handleSubmit(onSubmit),
             }}
+            isLoading={isCreatingQualification}
           />
         </DialogFooter>
       </DialogContent>
