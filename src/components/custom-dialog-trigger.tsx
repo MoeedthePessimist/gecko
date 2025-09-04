@@ -9,6 +9,7 @@ type CustomDialogTriggerProps = {
   iconPosition?: "start" | "end";
   textOptions?: HTMLAttributes<HTMLParagraphElement>;
   containerClasses?: ClassNameValue;
+  openModal?: () => void;
 };
 
 const CustomDialogTrigger: React.FC<CustomDialogTriggerProps> = ({
@@ -17,12 +18,16 @@ const CustomDialogTrigger: React.FC<CustomDialogTriggerProps> = ({
   iconPosition,
   textOptions,
   containerClasses,
+  openModal,
 }) => {
   return (
     <DialogTrigger
       className={cn("px-4 py-2 rounded-md cursor-pointer", containerClasses)}
     >
-      <div className="flex gap-2 justify-center items-center">
+      <div
+        className="flex gap-2 justify-center items-center"
+        onClick={() => openModal && openModal()}
+      >
         {iconPosition === "start" && icon && icon}
         <p {...textOptions}>{title}</p>
         {iconPosition === "end" && icon && icon}

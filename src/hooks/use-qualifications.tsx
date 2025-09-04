@@ -4,8 +4,12 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useTypedQuery } from "./use-query";
 import { QUERY_KEYS } from "@/constants/query-keys";
+import { useState } from "react";
 
 const useQualifications = () => {
+  const [selectedQualificationId, setSelectedQualificationId] =
+    useState<string>("");
+
   const mutateQualification = useMutation({
     mutationFn: createQualification,
     onSuccess: (data: CreateQualificationApiResponseType) => {
@@ -21,9 +25,15 @@ const useQualifications = () => {
     queryFn: async () => getQualifications(),
   });
 
+  const [mutationModalOpen, setMutationModalOpen] = useState<boolean>(false);
+
   return {
     mutateQualification,
     queryQualifications,
+    setSelectedQualificationId,
+    selectedQualificationId,
+    mutationModalOpen,
+    setMutationModalOpen,
   };
 };
 

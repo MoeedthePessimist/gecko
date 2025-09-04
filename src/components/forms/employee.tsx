@@ -23,7 +23,7 @@ import { ContactFormInputs } from "@/schemas/contact-schema";
 import { DocumentFormInputs } from "@/schemas/document-schema";
 
 const EmployeeForm = () => {
-  const { employeeForm, qualificationForm, contactForm, documentForm } =
+  const { employeeForm, contactForm, documentForm, onCreateQualification } =
     useEmployeeManagement();
 
   return (
@@ -70,7 +70,14 @@ const EmployeeForm = () => {
                 />
               </TabsContent>
               <TabsContent value={tabs[4].value}>
-                <EmployeeQualificationInformationForm />
+                <EmployeeQualificationInformationForm
+                  handleQualificationMutated={onCreateQualification}
+                  createdQualifications={
+                    (employeeForm.watch(
+                      "qualificationsInfo"
+                    ) as Array<QualificationFormInputs>) || []
+                  }
+                />
               </TabsContent>
               <TabsContent value={tabs[5].value}>
                 <EmployeeContactInformationForm

@@ -14,6 +14,8 @@ import {
   DocumentFormInputs,
   documentFormSchema,
 } from "@/schemas/document-schema";
+import { Qualification } from "@/types/qualification.type";
+import { BaseType } from "@/types/base.type";
 
 const useEmployeeManagement = () => {
   const employeeForm = useForm({
@@ -32,31 +34,38 @@ const useEmployeeManagement = () => {
     resolver: zodResolver(documentFormSchema),
   });
 
-  const onSubmitDocumentForm = (data: DocumentFormInputs) => {
-    console.log("qualification data => ", data);
-  };
-
-  const onSubmitContactForm = (data: ContactFormInputs) => {
-    console.log("qualification data => ", data);
-  };
-
-  const onSubmitQualificationForm = (data: QualificationFormInputs) => {
-    console.log("qualification data => ", data);
-  };
-
   const onSubmitEmployeeForm = (data: EmployeeFormInputs) => {
     console.log("employee data => ", data);
+  };
+
+  const onCreateQualification = (data: QualificationFormInputs) => {
+    const currentQualifications =
+      employeeForm.watch("qualificationsInfo") || [];
+    employeeForm.setValue("qualificationsInfo", [
+      ...currentQualifications,
+      data,
+    ]);
+  };
+
+  const onCreateDocument = (data: DocumentFormInputs) => {
+    const currentDocuments = employeeForm.watch("documentsInfo") || [];
+    employeeForm.setValue("documentsInfo", [...currentDocuments, data]);
+  };
+
+  const onCreateContact = (data: ContactFormInputs) => {
+    const currentContacts = employeeForm.watch("contactsInfo") || [];
+    employeeForm.setValue("contactsInfo", [...currentContacts, data]);
   };
 
   return {
     employeeForm,
     onSubmitEmployeeForm,
     qualificationForm,
-    onSubmitQualificationForm,
     contactForm,
-    onSubmitContactForm,
     documentForm,
-    onSubmitDocumentForm,
+    onCreateQualification,
+    onCreateDocument,
+    onCreateContact,
   };
 };
 
