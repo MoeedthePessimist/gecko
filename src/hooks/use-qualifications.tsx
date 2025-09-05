@@ -1,4 +1,8 @@
-import { createQualification, getQualifications } from "@/api/qualifications";
+import {
+  createQualification,
+  getQualifications,
+  updateQualification,
+} from "@/api/qualifications";
 import { CreateQualificationApiResponseType } from "@/types/api.type";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
@@ -12,6 +16,16 @@ const useQualifications = () => {
 
   const mutateQualification = useMutation({
     mutationFn: createQualification,
+    onSuccess: (data: CreateQualificationApiResponseType) => {
+      console.log("Qualification created:", data);
+    },
+    onError: (error: AxiosError) => {
+      console.error("Error creating qualification:", error);
+    },
+  });
+
+  const editQualification = useMutation({
+    mutationFn: updateQualification,
     onSuccess: (data: CreateQualificationApiResponseType) => {
       console.log("Qualification created:", data);
     },
@@ -34,6 +48,7 @@ const useQualifications = () => {
     selectedQualificationId,
     mutationModalOpen,
     setMutationModalOpen,
+    editQualification,
   };
 };
 

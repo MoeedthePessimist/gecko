@@ -37,3 +37,10 @@ export type CreateQualificationApiRequestType = Omit<
 >;
 
 export type CreateQualificationApiResponseType = ApiResponseType<Qualification>;
+
+export type UpdateQualificationApiRequestType =
+  CreateQualificationApiRequestType & {
+    id: string;
+  };
+
+export type UpdateQualificationApiResponseType = ApiResponseType<Qualification>;

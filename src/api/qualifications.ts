@@ -5,6 +5,8 @@ import {
   GetQualificationsApiResponseType,
   CreateQualificationApiResponseType,
   CreateQualificationApiRequestType,
+  UpdateQualificationApiRequestType,
+  UpdateQualificationApiResponseType,
 } from "@/types/api.type";
 
 export const getQualifications =
@@ -17,5 +19,12 @@ export const createQualification = async (
   data: CreateQualificationApiRequestType
 ): Promise<CreateQualificationApiResponseType> => {
   const response = await api.post(API.CREATE_QUALIFICATION, data);
+  return response.data;
+};
+
+export const updateQualification = async (
+  data: UpdateQualificationApiRequestType
+): Promise<UpdateQualificationApiResponseType> => {
+  const response = await api.post(API.UPDATE_QUALIFICATION(data.id));
   return response.data;
 };

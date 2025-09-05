@@ -22,7 +22,7 @@ const CustomDialogTrigger: React.FC<CustomDialogTriggerProps> = ({
 }) => {
   return (
     <DialogTrigger
-      className={cn("px-4 py-2 rounded-md cursor-pointer", containerClasses)}
+      className={cn("px-4 py-2 rounded-md cursor-pointer ", containerClasses)}
     >
       <div
         className="flex gap-2 justify-center items-center"

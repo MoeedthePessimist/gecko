@@ -43,19 +43,26 @@ const EmployeeQualificationInformationForm: React.FC<
     mutationModalOpen,
     setMutationModalOpen,
     selectedQualificationId,
+    editQualification: {
+      mutate: updateQualification,
+      isPending: isUpdatingQualification,
+      isError: isUpdateQualificationError,
+      data: updatedQualificationData,
+      isSuccess: isUpdatedQualificationSuccess,
+    },
   } = useQualifications();
 
   const {
-    qualificationForm: {
-      control,
-      handleSubmit,
-      reset,
-      formState: { errors },
-    },
+    qualificationForm: { control, handleSubmit, reset },
   } = useEmployeeManagement();
 
-  const onSubmit = (qualification: QualificationFormInputs) => {
+  const onCreate = (qualification: QualificationFormInputs) => {
+    delete qualification.id;
     createQualification(qualification);
+  };
+
+  const onUpdate = (qualification: QualificationFormInputs) => {
+    updateQualification({ ...qualification, id: qualification.id || "" });
   };
 
   const onEdit = (qualification: QualificationFormInputs) => {
@@ -64,19 +71,38 @@ const EmployeeQualificationInformationForm: React.FC<
     setMutationModalOpen(true);
   };
 
+  const mutationSuccess = (data: QualificationFormInputs) => {
+    handleQualificationMutated(data);
+    setMutationModalOpen(false);
+  };
+
   useEffect(() => {
     if (isCreatedQualificationSuccess) {
       const data: QualificationFormInputs = createdQualificationData.data;
-      handleQualificationMutated(data);
-      reset();
-      setMutationModalOpen(false);
+      mutationSuccess(data);
     }
   }, [isCreatedQualificationSuccess]);
 
+  useEffect(() => {
+    if (isUpdatedQualificationSuccess) {
+      const data: QualificationFormInputs = updatedQualificationData.data;
+      mutationSuccess(data);
+    }
+  }, [isUpdatedQualificationSuccess]);
+
   const openModal = () => {
-    setMutationModalOpen(true);
-    reset();
+    reset({
+      id: "",
+      nameOfInstitution: "",
+      comment: "",
+      type: "",
+      level: "",
+      endDate: null,
+      startDate: null,
+      expiryDate: null,
+    });
     setSelectedQualificationId("");
+    setMutationModalOpen(true);
   };
 
   return (
@@ -86,7 +112,7 @@ const EmployeeQualificationInformationForm: React.FC<
           title="Add New Qualification"
           icon={<PlusCircle />}
           iconPosition="start"
-          containerClasses="bg-accent text-white text-sm float-right"
+          containerClasses="bg-accent text-white text-sm float-right md:max-w-[300px] self-end"
           openModal={openModal}
         />
         <DialogContent>
@@ -136,14 +162,16 @@ const EmployeeQualificationInformationForm: React.FC<
                 title="Update Qualification"
                 buttonOptions={{
                   className: "bg-secondary text-white",
+                  onClick: handleSubmit(onUpdate),
                 }}
+                isLoading={isUpdatingQualification}
               />
             ) : (
               <AppButton
                 title="Add Qualification"
                 buttonOptions={{
                   className: "bg-secondary text-white",
-                  onClick: handleSubmit(onSubmit),
+                  onClick: handleSubmit(onCreate),
                 }}
                 isLoading={isCreatingQualification}
               />
