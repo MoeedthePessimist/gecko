@@ -1,5 +1,6 @@
 import {
   createQualification,
+  deleteQualification,
   getQualifications,
   updateQualification,
 } from "@/api/qualifications";
@@ -34,6 +35,10 @@ const useQualifications = () => {
     },
   });
 
+  const removeQualification = useMutation({
+    mutationFn: deleteQualification,
+  });
+
   const queryQualifications = useTypedQuery({
     queryKey: QUERY_KEYS.QUALIFICATIONS,
     queryFn: async () => getQualifications(),
@@ -49,6 +54,7 @@ const useQualifications = () => {
     mutationModalOpen,
     setMutationModalOpen,
     editQualification,
+    removeQualification,
   };
 };
 

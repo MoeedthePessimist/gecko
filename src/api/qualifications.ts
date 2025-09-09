@@ -7,6 +7,7 @@ import {
   CreateQualificationApiRequestType,
   UpdateQualificationApiRequestType,
   UpdateQualificationApiResponseType,
+  DeleteQualificationApiResponseType,
 } from "@/types/api.type";
 
 export const getQualifications =
@@ -26,5 +27,12 @@ export const updateQualification = async (
   data: UpdateQualificationApiRequestType
 ): Promise<UpdateQualificationApiResponseType> => {
   const response = await api.patch(API.UPDATE_QUALIFICATION(data.id), data);
+  return response.data;
+};
+
+export const deleteQualification = async (
+  id: string
+): Promise<DeleteQualificationApiResponseType> => {
+  const response = await api.delete(API.DELETE_QUALIFICATION(id));
   return response.data;
 };

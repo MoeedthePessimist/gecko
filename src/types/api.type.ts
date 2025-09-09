@@ -44,3 +44,5 @@ export type UpdateQualificationApiRequestType =
   };
 
 export type UpdateQualificationApiResponseType = ApiResponseType<Qualification>;
+
+export type DeleteQualificationApiResponseType = ApiResponseType<string>;

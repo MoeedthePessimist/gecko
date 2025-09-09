@@ -37,23 +37,36 @@ const useEmployeeManagement = () => {
   };
 
   const onMutateQualification = (
-    data: QualificationFormInputs,
-    isEdited: boolean
+    data: QualificationFormInputs | string,
+    isEdited: boolean,
+    isDeleted: boolean
   ) => {
+    const currentQualifications =
+      employeeForm.watch("qualificationsInfo") || [];
+
+    if (isDeleted) {
+      const deletedQualificationId = data;
+      const restQualifications = currentQualifications.filter(
+        (qualification) => qualification.id !== deletedQualificationId
+      );
+      employeeForm.setValue("qualificationsInfo", restQualifications);
+      return;
+    }
+
+    if (typeof data === "string") {
+      return;
+    }
+
     if (isEdited) {
       const editedQualificationId = data.id;
 
-      const updatedQualifications = (
-        employeeForm.watch("qualificationsInfo") || []
-      ).map((qualification) =>
+      const updatedQualifications = currentQualifications.map((qualification) =>
         qualification.id === editedQualificationId ? data : qualification
       );
       employeeForm.setValue("qualificationsInfo", updatedQualifications);
       return;
     }
 
-    const currentQualifications =
-      employeeForm.watch("qualificationsInfo") || [];
     employeeForm.setValue("qualificationsInfo", [
       ...currentQualifications,
       data,

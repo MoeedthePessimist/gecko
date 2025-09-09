@@ -24,8 +24,9 @@ import { Card, CardContent } from "../ui/card";
 
 type EmployeeQualificationInformationFormProps = {
   handleQualificationMutated: (
-    data: QualificationFormInputs,
-    isEdited: boolean
+    data: QualificationFormInputs | string,
+    isEdited: boolean,
+    isDeleted: boolean
   ) => void;
   createdQualifications: Array<QualificationFormInputs>;
 };
@@ -52,6 +53,13 @@ const EmployeeQualificationInformationForm: React.FC<
       isError: isUpdateQualificationError,
       data: updatedQualificationData,
       isSuccess: isUpdatedQualificationSuccess,
+    },
+    removeQualification: {
+      mutate: deleteQualifaction,
+      isPending: isDeletingQualification,
+      isError: isDeleteQualificationError,
+      data: deletedQualificationData,
+      isSuccess: isDeletedQualificationSuccess,
     },
   } = useQualifications();
 
@@ -90,27 +98,40 @@ const EmployeeQualificationInformationForm: React.FC<
     setMutationModalOpen(true);
   };
 
+  const onDelete = (qualification: QualificationFormInputs) => {
+    setSelectedQualificationId(qualification.id || "");
+    deleteQualifaction(qualification.id || "");
+  };
+
   const mutationSuccess = (
-    data: QualificationFormInputs,
-    isEdited: boolean
+    data: QualificationFormInputs | string,
+    isEdited: boolean,
+    isDeleted: boolean
   ) => {
-    handleQualificationMutated(data, isEdited);
+    handleQualificationMutated(data, isEdited, isDeleted);
     setMutationModalOpen(false);
   };
 
   useEffect(() => {
     if (isCreatedQualificationSuccess) {
       const data: QualificationFormInputs = createdQualificationData.data;
-      mutationSuccess(data, false);
+      mutationSuccess(data, false, false);
     }
   }, [isCreatedQualificationSuccess]);
 
   useEffect(() => {
     if (isUpdatedQualificationSuccess) {
       const data: QualificationFormInputs = updatedQualificationData.data;
-      mutationSuccess(data, true);
+      mutationSuccess(data, true, false);
     }
   }, [isUpdatedQualificationSuccess]);
+
+  useEffect(() => {
+    if (isDeletedQualificationSuccess) {
+      const data: string = deletedQualificationData.data;
+      mutationSuccess(data, true, true);
+    }
+  }, [isDeletedQualificationSuccess]);
 
   const openModal = () => {
     reset({
@@ -229,7 +250,11 @@ const EmployeeQualificationInformationForm: React.FC<
                     size="20"
                     onClick={() => onEdit(qualification)}
                   />
-                  <Trash className="hover:text-accent text-primary" size="20" />
+                  <Trash
+                    className="hover:text-accent text-primary"
+                    size="20"
+                    onClick={() => onDelete(qualification)}
+                  />
                 </div>
               </CardContent>
             </Card>
