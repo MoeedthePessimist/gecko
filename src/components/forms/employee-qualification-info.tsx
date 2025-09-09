@@ -64,15 +64,8 @@ const EmployeeQualificationInformationForm: React.FC<
   } = useQualifications();
 
   const {
-    qualificationForm: {
-      control,
-      handleSubmit,
-      reset,
-      formState: { errors },
-    },
+    qualificationForm: { control, handleSubmit, reset },
   } = useEmployeeManagement();
-
-  console.log(errors, "errors");
 
   const onCreate = (qualification: QualificationFormInputs) => {
     delete qualification.id;

@@ -1,4 +1,5 @@
 import { Company } from "./company.type";
+import { Contact } from "./contact.type";
 import { Qualification } from "./qualification.type";
 import { User } from "./user.type";
 
@@ -7,6 +8,10 @@ type ApiResponseType<T> = {
   status: number;
   success: boolean;
 };
+
+/*
+AUTH API TYPES
+*/
 
 export type LoginApiRequestType = {
   email: string;
@@ -25,9 +30,17 @@ export type RegisterApiRequestType = {
 
 export type RegisterApiResponseType = undefined;
 
+/*
+USER API TYPES
+*/
+
 export type MeApiResponseType = {
   user: User;
 };
+
+/*
+QUALIFICATTION API TYPES
+*/
 
 export type GetQualificationsApiResponseType = ApiResponseType<Qualification[]>;
 
@@ -46,3 +59,23 @@ export type UpdateQualificationApiRequestType =
 export type UpdateQualificationApiResponseType = ApiResponseType<Qualification>;
 
 export type DeleteQualificationApiResponseType = ApiResponseType<string>;
+
+/*
+CONTACT API TYPES
+*/
+export type GetContactsApiResponseType = ApiResponseType<Contact[]>;
+
+export type CreateContactApiRequestType = Omit<
+  Contact,
+  "id" | "isActive" | "isArchived" | "createDateTime" | "lastChangedDateTime"
+>;
+
+export type CreateContactApiResponseType = ApiResponseType<Contact>;
+
+export type UpdateContactApiRequestType = CreateContactApiRequestType & {
+  id: string;
+};
+
+export type UpdateContactApiResponseType = ApiResponseType<Contact>;
+
+export type DeleteContactApiResponseType = ApiResponseType<string>;
