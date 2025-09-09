@@ -25,6 +25,6 @@ export const createQualification = async (
 export const updateQualification = async (
   data: UpdateQualificationApiRequestType
 ): Promise<UpdateQualificationApiResponseType> => {
-  const response = await api.post(API.UPDATE_QUALIFICATION(data.id));
+  const response = await api.patch(API.UPDATE_QUALIFICATION(data.id), data);
   return response.data;
 };

@@ -14,8 +14,6 @@ import {
   DocumentFormInputs,
   documentFormSchema,
 } from "@/schemas/document-schema";
-import { Qualification } from "@/types/qualification.type";
-import { BaseType } from "@/types/base.type";
 
 const useEmployeeManagement = () => {
   const employeeForm = useForm({
@@ -38,7 +36,22 @@ const useEmployeeManagement = () => {
     console.log("employee data => ", data);
   };
 
-  const onCreateQualification = (data: QualificationFormInputs) => {
+  const onMutateQualification = (
+    data: QualificationFormInputs,
+    isEdited: boolean
+  ) => {
+    if (isEdited) {
+      const editedQualificationId = data.id;
+
+      const updatedQualifications = (
+        employeeForm.watch("qualificationsInfo") || []
+      ).map((qualification) =>
+        qualification.id === editedQualificationId ? data : qualification
+      );
+      employeeForm.setValue("qualificationsInfo", updatedQualifications);
+      return;
+    }
+
     const currentQualifications =
       employeeForm.watch("qualificationsInfo") || [];
     employeeForm.setValue("qualificationsInfo", [
@@ -63,7 +76,7 @@ const useEmployeeManagement = () => {
     qualificationForm,
     contactForm,
     documentForm,
-    onCreateQualification,
+    onMutateQualification,
     onCreateDocument,
     onCreateContact,
   };

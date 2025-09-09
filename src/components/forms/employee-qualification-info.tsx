@@ -23,7 +23,10 @@ import { Qualification } from "@/types/qualification.type";
 import { Card, CardContent } from "../ui/card";
 
 type EmployeeQualificationInformationFormProps = {
-  handleQualificationMutated: (data: QualificationFormInputs) => void;
+  handleQualificationMutated: (
+    data: QualificationFormInputs,
+    isEdited: boolean
+  ) => void;
   createdQualifications: Array<QualificationFormInputs>;
 };
 
@@ -53,8 +56,15 @@ const EmployeeQualificationInformationForm: React.FC<
   } = useQualifications();
 
   const {
-    qualificationForm: { control, handleSubmit, reset },
+    qualificationForm: {
+      control,
+      handleSubmit,
+      reset,
+      formState: { errors },
+    },
   } = useEmployeeManagement();
+
+  console.log(errors, "errors");
 
   const onCreate = (qualification: QualificationFormInputs) => {
     delete qualification.id;
@@ -67,26 +77,38 @@ const EmployeeQualificationInformationForm: React.FC<
 
   const onEdit = (qualification: QualificationFormInputs) => {
     setSelectedQualificationId(qualification.id || "");
-    reset(qualification);
+    reset({
+      ...qualification,
+      startDate: qualification.startDate
+        ? new Date(qualification.startDate)
+        : null,
+      endDate: qualification.endDate ? new Date(qualification.endDate) : null,
+      expiryDate: qualification.expiryDate
+        ? new Date(qualification.expiryDate)
+        : null,
+    });
     setMutationModalOpen(true);
   };
 
-  const mutationSuccess = (data: QualificationFormInputs) => {
-    handleQualificationMutated(data);
+  const mutationSuccess = (
+    data: QualificationFormInputs,
+    isEdited: boolean
+  ) => {
+    handleQualificationMutated(data, isEdited);
     setMutationModalOpen(false);
   };
 
   useEffect(() => {
     if (isCreatedQualificationSuccess) {
       const data: QualificationFormInputs = createdQualificationData.data;
-      mutationSuccess(data);
+      mutationSuccess(data, false);
     }
   }, [isCreatedQualificationSuccess]);
 
   useEffect(() => {
     if (isUpdatedQualificationSuccess) {
       const data: QualificationFormInputs = updatedQualificationData.data;
-      mutationSuccess(data);
+      mutationSuccess(data, true);
     }
   }, [isUpdatedQualificationSuccess]);
 
