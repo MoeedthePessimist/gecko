@@ -78,8 +78,36 @@ const useEmployeeManagement = () => {
     employeeForm.setValue("documentsInfo", [...currentDocuments, data]);
   };
 
-  const onCreateContact = (data: ContactFormInputs) => {
+  const onMutateContact = (
+    data: ContactFormInputs | string,
+    isEdited: boolean,
+    isDeleted: boolean
+  ) => {
     const currentContacts = employeeForm.watch("contactsInfo") || [];
+
+    if (isDeleted) {
+      const deletedContactId = data;
+      const restContacts = currentContacts.filter(
+        (contact) => contact.id !== deletedContactId
+      );
+      employeeForm.setValue("contactsInfo", restContacts);
+      return;
+    }
+
+    if (typeof data === "string") {
+      return;
+    }
+
+    if (isEdited) {
+      const editedContactId = data.id;
+
+      const updatedContacts = currentContacts.map((contact) =>
+        contact.id === editedContactId ? data : contact
+      );
+      employeeForm.setValue("contactsInfo", updatedContacts);
+      return;
+    }
+
     employeeForm.setValue("contactsInfo", [...currentContacts, data]);
   };
 
@@ -91,7 +119,7 @@ const useEmployeeManagement = () => {
     documentForm,
     onMutateQualification,
     onCreateDocument,
-    onCreateContact,
+    onMutateContact,
   };
 };
 

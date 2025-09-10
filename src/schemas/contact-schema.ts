@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const contactFormSchema = z.object({
+  id: z.string().optional(),
   name: z.string().optional().default(""),
   relation: z.string().optional().default(""),
   gender: z.string().optional().default(""),

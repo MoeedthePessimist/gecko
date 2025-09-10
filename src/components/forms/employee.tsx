@@ -23,8 +23,13 @@ import { ContactFormInputs } from "@/schemas/contact-schema";
 import { DocumentFormInputs } from "@/schemas/document-schema";
 
 const EmployeeForm = () => {
-  const { employeeForm, contactForm, documentForm, onMutateQualification } =
-    useEmployeeManagement();
+  const {
+    employeeForm,
+    contactForm,
+    documentForm,
+    onMutateQualification,
+    onMutateContact,
+  } = useEmployeeManagement();
 
   return (
     <Form {...employeeForm} handleSubmit={employeeForm.handleSubmit}>
@@ -81,7 +86,12 @@ const EmployeeForm = () => {
               </TabsContent>
               <TabsContent value={tabs[5].value}>
                 <EmployeeContactInformationForm
-                  control={contactForm.control as Control<ContactFormInputs>}
+                  handleContactMutated={onMutateContact}
+                  createdContacts={
+                    (employeeForm.watch(
+                      "contactsInfo"
+                    ) as Array<ContactFormInputs>) || []
+                  }
                 />
               </TabsContent>
               <TabsContent value={tabs[6].value}>

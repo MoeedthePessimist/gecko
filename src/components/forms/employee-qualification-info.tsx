@@ -1,25 +1,21 @@
 "use client";
-
-import { EmployeeFormInputs } from "@/schemas/employee-schema";
 import React, { useEffect } from "react";
 import { Control } from "react-hook-form";
 import ControlledInput from "../controlled-input";
 import AppButton from "../app-button";
-import { Delete, Edit, PlusCircle, Trash } from "lucide-react";
+import { Edit, PlusCircle, Trash } from "lucide-react";
 import {
   Dialog,
   DialogClose,
   DialogContent,
   DialogFooter,
   DialogTitle,
-  DialogTrigger,
 } from "../ui/dialog";
 import CustomDialogTrigger from "../custom-dialog-trigger";
 import useQualifications from "@/hooks/use-qualifications";
 import { QualificationFormInputs } from "@/schemas/qualification-schema";
 import useEmployeeManagement from "@/hooks/use-employee";
 import ControlledDatePicker from "../controlled-date-picker";
-import { Qualification } from "@/types/qualification.type";
 import { Card, CardContent } from "../ui/card";
 
 type EmployeeQualificationInformationFormProps = {
@@ -73,10 +69,29 @@ const EmployeeQualificationInformationForm: React.FC<
   };
 
   const onUpdate = (qualification: QualificationFormInputs) => {
-    updateQualification({ ...qualification, id: qualification.id || "" });
+    updateQualification({ ...qualification, id: selectedQualificationId });
   };
 
-  const onEdit = (qualification: QualificationFormInputs) => {
+  const onDelete = (qualification: QualificationFormInputs) => {
+    deleteQualifaction(qualification.id || "");
+  };
+
+  const openModal = () => {
+    reset({
+      id: "",
+      nameOfInstitution: "",
+      comment: "",
+      type: "",
+      level: "",
+      endDate: null,
+      startDate: null,
+      expiryDate: null,
+    });
+    setSelectedQualificationId("");
+    setMutationModalOpen(true);
+  };
+
+  const onPressEdit = (qualification: QualificationFormInputs) => {
     setSelectedQualificationId(qualification.id || "");
     reset({
       ...qualification,
@@ -89,11 +104,6 @@ const EmployeeQualificationInformationForm: React.FC<
         : null,
     });
     setMutationModalOpen(true);
-  };
-
-  const onDelete = (qualification: QualificationFormInputs) => {
-    setSelectedQualificationId(qualification.id || "");
-    deleteQualifaction(qualification.id || "");
   };
 
   const mutationSuccess = (
@@ -125,21 +135,6 @@ const EmployeeQualificationInformationForm: React.FC<
       mutationSuccess(data, true, true);
     }
   }, [isDeletedQualificationSuccess]);
-
-  const openModal = () => {
-    reset({
-      id: "",
-      nameOfInstitution: "",
-      comment: "",
-      type: "",
-      level: "",
-      endDate: null,
-      startDate: null,
-      expiryDate: null,
-    });
-    setSelectedQualificationId("");
-    setMutationModalOpen(true);
-  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -241,7 +236,7 @@ const EmployeeQualificationInformationForm: React.FC<
                   <Edit
                     className="hover:text-accent text-primary"
                     size="20"
-                    onClick={() => onEdit(qualification)}
+                    onClick={() => onPressEdit(qualification)}
                   />
                   <Trash
                     className="hover:text-accent text-primary"
