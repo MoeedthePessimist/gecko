@@ -4,10 +4,7 @@ import {
   getContacts,
   updateContact,
 } from "@/api/contacts";
-import {
-  CreateContactApiResponseType,
-  CreateQualificationApiResponseType,
-} from "@/types/api.type";
+import { CreateContactApiResponseType } from "@/types/api.type";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useTypedQuery } from "./use-query";
@@ -42,7 +39,7 @@ const useContacts = () => {
   });
 
   const queryContacts = useTypedQuery({
-    queryKey: QUERY_KEYS.QUALIFICATIONS,
+    queryKey: QUERY_KEYS.CONTACTS,
     queryFn: async () => getContacts(),
   });
 

@@ -73,8 +73,36 @@ const useEmployeeManagement = () => {
     ]);
   };
 
-  const onCreateDocument = (data: DocumentFormInputs) => {
+  const onMutateDocument = (
+    data: DocumentFormInputs | string,
+    isEdited: boolean,
+    isDeleted: boolean
+  ) => {
     const currentDocuments = employeeForm.watch("documentsInfo") || [];
+
+    if (isDeleted) {
+      const deletedDocumentId = data;
+      const restDocuments = currentDocuments.filter(
+        (document) => document.id !== deletedDocumentId
+      );
+      employeeForm.setValue("documentsInfo", restDocuments);
+      return;
+    }
+
+    if (typeof data === "string") {
+      return;
+    }
+
+    if (isEdited) {
+      const editedDocumentId = data.id;
+
+      const updatedDocuments = currentDocuments.map((document) =>
+        document.id === editedDocumentId ? data : document
+      );
+      employeeForm.setValue("documentsInfo", updatedDocuments);
+      return;
+    }
+
     employeeForm.setValue("documentsInfo", [...currentDocuments, data]);
   };
 
@@ -118,7 +146,7 @@ const useEmployeeManagement = () => {
     contactForm,
     documentForm,
     onMutateQualification,
-    onCreateDocument,
+    onMutateDocument,
     onMutateContact,
   };
 };

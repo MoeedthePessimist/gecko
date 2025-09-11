@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const documentFormSchema = z.object({
+  id: z.string().optional(),
   title: z.string().optional().default(""),
   category: z.string().optional().default(""),
   startDate: z.date().optional().default(new Date()),

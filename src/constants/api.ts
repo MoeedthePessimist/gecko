@@ -10,4 +10,9 @@ export const API = {
   GET_CONTACT: "/contact",
   UPDATE_CONTACT: (id: string) => `/contact/${id}`,
   DELETE_CONTACT: (id: string) => `/contact/${id}`,
+  UPLOAD: "/upload",
+  CREATE_DOCUMENT: "/contact",
+  GET_DOCUMENT: "/document",
+  UPDATE_DOCUMENT: (id: string) => `/document/${id}`,
+  DELETE_DOCUMENT: (id: string) => `/document/${id}`,
 };

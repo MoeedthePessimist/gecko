@@ -1,5 +1,6 @@
 import { Company } from "./company.type";
 import { Contact } from "./contact.type";
+import { Document } from "./document.type";
 import { Qualification } from "./qualification.type";
 import { User } from "./user.type";
 
@@ -79,3 +80,31 @@ export type UpdateContactApiRequestType = CreateContactApiRequestType & {
 export type UpdateContactApiResponseType = ApiResponseType<Contact>;
 
 export type DeleteContactApiResponseType = ApiResponseType<string>;
+
+/*
+DOCUMENT API TYPES
+*/
+export type GetDocumentsApiResponseType = ApiResponseType<Document[]>;
+
+export type CreateDocumentApiRequestType = Omit<
+  Document,
+  "id" | "isActive" | "isArchived" | "createDateTime" | "lastChangedDateTime"
+>;
+
+export type CreateDocumentApiResponseType = ApiResponseType<Document>;
+
+export type UpdateDocumentApiRequestType = CreateDocumentApiRequestType & {
+  id: string;
+};
+
+export type UpdateDocumentApiResponseType = ApiResponseType<Document>;
+
+export type DeleteDocumentApiResponseType = ApiResponseType<string>;
+
+/*
+UPLOAD API TYPES
+*/
+export type UploadFileApiResponseType = ApiResponseType<{
+  fileName: string;
+  fileSize: string | number;
+}>;
