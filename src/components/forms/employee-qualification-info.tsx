@@ -51,7 +51,7 @@ const EmployeeQualificationInformationForm: React.FC<
       isSuccess: isUpdatedQualificationSuccess,
     },
     removeQualification: {
-      mutate: deleteQualifaction,
+      mutate: deleteQualification,
       isPending: isDeletingQualification,
       isError: isDeleteQualificationError,
       data: deletedQualificationData,
@@ -73,7 +73,7 @@ const EmployeeQualificationInformationForm: React.FC<
   };
 
   const onDelete = (qualification: QualificationFormInputs) => {
-    deleteQualifaction(qualification.id || "");
+    deleteQualification(qualification.id || "");
   };
 
   const openModal = () => {
@@ -227,7 +227,7 @@ const EmployeeQualificationInformationForm: React.FC<
         )}
         {createdQualifications.map((qualification) => {
           return (
-            <Card>
+            <Card key={qualification.id}>
               <CardContent className="flex justify-between">
                 <p className="text-primary text-sm font-semibold">
                   {qualification.type}

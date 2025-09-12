@@ -25,10 +25,9 @@ import { DocumentFormInputs } from "@/schemas/document-schema";
 const EmployeeForm = () => {
   const {
     employeeForm,
-    contactForm,
-    documentForm,
     onMutateQualification,
     onMutateContact,
+    onMutateDocument,
   } = useEmployeeManagement();
 
   return (
@@ -96,7 +95,12 @@ const EmployeeForm = () => {
               </TabsContent>
               <TabsContent value={tabs[6].value}>
                 <EmployeeDocumentInformationForm
-                  control={documentForm.control as Control<DocumentFormInputs>}
+                  handleDocumentMutated={onMutateDocument}
+                  createdDocuments={
+                    (employeeForm.watch(
+                      "documentsInfo"
+                    ) as Array<DocumentFormInputs>) || []
+                  }
                 />
               </TabsContent>
             </CardContent>
