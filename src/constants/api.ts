@@ -11,7 +11,7 @@ export const API = {
   UPDATE_CONTACT: (id: string) => `/contact/${id}`,
   DELETE_CONTACT: (id: string) => `/contact/${id}`,
   UPLOAD: "/upload",
-  CREATE_DOCUMENT: "/contact",
+  CREATE_DOCUMENT: "/document",
   GET_DOCUMENT: "/document",
   UPDATE_DOCUMENT: (id: string) => `/document/${id}`,
   DELETE_DOCUMENT: (id: string) => `/document/${id}`,
