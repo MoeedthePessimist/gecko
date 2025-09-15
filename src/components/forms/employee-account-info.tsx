@@ -10,6 +10,7 @@ import { identitiesList } from "@/enums/identities.enum";
 import { gendersList } from "@/enums/genders.enum";
 import { raceList } from "@/enums/race.enum";
 import ControlledCheckbox from "../controlled-checkbox";
+import ControlledDatePicker from "../controlled-date-picker";
 
 type EmployeeAccountInformationFormProps = {
   control: Control<EmployeeFormInputs>;
@@ -68,12 +69,11 @@ const EmployeeAccountInformationForm: React.FC<
           label="Identity Number"
         />
 
-        <ControlledInput<EmployeeFormInputs>
+        <ControlledDatePicker<EmployeeFormInputs>
           control={control}
           name={"accountInfo.dateOfBirth"}
           placeholder="Select Date of Birth"
           label="Date of Birth"
-          type="date"
         />
 
         <ControlledSelect<EmployeeFormInputs>

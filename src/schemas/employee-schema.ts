@@ -5,7 +5,6 @@ import { employementFormSchema } from "./employement-schema";
 import { qualificationFormSchema } from "./qualification-schema";
 import { contactFormSchema } from "./contact-schema";
 import { documentFormSchema } from "./document-schema";
-import { gendersEnum } from "@/enums/genders.enum";
 
 export const accountFormSchema = z.object({
   name: z.string().nonempty("Please enter employee name").default(""),

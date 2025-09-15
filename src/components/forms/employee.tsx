@@ -30,6 +30,12 @@ const EmployeeForm = () => {
     onMutateDocument,
   } = useEmployeeManagement();
 
+  const onSubmit = (data: EmployeeFormInputs) => {
+    console.log(data);
+  };
+
+  console.log(employeeForm.formState.errors);
+
   return (
     <Form {...employeeForm} handleSubmit={employeeForm.handleSubmit}>
       <ImageUploader />
@@ -111,6 +117,7 @@ const EmployeeForm = () => {
             title="Create Employee"
             buttonOptions={{
               className: "w-full md:w-auto bg-primary mt-4 !px-4 !py-2",
+              onClick: () => employeeForm.handleSubmit(onSubmit),
             }}
           />
         </div>
