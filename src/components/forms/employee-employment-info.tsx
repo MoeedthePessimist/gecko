@@ -7,6 +7,7 @@ import { Card, CardContent } from "../ui/card";
 import ControlledInput from "../controlled-input";
 import ControlledSelect from "../controlled-select";
 import { employeeStatusesList } from "@/enums/statuses.enum";
+import ControlledDatePicker from "../controlled-date-picker";
 
 type EmployeeEmployementInformationFormProps = {
   control: Control<EmployeeFormInputs>;
@@ -46,33 +47,29 @@ const EmployeeEmployementInformationForm: React.FC<
           label="Direct Manager"
           list={[]} //TODO: data from the backend
         />
-        <ControlledInput<EmployeeFormInputs>
+        <ControlledDatePicker<EmployeeFormInputs>
           control={control}
           name={"employementInfo.dateJoined"}
           placeholder="Enter Date Joined"
           label="Date Joined"
-          type="date"
         />
-        <ControlledInput<EmployeeFormInputs>
+        <ControlledDatePicker<EmployeeFormInputs>
           control={control}
           name={"employementInfo.dateLeft"}
           placeholder="Select Date Left"
           label="Date Left"
-          type="date"
         />
-        <ControlledInput<EmployeeFormInputs>
+        <ControlledDatePicker<EmployeeFormInputs>
           control={control}
           name={"employementInfo.probationFrom"}
           placeholder="Enter Probation From"
           label="Probation From"
-          type="date"
         />
-        <ControlledInput<EmployeeFormInputs>
+        <ControlledDatePicker<EmployeeFormInputs>
           control={control}
           name={"employementInfo.probationTo"}
           placeholder="Select Probation To"
           label="Probation To"
-          type="date"
         />
       </CardContent>
     </Card>

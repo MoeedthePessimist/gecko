@@ -47,7 +47,7 @@ const useEmployeeManagement = () => {
         role: "",
         homeTelephoneNumber: "",
         workTelephoneNumber: "",
-        isNonResidentialDirector: false,
+        isNonResidentialDirector: "",
         bank: {
           bankName: "",
           bankSwiftCode: "",

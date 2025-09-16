@@ -38,6 +38,16 @@ const ControlledInput = <TFieldValues extends FieldValues>({
             <Input
               placeholder={placeholder}
               {...field}
+              onChange={(e) => {
+                const value = e.target.value;
+                field.onChange(
+                  type === "number"
+                    ? value === ""
+                      ? ""
+                      : Number(value)
+                    : value
+                );
+              }}
               className={`text-sm ${classNames}`}
               type={type}
             />

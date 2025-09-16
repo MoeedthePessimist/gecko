@@ -8,6 +8,7 @@ import ControlledInput from "../controlled-input";
 import ControlledSelect from "../controlled-select";
 import { cpfTablesList } from "@/enums/cpf-tables.enum";
 import ControlledCheckbox from "../controlled-checkbox";
+import ControlledDatePicker from "../controlled-date-picker";
 
 type EmployeeSettingsInformationFormProps = {
   control: Control<EmployeeFormInputs>;
@@ -34,12 +35,11 @@ const EmployeeSettingsInformationForm: React.FC<
           />
         </div>
 
-        <ControlledInput<EmployeeFormInputs>
+        <ControlledDatePicker<EmployeeFormInputs>
           control={control}
           name={"settingsInfo.prEffectiveDate"}
           label="PR Effective Date"
           placeholder="PR Effective Date"
-          type="date"
         />
 
         <ControlledInput<EmployeeFormInputs>

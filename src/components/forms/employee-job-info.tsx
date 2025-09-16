@@ -6,6 +6,7 @@ import { Control } from "react-hook-form";
 import { Card, CardContent } from "../ui/card";
 import ControlledInput from "../controlled-input";
 import ControlledSelect from "../controlled-select";
+import ControlledDatePicker from "../controlled-date-picker";
 
 type EmployeeJobInformationFormProps = {
   control: Control<EmployeeFormInputs>;
@@ -42,20 +43,19 @@ const EmployeeJobInformationForm: React.FC<EmployeeJobInformationFormProps> = ({
           name={"jobInfo.basicRate"}
           label="Basic Rate"
           placeholder="Enter Basic Rate"
+          type="number"
         />
-        <ControlledInput<EmployeeFormInputs>
+        <ControlledDatePicker<EmployeeFormInputs>
           control={control}
           name={"jobInfo.startDate"}
           placeholder="Enter Start Date"
           label="Start Date"
-          type="date"
         />
-        <ControlledInput<EmployeeFormInputs>
+        <ControlledDatePicker<EmployeeFormInputs>
           control={control}
           name={"jobInfo.endDate"}
           placeholder="Select End Date"
           label="End Date"
-          type="date"
         />
       </CardContent>
     </Card>

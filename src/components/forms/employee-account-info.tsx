@@ -46,6 +46,7 @@ const EmployeeAccountInformationForm: React.FC<
           name={"accountInfo.repeatPassword"}
           placeholder="Repeat the password"
           label="Repeat Password"
+          type="password"
         />
 
         <ControlledInput<EmployeeFormInputs>

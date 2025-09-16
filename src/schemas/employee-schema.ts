@@ -6,67 +6,65 @@ import { qualificationFormSchema } from "./qualification-schema";
 import { contactFormSchema } from "./contact-schema";
 import { documentFormSchema } from "./document-schema";
 
-export const accountFormSchema = z.object({
-  name: z.string().nonempty("Please enter employee name").default(""),
-  identityNumber: z
-    .string()
-    .nonempty("Please enter employee identity number")
-    .default(""),
-  identityType: z
-    .string()
-    .nonempty("Please select an identity type")
-    .default(""),
-  dateOfBirth: z.date().optional().default(new Date()),
-  gender: z.string().nonempty("Please select employee gender").default(""),
-  race: z.string().nonempty("Please select employee race").default(""),
-  mobileNumber: z.string().nonempty("Please enter a phone number").default(""),
-  email: z.string().email("Please enter a valid employee email").default(""),
-  password: z
-    .string()
-    .min(6, "Password must be at least 6 characters")
-    .default(""),
-  repeatPassword: z.string().default(""),
-  optionalEmail: z.string().optional().default(""),
-  allowLogin: z.boolean().default(false),
-});
+export const accountFormSchema = z
+  .object({
+    name: z.string().nonempty("Please enter employee name"),
+    identityNumber: z
+      .string()
+      .nonempty("Please enter employee identity number"),
+    identityType: z.string().nonempty("Please select an identity type"),
+    dateOfBirth: z.date().optional(),
+    gender: z.string().nonempty("Please select employee gender"),
+    race: z.string().nonempty("Please select employee race"),
+    mobileNumber: z.string().nonempty("Please enter a phone number"),
+    email: z.string().email("Please enter a valid employee email"),
+    password: z.string().min(6, "Password must be at least 6 characters"),
+    repeatPassword: z.string(),
+    optionalEmail: z.string().optional(),
+    allowLogin: z.boolean(),
+  })
+  .refine((data) => data.password === data.repeatPassword, {
+    message: "Passwords do not match",
+    path: ["repeatPassword"],
+  });
 
 export const generalFormSchema = z.object({
-  addresstype: z.string().optional().default(""),
-  houseNo: z.string().optional().default(""),
-  levelNo: z.string().optional().default(""),
-  unitNo: z.string().optional().default(""),
-  address: z.string().nonempty("Please enter employee address").default(""),
-  city: z.string().optional().default(""),
-  state: z.string().optional().default(""),
-  country: z.string().optional().default(""),
-  nationality: z.string().optional().default(""),
-  maritalStatus: z.string().optional().default(""),
-  role: z.string().nonempty("Please select employee role").default(""),
-  homeTelephoneNumber: z.string().optional().default(""),
-  workTelephoneNumber: z.string().optional().default(""),
-  isNonResidentialDirector: z.boolean().default(false),
+  addresstype: z.string().optional(),
+  houseNo: z.string().optional(),
+  levelNo: z.string().optional(),
+  unitNo: z.string().optional(),
+  address: z.string().nonempty("Please enter employee address"),
+  city: z.string().optional(),
+  state: z.string().optional(),
+  country: z.string().optional(),
+  nationality: z.string().optional(),
+  maritalStatus: z.string().optional(),
+  role: z.string().nonempty("Please select employee role"),
+  homeTelephoneNumber: z.string().optional(),
+  workTelephoneNumber: z.string().optional(),
+  isNonResidentialDirector: z.string().optional(),
   bank: bankFormSchema,
 });
 
 export const settingFormSchema = z.object({
-  cpfTable: z.string().optional().default(""),
-  employerPaysCpf: z.boolean().optional().default(false),
-  prEffectiveDate: z.date().optional().default(new Date()),
-  cpfNo: z.string().optional().default(""),
-  taxNo: z.string().optional().default(""),
-  workTable: z.record(z.any()).default({}),
-  leaveTable: z.record(z.any()).default({}),
-  levy: z.record(z.any()).optional().default({}),
-  noSdlContribution: z.boolean().optional().default(false),
-  noShgContribution: z.boolean().optional().default(false),
-  useAttendanceRecords: z.boolean().optional().default(false),
-  maxPayToCalculate: z.number().optional().default(0),
-  allowanceCommission: z.number().optional().default(0),
-  allowanceErrorFee: z.number().optional().default(0),
-  deductionCdac: z.number().optional().default(0),
-  deductionEcf: z.number().optional().default(0),
-  deductionMbmf: z.number().optional().default(0),
-  deductionEcfSinda: z.number().optional().default(0),
+  cpfTable: z.string().optional(),
+  employerPaysCpf: z.boolean().optional(),
+  prEffectiveDate: z.date().optional(),
+  cpfNo: z.string().optional(),
+  taxNo: z.string().optional(),
+  workTable: z.record(z.any()),
+  leaveTable: z.record(z.any()),
+  levy: z.record(z.any()).optional(),
+  noSdlContribution: z.boolean().optional(),
+  noShgContribution: z.boolean().optional(),
+  useAttendanceRecords: z.boolean().optional(),
+  maxPayToCalculate: z.number().optional(),
+  allowanceCommission: z.number().optional(),
+  allowanceErrorFee: z.number().optional(),
+  deductionCdac: z.number().optional(),
+  deductionEcf: z.number().optional(),
+  deductionMbmf: z.number().optional(),
+  deductionEcfSinda: z.number().optional(),
 });
 
 export const employeeFormSchema = z.object({

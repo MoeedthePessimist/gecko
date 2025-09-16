@@ -16,6 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { BOOLEAN_OPTIONS } from "@/constants/options";
 
 type ControlledSelectProps<TFieldValues extends FieldValues> = {
   control: Control<TFieldValues>;
