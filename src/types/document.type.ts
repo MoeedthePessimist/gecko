@@ -9,3 +9,7 @@ export type Document = BaseType & {
   fileName: string;
   remarks: string;
 };
+export type DocumentWithNecessaryFields = Omit<
+  Document,
+  "isActive" | "isArchived" | "createDateTime" | "lastChangedDateTime"
+>;

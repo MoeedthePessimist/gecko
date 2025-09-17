@@ -2,11 +2,14 @@ import { z } from "zod";
 
 export const contactFormSchema = z.object({
   id: z.string().optional(),
-  name: z.string().optional(),
-  relation: z.string().optional(),
-  gender: z.string().optional(),
+  name: z.string().nonempty("Please enter a name"),
+  relation: z.string().nonempty("Please enter a relation"),
+  gender: z.string().nonempty("Please enter a gender"),
   mobileNumber: z.string().optional(),
-  email: z.string().email("Please enter a valid email").optional(),
+  email: z
+    .string()
+    .email("Please enter a valid email")
+    .nonempty("Please enter a contact email"),
   homeTelephoneNumber: z.string().optional(),
   workTelephoneNumber: z.string().optional(),
 });

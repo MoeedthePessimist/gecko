@@ -108,3 +108,13 @@ export type UploadFileApiResponseType = ApiResponseType<{
   fileName: string;
   fileSize: string | number;
 }>;
+
+/**
+ * EMPLOYEE API TYPES
+ */
+export type CreateEmployeeRequestType = Omit<
+  User,
+  "id" | "isActive" | "isArchived" | "createDateTime" | "lastChangedDateTime"
+>;
+
+export type CreateEmployeeResponseType = ApiResponseType<User>;

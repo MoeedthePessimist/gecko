@@ -21,6 +21,8 @@ import { EmployeeFormInputs } from "@/schemas/employee-schema";
 import { QualificationFormInputs } from "@/schemas/qualification-schema";
 import { ContactFormInputs } from "@/schemas/contact-schema";
 import { DocumentFormInputs } from "@/schemas/document-schema";
+import { User } from "@/types/user.type";
+import { ContactWithNecessaryFields } from "@/types/contact.type";
 
 const EmployeeForm = () => {
   const {
@@ -31,6 +33,21 @@ const EmployeeForm = () => {
   } = useEmployeeManagement();
 
   const onSubmit = (data: EmployeeFormInputs) => {
+    const { role, bank, ...restGeneralInfo } = data.generalInfo;
+
+    const employee: User = {
+      ...data.accountInfo,
+      ...restGeneralInfo,
+      job: data.jobInfo,
+      ...data.settingsInfo,
+      employment: data.employementInfo,
+      contacts:
+        data.contactsInfo as unknown as Array<ContactWithNecessaryFields>,
+      isEmailVerified: true,
+      roles: [role],
+      avatar: "",
+      bank: bank,
+    };
     console.log(data);
   };
 

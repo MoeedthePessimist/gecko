@@ -1,10 +1,10 @@
 import { z } from "zod";
 
 export const employementFormSchema = z.object({
+  id: z.string().optional(),
   department: z.string().optional().default(""),
   employmentType: z.string().optional().default(""),
   status: z.string().optional().default(""),
-  directManager: z.record(z.any()).default({}),
   dateJoined: z.date().default(new Date()),
   dateLeft: z.date().optional().default(new Date()),
   probationFrom: z.date().optional().default(new Date()),

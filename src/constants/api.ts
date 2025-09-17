@@ -15,4 +15,5 @@ export const API = {
   GET_DOCUMENT: "/document",
   UPDATE_DOCUMENT: (id: string) => `/document/${id}`,
   DELETE_DOCUMENT: (id: string) => `/document/${id}`,
+  CREATE_EMPLOYEE: "user/employee",
 };

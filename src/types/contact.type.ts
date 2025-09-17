@@ -9,3 +9,8 @@ export type Contact = BaseType & {
   homeTelephoneNumber: string;
   workTelephoneNumber: string;
 };
+
+export type ContactWithNecessaryFields = Omit<
+  Contact,
+  "isActive" | "isArchived" | "createDateTime" | "lastChangedDateTime"
+>;

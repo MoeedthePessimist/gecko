@@ -9,3 +9,8 @@ export type Qualification = {
   expiryDate: Date | null;
   comment?: string;
 } & BaseType;
+
+export type QualificationWithNecessaryFields = Omit<
+  Qualification,
+  "isActive" | "isArchived" | "createDateTime" | "lastChangedDateTime"
+>;
