@@ -7,7 +7,7 @@ export type WorkTable = BaseType & {
   dailyWorkingHours: number;
   remarks: string;
   workingDays: WorkingDay[];
-  company: Company;
+  company?: Company;
 };
 
 export type WorkTableWithNecessaryFields = Omit<

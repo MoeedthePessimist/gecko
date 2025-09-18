@@ -14,6 +14,9 @@ import {
   DocumentFormInputs,
   documentFormSchema,
 } from "@/schemas/document-schema";
+import { useMutation } from "@tanstack/react-query";
+import { createEmployee } from "@/api/user";
+import { AxiosError } from "axios";
 
 const useEmployeeManagement = () => {
   const employeeForm = useForm({
@@ -60,9 +63,9 @@ const useEmployeeManagement = () => {
         prEffectiveDate: new Date(),
         cpfNo: "",
         taxNo: "",
-        workTable: {},
-        leaveTable: {},
-        levy: {},
+        workTable: undefined,
+        leaveTable: undefined,
+        levy: undefined,
         noSdlContribution: false,
         noShgContribution: false,
         useAttendanceRecords: false,
@@ -87,7 +90,6 @@ const useEmployeeManagement = () => {
         department: "",
         employmentType: "",
         status: "",
-        directManager: {},
         dateJoined: new Date(),
         dateLeft: new Date(),
         probationFrom: new Date(),
@@ -96,6 +98,16 @@ const useEmployeeManagement = () => {
       qualificationsInfo: [],
       contactsInfo: [],
       documentsInfo: [],
+    },
+  });
+
+  const createEmployeeMutation = useMutation({
+    mutationFn: createEmployee,
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error: AxiosError) => {
+      console.error(error);
     },
   });
 
@@ -227,6 +239,7 @@ const useEmployeeManagement = () => {
     onMutateQualification,
     onMutateDocument,
     onMutateContact,
+    createEmployeeMutation,
   };
 };
 

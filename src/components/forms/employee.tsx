@@ -30,6 +30,7 @@ const EmployeeForm = () => {
     onMutateQualification,
     onMutateContact,
     onMutateDocument,
+    createEmployeeMutation,
   } = useEmployeeManagement();
 
   const onSubmit = (data: EmployeeFormInputs) => {
@@ -48,7 +49,9 @@ const EmployeeForm = () => {
       avatar: "",
       bank: bank,
     };
-    console.log(data);
+    console.log(employee);
+
+    createEmployeeMutation.mutate(employee);
   };
 
   console.log(employeeForm.formState.errors);

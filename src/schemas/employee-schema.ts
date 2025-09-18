@@ -5,6 +5,9 @@ import { employementFormSchema } from "./employement-schema";
 import { qualificationFormSchema } from "./qualification-schema";
 import { contactFormSchema } from "./contact-schema";
 import { documentFormSchema } from "./document-schema";
+import { workTableSchema } from "./work-table-schema";
+import { leaveTableSchema } from "./leave-table-schema";
+import { levySchema } from "./levy-schema";
 
 export const accountFormSchema = z
   .object({
@@ -52,9 +55,9 @@ export const settingFormSchema = z.object({
   prEffectiveDate: z.date().optional(),
   cpfNo: z.string().optional(),
   taxNo: z.string().optional(),
-  workTable: z.record(z.any()),
-  leaveTable: z.record(z.any()),
-  levy: z.record(z.any()).optional(),
+  workTable: workTableSchema.optional(),
+  leaveTable: leaveTableSchema.optional(),
+  levy: levySchema.optional(),
   noSdlContribution: z.boolean().optional(),
   noShgContribution: z.boolean().optional(),
   useAttendanceRecords: z.boolean().optional(),

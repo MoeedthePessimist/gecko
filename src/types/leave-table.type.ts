@@ -9,7 +9,7 @@ export type LeaveTable = BaseType & {
   workingYearTo: number;
   entitlement: number;
   carryForward: number;
-  company: Company;
+  company?: Company;
 };
 
 export type LeaveTableWithNecessaryFields = Omit<

@@ -14,6 +14,6 @@ export const me = async (): Promise<MeApiResponseType> => {
 export const createEmployee = async (
   data: CreateEmployeeRequestType
 ): Promise<CreateEmployeeResponseType> => {
-  const response = await api.get(API.CREATE_EMPLOYEE);
+  const response = await api.post(API.CREATE_EMPLOYEE, data);
   return response.data;
 };
