@@ -32,7 +32,7 @@ export const accountFormSchema = z
   });
 
 export const generalFormSchema = z.object({
-  addresstype: z.string().optional(),
+  addressType: z.string().optional(),
   houseNo: z.string().optional(),
   levelNo: z.string().optional(),
   unitNo: z.string().optional(),

@@ -34,24 +34,25 @@ const EmployeeForm = () => {
   } = useEmployeeManagement();
 
   const onSubmit = (data: EmployeeFormInputs) => {
-    const { role, bank, ...restGeneralInfo } = data.generalInfo;
+    // const { role, bank, ...restGeneralInfo } = data.generalInfo;
 
-    const employee: User = {
-      ...data.accountInfo,
-      ...restGeneralInfo,
-      job: data.jobInfo,
-      ...data.settingsInfo,
-      employment: data.employementInfo,
-      contacts:
-        data.contactsInfo as unknown as Array<ContactWithNecessaryFields>,
-      isEmailVerified: true,
-      roles: [role],
-      avatar: "",
-      bank: bank,
-    };
-    console.log(employee);
+    // const employee: User = {
+    //   ...data.accountInfo,
+    //   ...restGeneralInfo,
+    //   job: data.jobInfo,
+    //   ...data.settingsInfo,
+    //   employment: data.employementInfo,
+    //   contacts:
+    //     data.contactsInfo as unknown as Array<ContactWithNecessaryFields>,
+    //   isEmailVerified: true,
+    //   roles: [role],
+    //   avatar: "",
+    //   bank: bank,
+    // };
+    // console.log(employee);
 
-    createEmployeeMutation.mutate(employee);
+    // createEmployeeMutation.mutate(employee);
+    createEmployeeMutation.mutate(data);
   };
 
   console.log(employeeForm.formState.errors);

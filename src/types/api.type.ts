@@ -1,3 +1,4 @@
+import { EmployeeFormInputs } from "@/schemas/employee-schema";
 import { Company } from "./company.type";
 import { Contact } from "./contact.type";
 import { Document } from "./document.type";
@@ -112,9 +113,5 @@ export type UploadFileApiResponseType = ApiResponseType<{
 /**
  * EMPLOYEE API TYPES
  */
-export type CreateEmployeeRequestType = Omit<
-  User,
-  "id" | "isActive" | "isArchived" | "createDateTime" | "lastChangedDateTime"
->;
-
+export type CreateEmployeeRequestType = EmployeeFormInputs;
 export type CreateEmployeeResponseType = ApiResponseType<User>;

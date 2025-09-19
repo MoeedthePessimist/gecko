@@ -26,7 +26,7 @@ const EmployeeGeneralInformationForm: React.FC<
       <CardContent className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <ControlledSelect<EmployeeFormInputs>
           control={control}
-          name={"generalInfo.addresstype"}
+          name={"generalInfo.addressType"}
           list={addressTypesList}
           label="Address Type"
           placeholder="Select Address Type"
