@@ -45,11 +45,6 @@ const useEmployeeManagement = () => {
         state: "",
         role: "",
         isNonResidentialDirector: "",
-        bank: {
-          bankName: "",
-          bankSwiftCode: "",
-          bankAccountNumber: "",
-        },
       },
       settingsInfo: {
         cpfTable: undefined,
