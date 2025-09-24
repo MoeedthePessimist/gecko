@@ -16,4 +16,6 @@ export const API = {
   UPDATE_DOCUMENT: (id: string) => `/document/${id}`,
   DELETE_DOCUMENT: (id: string) => `/document/${id}`,
   CREATE_EMPLOYEE: "user/employee",
+  GET_EMPLOYEES: "user/employees",
+  GET_EMPLOYEE: (id: string) => `user/employee/${id}`,
 };

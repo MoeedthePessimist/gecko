@@ -115,3 +115,6 @@ export type UploadFileApiResponseType = ApiResponseType<{
  */
 export type CreateEmployeeRequestType = EmployeeFormInputs;
 export type CreateEmployeeResponseType = ApiResponseType<User>;
+
+export type GetEmployeesResponseType = ApiResponseType<Array<User>>;
+export type GetEmployeeResponseType = ApiResponseType<User>;
