@@ -15,8 +15,10 @@ import {
   documentFormSchema,
 } from "@/schemas/document-schema";
 import { useMutation } from "@tanstack/react-query";
-import { createEmployee } from "@/api/user";
+import { createEmployee, getEmployees } from "@/api/user";
 import { AxiosError } from "axios";
+import { useTypedQuery } from "./use-query";
+import { QUERY_KEYS } from "@/constants/query-keys";
 
 const useEmployeeManagement = () => {
   const employeeForm = useForm({
@@ -95,6 +97,11 @@ const useEmployeeManagement = () => {
     onError: (error: AxiosError) => {
       console.error(error);
     },
+  });
+
+  const getEmployeesQuery = useTypedQuery({
+    queryKey: QUERY_KEYS.EMPLOYEES,
+    queryFn: getEmployees,
   });
 
   const qualificationForm = useForm({
@@ -226,6 +233,7 @@ const useEmployeeManagement = () => {
     onMutateDocument,
     onMutateContact,
     createEmployeeMutation,
+    getEmployeesQuery,
   };
 };
 

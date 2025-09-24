@@ -6,15 +6,26 @@ import TitleValuePair from "./title-value-pair";
 import AppButton from "./app-button";
 import { EditIcon, Trash2 } from "lucide-react";
 import { User } from "@/types/user.type";
+import useUser from "@/hooks/use-user";
+import useAuth from "@/hooks/use-auth";
+import { useAuthContext } from "@/context/auth-context";
 
 type EmployeeCardProps = {
   employee?: User;
 };
 
 const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
+  const { user } = useAuthContext();
+  const isOwner = user?.id === employee?.id;
+
   return (
-    <Card className="rounded-xl flex flex-col p-4 w-full border-2">
-      <CardHeader className="relative w-full h-32 ">
+    <Card className="rounded-xl flex flex-col p-4 w-full border-2 relative">
+      {isOwner && (
+        <p className="text-white bg-accent px-4 text-sm rounded-sm absolute -top-2 -right-2 z-20">
+          You
+        </p>
+      )}
+      <CardHeader className="relative w-full h-32">
         <Image
           src="/images/cover-placeholder.jpg"
           alt="cover placeholder"
@@ -33,12 +44,18 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
         </div>
       </CardHeader>
       <CardContent className="grid grid-cols-2 md:grid-cols-3 mt-10 gap-4">
-        <TitleValuePair title="ID" value="0000001" />
-        <TitleValuePair title="Name" value="Abdul Moeed" />
-        <TitleValuePair title="Email" value="test@gmail.com" />
-        <TitleValuePair title="Job Category" value="Manager" />
-        <TitleValuePair title="Designation" value="General Directory" />
-        <TitleValuePair title="Phone" value="01293128492" />
+        <TitleValuePair title="ID" value={employee?.identityNumber || "N/A"} />
+        <TitleValuePair title="Name" value={employee?.name || "N/A"} />
+        <TitleValuePair title="Email" value={employee?.email || "N/A"} />
+        <TitleValuePair
+          title="Job Category"
+          value={employee?.job?.jobCategory || "N/A"}
+        />
+        <TitleValuePair
+          title="Designation"
+          value={employee?.job?.designation || "N/A"}
+        />
+        <TitleValuePair title="Phone" value={employee?.mobileNumber || "N/A"} />
       </CardContent>
 
       <CardFooter className="grid grid-cols-2 gap-4">
@@ -46,6 +63,7 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
           buttonOptions={{
             className:
               "bg-white text-primary border-2 border-primary hover:bg-primary hover:text-white",
+            disabled: isOwner,
           }}
           title="Edit"
           icon={<EditIcon />}
@@ -56,6 +74,7 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
           buttonOptions={{
             className:
               "bg-white text-red-500 border-2 border-red-500 hover:bg-red-500 hover:text-white",
+            disabled: isOwner,
           }}
           title="Delete"
           icon={<Trash2 />}

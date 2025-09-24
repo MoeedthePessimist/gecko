@@ -3,4 +3,6 @@ export const QUERY_KEYS = {
   QUALIFICATIONS: ["qualifications"],
   CONTACTS: ["contacts"],
   DOCUMENTS: ["documents"],
+  EMPLOYEES: ["employees"],
+  EMPLOYEE: (id: string) => ["employee", id],
 };

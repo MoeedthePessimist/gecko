@@ -1,14 +1,22 @@
-"use server";
+"use client";
 
 import AppButton from "@/components/app-button";
 import EmployeeCard from "@/components/employee-card";
 import SearchBar from "@/components/search-bar";
+import SpinnerLoader from "@/components/ui/loader";
 import { ADMIN_ROUTES } from "@/constants/routes";
+import useEmployeeManagement from "@/hooks/use-employee";
 import { PlusCircle } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
 const EmployeeManagementPage = () => {
+  const {
+    getEmployeesQuery: { data, isFetching, isRefetching, refetch, error },
+  } = useEmployeeManagement();
+
+  console.log(data);
+
   return (
     <div className="flex flex-col items-center gap-8 p-5 ">
       {/* searchbar and add button */}
@@ -27,10 +35,11 @@ const EmployeeManagementPage = () => {
       </div>
       {/* Employee Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-        <EmployeeCard />
-        <EmployeeCard />
-        <EmployeeCard />
-        <EmployeeCard />
+        {isFetching || (isRefetching && <SpinnerLoader />)}
+        {data &&
+          data.data.map((employee) => (
+            <EmployeeCard key={employee.id} employee={employee} />
+          ))}
       </div>
     </div>
   );
