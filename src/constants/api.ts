@@ -18,4 +18,6 @@ export const API = {
   CREATE_EMPLOYEE: "user/employee",
   GET_EMPLOYEES: "user/employees",
   GET_EMPLOYEE: (id: string) => `user/employee/${id}`,
+  DELETE_EMPLOYEE: (id: string) => `user/employee/${id}`,
+  UPDATE_EMPLOYEE: (id: string) => `user/employee/${id}`,
 };

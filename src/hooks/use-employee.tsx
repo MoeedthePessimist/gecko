@@ -15,7 +15,7 @@ import {
   documentFormSchema,
 } from "@/schemas/document-schema";
 import { useMutation } from "@tanstack/react-query";
-import { createEmployee, getEmployees } from "@/api/user";
+import { createEmployee, deleteEmployee, getEmployees } from "@/api/user";
 import { AxiosError } from "axios";
 import { useTypedQuery } from "./use-query";
 import { QUERY_KEYS } from "@/constants/query-keys";
@@ -102,6 +102,16 @@ const useEmployeeManagement = () => {
   const getEmployeesQuery = useTypedQuery({
     queryKey: QUERY_KEYS.EMPLOYEES,
     queryFn: getEmployees,
+  });
+
+  const deleteEmployeeMutation = useMutation({
+    mutationFn: deleteEmployee,
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error: AxiosError) => {
+      console.error(error);
+    },
   });
 
   const qualificationForm = useForm({
@@ -234,6 +244,7 @@ const useEmployeeManagement = () => {
     onMutateContact,
     createEmployeeMutation,
     getEmployeesQuery,
+    deleteEmployeeMutation,
   };
 };
 

@@ -6,17 +6,29 @@ import TitleValuePair from "./title-value-pair";
 import AppButton from "./app-button";
 import { EditIcon, Trash2 } from "lucide-react";
 import { User } from "@/types/user.type";
-import useUser from "@/hooks/use-user";
-import useAuth from "@/hooks/use-auth";
 import { useAuthContext } from "@/context/auth-context";
+import useEmployeeManagement from "@/hooks/use-employee";
 
 type EmployeeCardProps = {
   employee?: User;
+  deleteEmployeeMutation: ReturnType<
+    typeof useEmployeeManagement
+  >["deleteEmployeeMutation"];
 };
 
-const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
+const EmployeeCard: React.FC<EmployeeCardProps> = ({
+  employee,
+  deleteEmployeeMutation,
+}) => {
   const { user } = useAuthContext();
   const isOwner = user?.id === employee?.id;
+
+  const {
+    mutate: deleteEmployee,
+    isPending: isDeletingEmployee,
+    isSuccess,
+    isError,
+  } = deleteEmployeeMutation;
 
   return (
     <Card className="rounded-xl flex flex-col p-4 w-full border-2 relative">
@@ -75,7 +87,13 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
             className:
               "bg-white text-red-500 border-2 border-red-500 hover:bg-red-500 hover:text-white",
             disabled: isOwner,
+            onClick: () => {
+              if (employee?.id) {
+                deleteEmployee(employee.id);
+              }
+            },
           }}
+          isLoading={isDeletingEmployee}
           title="Delete"
           icon={<Trash2 />}
           iconPosition="end"

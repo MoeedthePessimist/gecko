@@ -118,3 +118,8 @@ export type CreateEmployeeResponseType = ApiResponseType<User>;
 
 export type GetEmployeesResponseType = ApiResponseType<Array<User>>;
 export type GetEmployeeResponseType = ApiResponseType<User>;
+
+export type DeleteEmployeeResponseType = ApiResponseType<string>;
+
+export type UpdateEmployeeRequestType = EmployeeFormInputs & { id: string };
+export type UpdateEmployeeResponseType = ApiResponseType<User>;

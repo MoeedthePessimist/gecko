@@ -3,10 +3,13 @@ import { API } from "@/constants/api";
 import {
   CreateEmployeeRequestType,
   CreateEmployeeResponseType,
+  DeleteEmployeeResponseType,
   GetEmployeeResponseType,
   GetEmployeesResponseType,
   MeApiResponseType,
+  UpdateEmployeeRequestType,
 } from "@/types/api.type";
+import { deleteContact } from "./contacts";
 
 export const me = async (): Promise<MeApiResponseType> => {
   const response = await api.get(API.ME);
@@ -29,5 +32,20 @@ export const getEmployee = async (
   id: string
 ): Promise<GetEmployeeResponseType> => {
   const response = await api.get(API.GET_EMPLOYEE(id));
+  return response.data;
+};
+
+export const deleteEmployee = async (
+  id: string
+): Promise<DeleteEmployeeResponseType> => {
+  const response = await api.delete(API.DELETE_EMPLOYEE(id));
+  return response.data;
+};
+
+export const updateEmployee = async (
+  id: string,
+  data: UpdateEmployeeRequestType
+): Promise<UpdateEmployeeRequestType> => {
+  const response = await api.put(API.UPDATE_EMPLOYEE(id), data);
   return response.data;
 };

@@ -8,14 +8,25 @@ import { ADMIN_ROUTES } from "@/constants/routes";
 import useEmployeeManagement from "@/hooks/use-employee";
 import { PlusCircle } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
 const EmployeeManagementPage = () => {
   const {
-    getEmployeesQuery: { data, isFetching, isRefetching, refetch, error },
+    getEmployeesQuery: {
+      data: employeesData,
+      isFetching: isFetchingEmployees,
+      isRefetching: isRefetchingEmployees,
+      refetch: refetchEmployeesData,
+      error: employeesError,
+    },
+    deleteEmployeeMutation,
   } = useEmployeeManagement();
 
-  console.log(data);
+  useEffect(() => {
+    if (deleteEmployeeMutation.isSuccess) {
+      refetchEmployeesData();
+    }
+  }, [deleteEmployeeMutation.isSuccess]);
 
   return (
     <div className="flex flex-col items-center gap-8 p-5 ">
@@ -35,11 +46,18 @@ const EmployeeManagementPage = () => {
       </div>
       {/* Employee Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-        {isFetching || (isRefetching && <SpinnerLoader />)}
-        {data &&
-          data.data.map((employee) => (
-            <EmployeeCard key={employee.id} employee={employee} />
+        {(isFetchingEmployees || isRefetchingEmployees) && <SpinnerLoader />}
+        {employeesData &&
+          employeesData.data.map((employee) => (
+            <EmployeeCard
+              key={employee.id}
+              employee={employee}
+              deleteEmployeeMutation={deleteEmployeeMutation}
+            />
           ))}
+        {employeesData && employeesData.data.length === 0 && (
+          <p className="text-center col-span-full">No Employees Found</p>
+        )}
       </div>
     </div>
   );
