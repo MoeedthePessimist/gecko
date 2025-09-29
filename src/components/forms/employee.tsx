@@ -1,6 +1,4 @@
 "use client";
-
-import React from "react";
 import { Form } from "../ui/form";
 import useEmployeeManagement from "@/hooks/use-employee";
 import EmployeeAccountInformationForm from "./employee-account-info";
@@ -22,9 +20,13 @@ import { QualificationFormInputs } from "@/schemas/qualification-schema";
 import { ContactFormInputs } from "@/schemas/contact-schema";
 import { DocumentFormInputs } from "@/schemas/document-schema";
 import { User } from "@/types/user.type";
-import { ContactWithNecessaryFields } from "@/types/contact.type";
+import React from "react";
 
-const EmployeeForm = () => {
+type EmployeeFormProps = {
+  data?: User;
+};
+
+const EmployeeForm: React.FC<EmployeeFormProps> = ({ data }) => {
   const {
     employeeForm,
     onMutateQualification,
@@ -33,25 +35,9 @@ const EmployeeForm = () => {
     createEmployeeMutation,
   } = useEmployeeManagement();
 
+  console.log(data, "data");
+
   const onSubmit = (data: EmployeeFormInputs) => {
-    // const { role, bank, ...restGeneralInfo } = data.generalInfo;
-
-    // const employee: User = {
-    //   ...data.accountInfo,
-    //   ...restGeneralInfo,
-    //   job: data.jobInfo,
-    //   ...data.settingsInfo,
-    //   employment: data.employementInfo,
-    //   contacts:
-    //     data.contactsInfo as unknown as Array<ContactWithNecessaryFields>,
-    //   isEmailVerified: true,
-    //   roles: [role],
-    //   avatar: "",
-    //   bank: bank,
-    // };
-    // console.log(employee);
-
-    // createEmployeeMutation.mutate(employee);
     createEmployeeMutation.mutate(data);
   };
 

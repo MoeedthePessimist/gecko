@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { rolesEnum } from "@/enums/roles.enum";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -19,3 +20,6 @@ export const getFirstAlphabets = (text: string) => {
     .map((word) => word[0].toLowerCase())
     .join("");
 };
+
+export const formatRoles = (roles: rolesEnum[]): string[] =>
+  JSON.parse(roles[0]) as string[];

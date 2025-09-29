@@ -6,10 +6,10 @@ export const employementFormSchema = z.object({
   department: z.string().optional(),
   employmentType: z.string().optional(),
   status: z.string().optional(),
-  dateJoined: z.date(),
-  dateLeft: z.date().optional(),
-  probationFrom: z.date().optional(),
-  probationTo: z.date().optional(),
+  dateJoined: z.date().or(z.string().optional()),
+  dateLeft: z.date().optional().or(z.string().optional()),
+  probationFrom: z.date().optional().or(z.string().optional()),
+  probationTo: z.date().optional().or(z.string().optional()),
   directManager: z.string().optional(),
 });
 

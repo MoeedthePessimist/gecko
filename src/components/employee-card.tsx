@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import React from "react";
 import Avatar from "./avatar";
@@ -8,6 +10,7 @@ import { EditIcon, Trash2 } from "lucide-react";
 import { User } from "@/types/user.type";
 import { useAuthContext } from "@/context/auth-context";
 import useEmployeeManagement from "@/hooks/use-employee";
+import { useRouter } from "next/navigation";
 
 type EmployeeCardProps = {
   employee?: User;
@@ -23,12 +26,24 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
   const { user } = useAuthContext();
   const isOwner = user?.id === employee?.id;
 
+  const navigation = useRouter();
+
   const {
     mutate: deleteEmployee,
     isPending: isDeletingEmployee,
     isSuccess,
     isError,
   } = deleteEmployeeMutation;
+
+  const handleUpdateClick = () => {
+    const employeeId = employee?.id;
+
+    if (employeeId) {
+      navigation.push(`/admin/employee-management/update/${employeeId}`);
+    }
+
+    return;
+  };
 
   return (
     <Card className="rounded-xl flex flex-col p-4 w-full border-2 relative">
@@ -76,6 +91,7 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
             className:
               "bg-white text-primary border-2 border-primary hover:bg-primary hover:text-white",
             disabled: isOwner,
+            onClick: handleUpdateClick,
           }}
           title="Edit"
           icon={<EditIcon />}

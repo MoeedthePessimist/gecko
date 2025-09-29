@@ -42,10 +42,10 @@ export const deleteEmployee = async (
   return response.data;
 };
 
-export const updateEmployee = async (
-  id: string,
-  data: UpdateEmployeeRequestType
-): Promise<UpdateEmployeeRequestType> => {
-  const response = await api.put(API.UPDATE_EMPLOYEE(id), data);
+export const updateEmployee = async (data: {
+  id: string;
+  payload: UpdateEmployeeRequestType;
+}): Promise<UpdateEmployeeRequestType> => {
+  const response = await api.put(API.UPDATE_EMPLOYEE(data.id), data.payload);
   return response.data;
 };

@@ -5,9 +5,9 @@ export const qualificationFormSchema = z.object({
   nameOfInstitution: z.string().nonempty("Please enter the institute name"),
   level: z.string().nonempty("Please enter qualification level"),
   type: z.string().nonempty("Please enter qualification type"),
-  startDate: z.date().optional().nullable(),
-  endDate: z.date().optional().nullable(),
-  expiryDate: z.date().optional().nullable(),
+  startDate: z.date().optional().or(z.string().optional()).nullable(),
+  endDate: z.date().optional().or(z.string().optional()).nullable(),
+  expiryDate: z.date().optional().or(z.string().optional()).nullable(),
   comment: z.string().optional(),
 });
 
