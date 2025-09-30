@@ -22,8 +22,13 @@ type ControlledSelectProps<TFieldValues extends FieldValues> = {
   control: Control<TFieldValues>;
   name: FieldPath<TFieldValues>;
   label?: string;
-  list: string[];
+  list: Array<ListOption>;
   placeholder?: string;
+};
+
+type ListOption = {
+  name: string;
+  code: string;
 };
 
 const ControlledSelect = <TFieldValues extends FieldValues>({
@@ -48,8 +53,8 @@ const ControlledSelect = <TFieldValues extends FieldValues>({
             </FormControl>
             <SelectContent>
               {list.map((item) => (
-                <SelectItem value={item} key={item}>
-                  {item}
+                <SelectItem value={item.code} key={item.name}>
+                  {item.name}
                 </SelectItem>
               ))}
             </SelectContent>

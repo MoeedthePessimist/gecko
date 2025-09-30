@@ -9,8 +9,14 @@ import {
   UserRegisterFormInputs,
 } from "@/schemas/register-schema";
 import ControlledSelect from "../controlled-select";
-import { companyEntitiesList } from "@/enums/company-entities.enum";
-import { industriesList } from "@/enums/industries.enum";
+import {
+  companyEntitiesList,
+  companyEntitiesListWithCode,
+} from "@/enums/company-entities.enum";
+import {
+  industriesList,
+  industriesListWithCode,
+} from "@/enums/industries.enum";
 import ControlledCheckbox from "../controlled-checkbox";
 import Link from "next/link";
 import ActivityIndicator from "../activity-indicatior";
@@ -133,7 +139,7 @@ const RegisterForm = () => {
 
           <ControlledSelect<CompanyRegisterFormInputs>
             control={companyControl}
-            list={companyEntitiesList}
+            list={companyEntitiesListWithCode}
             name="entity"
             label="Company Entity"
             placeholder="Select your company entity"
@@ -141,7 +147,7 @@ const RegisterForm = () => {
 
           <ControlledSelect<CompanyRegisterFormInputs>
             control={companyControl}
-            list={industriesList}
+            list={industriesListWithCode}
             name="industry"
             label="Industry"
             placeholder="Select your company industry"

@@ -2,8 +2,8 @@
 import React, { useEffect } from "react";
 import ControlledInput from "../controlled-input";
 import ControlledSelect from "../controlled-select";
-import { gendersList } from "@/enums/genders.enum";
-import { relationsList } from "@/enums/relations.enum";
+import { gendersList, gendersListWithCode } from "@/enums/genders.enum";
+import { relationsList, relationsListWithCode } from "@/enums/relations.enum";
 import AppButton from "../app-button";
 import { Edit, PlusCircle, Trash } from "lucide-react";
 import { Dialog, DialogContent, DialogFooter, DialogTitle } from "../ui/dialog";
@@ -132,14 +132,14 @@ const EmployeeContactInformationForm: React.FC<
               name={`gender`}
               placeholder="Select Gender"
               label="Gender"
-              list={gendersList}
+              list={gendersListWithCode}
             />
             <ControlledSelect<ContactFormInputs>
               control={control as Control<ContactFormInputs>}
               name={`relation`}
               placeholder="Select Relation"
               label="Relation"
-              list={relationsList}
+              list={relationsListWithCode}
             />
             <ControlledInput<ContactFormInputs>
               control={control as Control<ContactFormInputs>}

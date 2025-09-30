@@ -6,9 +6,12 @@ import { Control } from "react-hook-form";
 import { Card, CardContent } from "../ui/card";
 import ControlledInput from "../controlled-input";
 import ControlledSelect from "../controlled-select";
-import { identitiesList } from "@/enums/identities.enum";
-import { gendersList } from "@/enums/genders.enum";
-import { raceList } from "@/enums/race.enum";
+import {
+  identitiesList,
+  identitiesListWithCode,
+} from "@/enums/identities.enum";
+import { gendersList, gendersListWithCode } from "@/enums/genders.enum";
+import { raceList, raceListWithCode } from "@/enums/race.enum";
 import ControlledCheckbox from "../controlled-checkbox";
 import ControlledDatePicker from "../controlled-date-picker";
 
@@ -60,7 +63,7 @@ const EmployeeAccountInformationForm: React.FC<
           name={"accountInfo.identityType"}
           placeholder="Select Identity type"
           label="Identity Type"
-          list={identitiesList}
+          list={identitiesListWithCode}
         />
 
         <ControlledInput<EmployeeFormInputs>
@@ -82,7 +85,7 @@ const EmployeeAccountInformationForm: React.FC<
           name={"accountInfo.gender"}
           placeholder="Select Gender"
           label="Gender"
-          list={gendersList}
+          list={gendersListWithCode}
         />
 
         <ControlledSelect<EmployeeFormInputs>
@@ -90,7 +93,7 @@ const EmployeeAccountInformationForm: React.FC<
           name={"accountInfo.race"}
           placeholder="Select Race"
           label="Race"
-          list={raceList}
+          list={raceListWithCode}
         />
 
         <div className="flex flex-col space-y-2">

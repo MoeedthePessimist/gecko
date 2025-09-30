@@ -33,7 +33,7 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ data }) => {
     onMutateContact,
     onMutateDocument,
     createEmployeeMutation,
-  } = useEmployeeManagement();
+  } = useEmployeeManagement(undefined, data);
 
   console.log(data, "data");
 

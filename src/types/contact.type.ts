@@ -6,8 +6,8 @@ export type Contact = BaseType & {
   gender: string;
   mobileNumber: string;
   email: string;
-  homeTelephoneNumber: string;
-  workTelephoneNumber: string;
+  homeTelephoneNumber?: string;
+  workTelephoneNumber?: string;
 };
 
 export type ContactWithNecessaryFields = Omit<

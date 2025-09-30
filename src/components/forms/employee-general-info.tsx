@@ -6,13 +6,22 @@ import { Control } from "react-hook-form";
 import { Card, CardContent } from "../ui/card";
 import ControlledInput from "../controlled-input";
 import ControlledSelect from "../controlled-select";
-import { addressTypesList } from "@/enums/address-types.enum";
-import { countriesList } from "@/enums/countries.enum";
-import { nationalitiesList } from "@/enums/nationalities.enum";
-import { maritalStatusesList } from "@/enums/marital-statuses.enum";
-import { banksList } from "@/enums/banks.enum";
-import { rolesList } from "@/enums/roles.enum";
-import { BOOLEAN_OPTIONS } from "@/constants/options";
+import {
+  addressTypesList,
+  addressTypesListWithCode,
+} from "@/enums/address-types.enum";
+import { countriesList, countriesListWithCode } from "@/enums/countries.enum";
+import {
+  nationalitiesList,
+  nationalitiesListWithCode,
+} from "@/enums/nationalities.enum";
+import {
+  maritalStatusesList,
+  maritalStatusesListWithCode,
+} from "@/enums/marital-statuses.enum";
+import { banksList, banksListWithCode } from "@/enums/banks.enum";
+import { rolesList, rolesListWithCode } from "@/enums/roles.enum";
+import { BOOLEAN_OPTIONS, booleanOptionsWithCode } from "@/constants/options";
 
 type EmployeeGeneralInformationFormProps = {
   control: Control<EmployeeFormInputs>;
@@ -27,7 +36,7 @@ const EmployeeGeneralInformationForm: React.FC<
         <ControlledSelect<EmployeeFormInputs>
           control={control}
           name={"generalInfo.addressType"}
-          list={addressTypesList}
+          list={addressTypesListWithCode}
           label="Address Type"
           placeholder="Select Address Type"
         />
@@ -72,21 +81,21 @@ const EmployeeGeneralInformationForm: React.FC<
           name={"generalInfo.country"}
           placeholder="Select Country"
           label="Country"
-          list={countriesList}
+          list={countriesListWithCode}
         />
         <ControlledSelect<EmployeeFormInputs>
           control={control}
           name={"generalInfo.nationality"}
           placeholder="Select Nationality"
           label="Nationality"
-          list={nationalitiesList}
+          list={nationalitiesListWithCode}
         />
         <ControlledSelect<EmployeeFormInputs>
           control={control}
           name={"generalInfo.maritalStatus"}
           placeholder="Select Marital Status"
           label="Marital Status"
-          list={maritalStatusesList}
+          list={maritalStatusesListWithCode}
         />
         <ControlledInput<EmployeeFormInputs>
           control={control}
@@ -105,7 +114,7 @@ const EmployeeGeneralInformationForm: React.FC<
           name={"generalInfo.bank.bankName"}
           placeholder="Select Bank Name"
           label="Bank Name"
-          list={banksList}
+          list={banksListWithCode}
         />
         <ControlledInput<EmployeeFormInputs>
           control={control}
@@ -126,14 +135,14 @@ const EmployeeGeneralInformationForm: React.FC<
           name={"generalInfo.role"}
           placeholder="Select Role"
           label="Role"
-          list={rolesList}
+          list={rolesListWithCode}
         />
         <ControlledSelect<EmployeeFormInputs>
           control={control}
           name={"generalInfo.isNonResidentialDirector"}
           placeholder="Select"
           label="Non Resident-Director"
-          list={BOOLEAN_OPTIONS}
+          list={booleanOptionsWithCode}
         />
       </CardContent>
     </Card>

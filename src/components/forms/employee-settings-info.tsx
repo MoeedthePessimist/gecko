@@ -6,7 +6,6 @@ import { Control } from "react-hook-form";
 import { Card, CardContent } from "../ui/card";
 import ControlledInput from "../controlled-input";
 import ControlledSelect from "../controlled-select";
-import { cpfTablesList } from "@/enums/cpf-tables.enum";
 import ControlledCheckbox from "../controlled-checkbox";
 import ControlledDatePicker from "../controlled-date-picker";
 
@@ -26,7 +25,7 @@ const EmployeeSettingsInformationForm: React.FC<
             name={"settingsInfo.cpfTable"}
             placeholder="Select CPF Table"
             label="CPF Table"
-            list={cpfTablesList}
+            list={[]}
           />
           <ControlledCheckbox
             control={control}

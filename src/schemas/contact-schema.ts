@@ -5,7 +5,7 @@ export const contactFormSchema = z.object({
   name: z.string().nonempty("Please enter a name"),
   relation: z.string().nonempty("Please enter a relation"),
   gender: z.string().nonempty("Please enter a gender"),
-  mobileNumber: z.string().optional(),
+  mobileNumber: z.string().nonempty("Please enter a mobile number"),
   email: z
     .string()
     .email("Please enter a valid email")

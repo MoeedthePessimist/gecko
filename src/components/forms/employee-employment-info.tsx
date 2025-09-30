@@ -6,7 +6,10 @@ import { Control } from "react-hook-form";
 import { Card, CardContent } from "../ui/card";
 import ControlledInput from "../controlled-input";
 import ControlledSelect from "../controlled-select";
-import { employeeStatusesList } from "@/enums/statuses.enum";
+import {
+  employeeStatusesList,
+  employeeStatusesListWithCode,
+} from "@/enums/statuses.enum";
 import ControlledDatePicker from "../controlled-date-picker";
 
 type EmployeeEmployementInformationFormProps = {
@@ -38,7 +41,7 @@ const EmployeeEmployementInformationForm: React.FC<
           name={"employementInfo.status"}
           placeholder="Select Status"
           label="Status"
-          list={employeeStatusesList}
+          list={employeeStatusesListWithCode}
         />
         <ControlledSelect<EmployeeFormInputs>
           control={control}

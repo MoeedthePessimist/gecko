@@ -34,6 +34,9 @@ export type User = BaseType & {
   postalCode?: string;
   city?: string;
   state?: string;
+  houseNo?: string;
+  levelNo?: string;
+  unitNo?: string;
   gender?: gendersEnum | string;
   race?: raceEnum | string;
   mobileNumber?: string;
@@ -57,6 +60,7 @@ export type User = BaseType & {
   noSdlContribution?: boolean;
   noShgContribution?: boolean;
   useAttendanceRecords?: boolean;
+  isNonResidentialDirector?: string;
 
   // Relations
   bank?: Bank | BankWithNecessaryFields;

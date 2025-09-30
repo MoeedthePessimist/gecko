@@ -15,77 +15,92 @@ import {
   documentFormSchema,
 } from "@/schemas/document-schema";
 import { useMutation } from "@tanstack/react-query";
-import { createEmployee, deleteEmployee, getEmployees } from "@/api/user";
+import {
+  createEmployee,
+  deleteEmployee,
+  getEmployee,
+  getEmployees,
+  updateEmployee,
+} from "@/api/user";
 import { AxiosError } from "axios";
 import { useTypedQuery } from "./use-query";
 import { QUERY_KEYS } from "@/constants/query-keys";
+import { User } from "@/types/user.type";
+import { formatRoles } from "@/lib/utils";
+import { rolesEnum } from "@/enums/roles.enum";
 
-const useEmployeeManagement = () => {
+const useEmployeeManagement = (id?: string, employeeData?: User) => {
   const employeeForm = useForm({
     resolver: zodResolver(employeeFormSchema),
     defaultValues: {
       accountInfo: {
-        name: "",
-        identityNumber: "",
-        identityType: "",
-        gender: "",
-        race: "",
-        mobileNumber: "",
-        email: "",
+        name: employeeData?.name || "",
+        identityNumber: employeeData?.identityNumber || "",
+        identityType: employeeData?.identityType || "",
+        gender: employeeData?.gender || "",
+        race: employeeData?.race || "",
+        mobileNumber: employeeData?.mobileNumber || "",
+        email: employeeData?.email || "",
         password: "",
         repeatPassword: "",
-        optionalEmail: "",
-        allowLogin: false,
-        dateOfBirth: new Date(),
+        optionalEmail: employeeData?.optionalEmail || "",
+        allowLogin: employeeData?.allowLogin || false,
+        dateOfBirth: new Date(employeeData?.dateOfBirth || ""),
       },
       generalInfo: {
-        houseNo: "",
-        levelNo: "",
-        unitNo: "",
-        address: "",
-        city: "",
-        state: "",
-        role: "",
-        isNonResidentialDirector: "",
+        houseNo: employeeData?.houseNo || "",
+        levelNo: employeeData?.levelNo || "",
+        unitNo: employeeData?.unitNo || "",
+        address: employeeData?.address || "",
+        city: employeeData?.city || "",
+        state: employeeData?.state || "",
+        role: employeeData?.roles
+          ? formatRoles(employeeData?.roles as rolesEnum[])[0]
+          : "",
+        isNonResidentialDirector: employeeData?.isNonResidentialDirector || "",
+        bank: employeeData?.bank || undefined,
       },
       settingsInfo: {
         cpfTable: undefined,
-        employerPaysCpf: false,
-        prEffectiveDate: new Date(),
-        cpfNo: "",
-        taxNo: "",
+        employerPaysCpf: employeeData?.employerPaysCpf || false,
+        prEffectiveDate: new Date(employeeData?.prEffectiveDate || ""),
+        cpfNo: employeeData?.cpfNumber || "",
+        taxNo: employeeData?.taxNumber || "",
         workTable: undefined,
         leaveTable: undefined,
         levy: undefined,
-        noSdlContribution: false,
-        noShgContribution: false,
-        useAttendanceRecords: false,
-        maxPayToCalculate: 0,
-        allowanceCommission: 0,
-        allowanceErrorFee: 0,
-        deductionCdac: 0,
-        deductionEcf: 0,
-        deductionMbmf: 0,
-        deductionEcfSinda: 0,
+        noSdlContribution: employeeData?.noSdlContribution || false,
+        noShgContribution: employeeData?.noShgContribution || false,
+        useAttendanceRecords: employeeData?.useAttendanceRecords || false,
+        maxPayToCalculate: employeeData?.maxPayToCalculate || 0,
+        allowanceCommission: employeeData?.allowanceCommission || 0,
+        allowanceErrorFee: employeeData?.allowanceErrorFee || 0,
+        deductionCdac: employeeData?.deductionCdac || 0,
+        deductionEcf: employeeData?.deductionEcf || 0,
+        deductionMbmf: employeeData?.deductionMbmf || 0,
+        deductionEcfSinda: employeeData?.deductionEcfSinda || 0,
       },
       jobInfo: {
-        title: "",
-        jobCategory: "",
-        designation: "",
-        basicRate: 0,
-        startDate: new Date(),
-        endDate: new Date(),
+        title: employeeData?.job?.title || "",
+        jobCategory: employeeData?.job?.jobCategory || "",
+        designation: employeeData?.job?.designation || "",
+        basicRate: employeeData?.job?.basicRate || 0,
+        startDate: new Date(employeeData?.job?.startDate || ""),
+        endDate: new Date(employeeData?.job?.endDate || ""),
       },
       employementInfo: {
-        department: "",
+        department: employeeData?.employment?.department || "",
         dateJoined: new Date(),
         dateLeft: new Date(),
         probationFrom: new Date(),
         probationTo: new Date(),
+        employmentType: employeeData?.employment?.employmentType || undefined,
+        status: employeeData?.employment?.status || undefined,
+        directManager: employeeData?.employment?.directManager?.id || undefined,
       },
-      qualificationsInfo: [],
-      contactsInfo: [],
-      documentsInfo: [],
+      qualificationsInfo: employeeData?.qualifications || [],
+      contactsInfo: employeeData?.contacts || [],
+      documentsInfo: employeeData?.documents || [],
     },
   });
 
@@ -112,6 +127,22 @@ const useEmployeeManagement = () => {
     onError: (error: AxiosError) => {
       console.error(error);
     },
+  });
+
+  const updateEmployeeMutation = useMutation({
+    mutationFn: updateEmployee,
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error: AxiosError) => {
+      console.error(error);
+    },
+  });
+
+  const getEmployeeQuery = useTypedQuery({
+    queryKey: [QUERY_KEYS.EMPLOYEE, id],
+    queryFn: () => getEmployee(id!),
+    enabled: !!id,
   });
 
   const qualificationForm = useForm({
@@ -245,6 +276,8 @@ const useEmployeeManagement = () => {
     createEmployeeMutation,
     getEmployeesQuery,
     deleteEmployeeMutation,
+    updateEmployeeMutation,
+    getEmployeeQuery,
   };
 };
 
