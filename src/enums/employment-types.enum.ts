@@ -1,10 +1,10 @@
 export enum employmentTypesEnum {
-  FULL_TIME = "FULL_TIME",
-  PART_TIME = "PART_TIME",
-  CONTRACTOR = "CONTRACTOR",
-  INTERN = "INTERN",
-  TEMPORARY = "TEMPORARY",
-  OTHER = "OTHER",
+  FULL_TIME = "Full Time",
+  PART_TIME = "Part Time",
+  CONTRACTOR = "Contractor",
+  INTERN = "Intern",
+  TEMPORARY = "Temporary",
+  OTHER = "Other",
 }
 
 export const employmentTypesList = Object.values(employmentTypesEnum);

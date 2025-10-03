@@ -4,6 +4,7 @@ import { Contact } from "./contact.type";
 import { Document } from "./document.type";
 import { Qualification } from "./qualification.type";
 import { User } from "./user.type";
+import { SelectOptionsType } from "./common.type";
 
 type ApiResponseType<T> = {
   data: T;
@@ -123,3 +124,18 @@ export type DeleteEmployeeResponseType = ApiResponseType<string>;
 
 export type UpdateEmployeeRequestType = EmployeeFormInputs & { id: string };
 export type UpdateEmployeeResponseType = ApiResponseType<User>;
+
+/**
+ * COMPANY API TYPES
+ */
+
+export type GetCompanyAdditionalDataResponseType = ApiResponseType<{
+  cpfTables: Array<SelectOptionsType>;
+  workTables: Array<SelectOptionsType>;
+  levies: Array<SelectOptionsType>;
+  leaveTables: Array<SelectOptionsType>;
+  jobCategories: Array<SelectOptionsType>;
+  designations: Array<SelectOptionsType>;
+  departments: Array<SelectOptionsType>;
+  users: Array<SelectOptionsType>;
+}>;

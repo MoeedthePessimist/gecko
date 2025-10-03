@@ -7,13 +7,18 @@ import { Card, CardContent } from "../ui/card";
 import ControlledInput from "../controlled-input";
 import ControlledSelect from "../controlled-select";
 import ControlledDatePicker from "../controlled-date-picker";
+import { SelectOptionsType } from "@/types/common.type";
 
 type EmployeeJobInformationFormProps = {
   control: Control<EmployeeFormInputs>;
+  jobCategoriesList: Array<SelectOptionsType>;
+  designationsList: Array<SelectOptionsType>;
 };
 
 const EmployeeJobInformationForm: React.FC<EmployeeJobInformationFormProps> = ({
   control,
+  jobCategoriesList,
+  designationsList,
 }) => {
   return (
     <Card className="border-none shadow-none">
@@ -29,14 +34,14 @@ const EmployeeJobInformationForm: React.FC<EmployeeJobInformationFormProps> = ({
           name={"jobInfo.jobCategory"}
           placeholder="Select Job Category"
           label="Job Category"
-          list={[]} //TODO: data from the backend
+          list={jobCategoriesList} //TODO: data from the backend
         />
         <ControlledSelect<EmployeeFormInputs>
           control={control}
           name={"jobInfo.designation"}
           placeholder="Select Designation"
           label="Designation"
-          list={[]} //TODO: data from the backend
+          list={designationsList} //TODO: data from the backend
         />
         <ControlledInput<EmployeeFormInputs>
           control={control}

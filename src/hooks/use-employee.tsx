@@ -45,7 +45,7 @@ const useEmployeeManagement = (id?: string, employeeData?: User) => {
         repeatPassword: "",
         optionalEmail: employeeData?.optionalEmail || "",
         allowLogin: employeeData?.allowLogin || false,
-        dateOfBirth: new Date(employeeData?.dateOfBirth || ""),
+        dateOfBirth: new Date(employeeData?.dateOfBirth || new Date()),
       },
       generalInfo: {
         houseNo: employeeData?.houseNo || "",
@@ -63,7 +63,7 @@ const useEmployeeManagement = (id?: string, employeeData?: User) => {
       settingsInfo: {
         cpfTable: undefined,
         employerPaysCpf: employeeData?.employerPaysCpf || false,
-        prEffectiveDate: new Date(employeeData?.prEffectiveDate || ""),
+        prEffectiveDate: new Date(employeeData?.prEffectiveDate || new Date()),
         cpfNo: employeeData?.cpfNumber || "",
         taxNo: employeeData?.taxNumber || "",
         workTable: undefined,
@@ -85,15 +85,21 @@ const useEmployeeManagement = (id?: string, employeeData?: User) => {
         jobCategory: employeeData?.job?.jobCategory || "",
         designation: employeeData?.job?.designation || "",
         basicRate: employeeData?.job?.basicRate || 0,
-        startDate: new Date(employeeData?.job?.startDate || ""),
-        endDate: new Date(employeeData?.job?.endDate || ""),
+        startDate: new Date(employeeData?.job?.startDate || new Date()),
+        endDate: new Date(employeeData?.job?.endDate || new Date()),
       },
       employementInfo: {
         department: employeeData?.employment?.department || "",
-        dateJoined: new Date(),
-        dateLeft: new Date(),
-        probationFrom: new Date(),
-        probationTo: new Date(),
+        dateJoined: new Date(
+          employeeData?.employment?.dateJoined || new Date()
+        ),
+        dateLeft: new Date(employeeData?.employment?.dateLeft || new Date()),
+        probationFrom: new Date(
+          employeeData?.employment?.probationFrom || new Date()
+        ),
+        probationTo: new Date(
+          employeeData?.employment?.probationTo || new Date()
+        ),
         employmentType: employeeData?.employment?.employmentType || undefined,
         status: employeeData?.employment?.status || undefined,
         directManager: employeeData?.employment?.directManager?.id || undefined,

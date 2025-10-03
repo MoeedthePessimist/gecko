@@ -21,6 +21,7 @@ import { ContactFormInputs } from "@/schemas/contact-schema";
 import { DocumentFormInputs } from "@/schemas/document-schema";
 import { User } from "@/types/user.type";
 import React from "react";
+import useCompany from "@/hooks/use-company";
 
 type EmployeeFormProps = {
   data?: User;
@@ -34,6 +35,12 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ data }) => {
     onMutateDocument,
     createEmployeeMutation,
   } = useEmployeeManagement(undefined, data);
+
+  const { getCompanyAdditionalDataQuery } = useCompany();
+
+  console.log(getCompanyAdditionalDataQuery.data, "company additional data");
+
+  const companyAdditionalData = getCompanyAdditionalDataQuery.data?.data;
 
   console.log(data, "data");
 
@@ -75,16 +82,24 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ data }) => {
               <TabsContent value={tabs[1].value}>
                 <EmployeeSettingsInformationForm
                   control={employeeForm.control as Control<EmployeeFormInputs>}
+                  leviesList={companyAdditionalData?.levies || []}
+                  leaveTablesList={companyAdditionalData?.leaveTables || []}
+                  workTablesList={companyAdditionalData?.workTables || []}
+                  cpfTablesList={companyAdditionalData?.cpfTables || []}
                 />
               </TabsContent>
               <TabsContent value={tabs[2].value}>
                 <EmployeeJobInformationForm
                   control={employeeForm.control as Control<EmployeeFormInputs>}
+                  jobCategoriesList={companyAdditionalData?.jobCategories || []}
+                  designationsList={companyAdditionalData?.designations || []}
                 />
               </TabsContent>
               <TabsContent value={tabs[3].value}>
                 <EmployeeEmployementInformationForm
                   control={employeeForm.control as Control<EmployeeFormInputs>}
+                  managersList={companyAdditionalData?.users || []}
+                  departmentsList={companyAdditionalData?.departments || []}
                 />
               </TabsContent>
               <TabsContent value={tabs[4].value}>

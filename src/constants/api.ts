@@ -20,4 +20,6 @@ export const API = {
   GET_EMPLOYEE: (id: string) => `user/employee/${id}`,
   DELETE_EMPLOYEE: (id: string) => `user/employee/${id}`,
   UPDATE_EMPLOYEE: (id: string) => `user/employee/${id}`,
+  GET_COMPANY_ADDITIONAL_DATA: (companyId: string) =>
+    `/company/data/${companyId}`,
 };

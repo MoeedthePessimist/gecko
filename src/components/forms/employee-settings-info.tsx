@@ -8,14 +8,25 @@ import ControlledInput from "../controlled-input";
 import ControlledSelect from "../controlled-select";
 import ControlledCheckbox from "../controlled-checkbox";
 import ControlledDatePicker from "../controlled-date-picker";
+import { SelectOptionsType } from "@/types/common.type";
 
 type EmployeeSettingsInformationFormProps = {
   control: Control<EmployeeFormInputs>;
+  cpfTablesList: Array<SelectOptionsType>;
+  leaveTablesList: Array<SelectOptionsType>;
+  workTablesList: Array<SelectOptionsType>;
+  leviesList: Array<SelectOptionsType>;
 };
 
 const EmployeeSettingsInformationForm: React.FC<
   EmployeeSettingsInformationFormProps
-> = ({ control }) => {
+> = ({
+  control,
+  cpfTablesList,
+  leaveTablesList,
+  workTablesList,
+  leviesList,
+}) => {
   return (
     <Card className="border-none shadow-none">
       <CardContent className="grid grid-cols-1 gap-4 md:grid-cols-2 items-start">
@@ -25,7 +36,7 @@ const EmployeeSettingsInformationForm: React.FC<
             name={"settingsInfo.cpfTable"}
             placeholder="Select CPF Table"
             label="CPF Table"
-            list={[]}
+            list={cpfTablesList}
           />
           <ControlledCheckbox
             control={control}
@@ -58,7 +69,7 @@ const EmployeeSettingsInformationForm: React.FC<
           name={"settingsInfo.leaveTable"}
           placeholder="Select Leave Table"
           label="Leave Table"
-          list={[]}
+          list={leaveTablesList}
         />
 
         <ControlledSelect<EmployeeFormInputs>
@@ -66,7 +77,7 @@ const EmployeeSettingsInformationForm: React.FC<
           name={"settingsInfo.workTable"}
           placeholder="Select Work Table"
           label="Work Table"
-          list={[]}
+          list={workTablesList}
         />
         <div className="flex flex-col space-y-2">
           <ControlledSelect<EmployeeFormInputs>
@@ -74,7 +85,7 @@ const EmployeeSettingsInformationForm: React.FC<
             name={"settingsInfo.levy"}
             placeholder="Select Levy"
             label="Levy"
-            list={[]}
+            list={leviesList}
           />
           <ControlledCheckbox
             control={control}
