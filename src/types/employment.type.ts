@@ -11,7 +11,7 @@ export type Employment = BaseType & {
   dateLeft?: Date | null;
   probationFrom?: Date | null;
   probationTo?: Date | null;
-  directManager?: User;
+  directManager?: string;
 };
 
 export type EmploymentWithNecessaryFields = Omit<

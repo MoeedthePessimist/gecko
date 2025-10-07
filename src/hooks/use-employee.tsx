@@ -102,7 +102,7 @@ const useEmployeeManagement = (id?: string, employeeData?: User) => {
         ),
         employmentType: employeeData?.employment?.employmentType || undefined,
         status: employeeData?.employment?.status || undefined,
-        directManager: employeeData?.employment?.directManager?.id || undefined,
+        directManager: employeeData?.employment?.directManager || undefined,
       },
       qualificationsInfo: employeeData?.qualifications || [],
       contactsInfo: employeeData?.contacts || [],

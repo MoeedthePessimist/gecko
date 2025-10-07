@@ -12,7 +12,7 @@ export const employeeStatusesList = Object.values(employeeStatusesEnum).sort(
 export const employeeStatusesListWithCode = Object.entries(
   employeeStatusesEnum
 ).map(([code, name]) => ({
-  code,
+  code: name,
   name,
 }));
 
