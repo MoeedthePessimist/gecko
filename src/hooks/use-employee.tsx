@@ -28,10 +28,17 @@ import { QUERY_KEYS } from "@/constants/query-keys";
 import { User } from "@/types/user.type";
 import { formatRoles } from "@/lib/utils";
 import { rolesEnum } from "@/enums/roles.enum";
+import { Qualification } from "@/types/qualification.type";
+import { Document } from "@/types/document.type";
+import { Contact } from "@/types/contact.type";
 
-const useEmployeeManagement = (id?: string, employeeData?: User) => {
+const useEmployeeManagement = (
+  id?: string,
+  employeeData?: User,
+  isUpdate?: boolean
+) => {
   const employeeForm = useForm({
-    resolver: zodResolver(employeeFormSchema),
+    resolver: zodResolver(employeeFormSchema(isUpdate)),
     defaultValues: {
       accountInfo: {
         name: employeeData?.name || "",
@@ -178,7 +185,8 @@ const useEmployeeManagement = (id?: string, employeeData?: User) => {
     if (isDeleted) {
       const deletedQualificationId = data;
       const restQualifications = currentQualifications.filter(
-        (qualification) => qualification.id !== deletedQualificationId
+        (qualification: Qualification) =>
+          qualification.id !== deletedQualificationId
       );
       employeeForm.setValue("qualificationsInfo", restQualifications);
       return;
@@ -191,8 +199,9 @@ const useEmployeeManagement = (id?: string, employeeData?: User) => {
     if (isEdited) {
       const editedQualificationId = data.id;
 
-      const updatedQualifications = currentQualifications.map((qualification) =>
-        qualification.id === editedQualificationId ? data : qualification
+      const updatedQualifications = currentQualifications.map(
+        (qualification: Qualification) =>
+          qualification.id === editedQualificationId ? data : qualification
       );
       employeeForm.setValue("qualificationsInfo", updatedQualifications);
       return;
@@ -214,7 +223,7 @@ const useEmployeeManagement = (id?: string, employeeData?: User) => {
     if (isDeleted) {
       const deletedDocumentId = data;
       const restDocuments = currentDocuments.filter(
-        (document) => document.id !== deletedDocumentId
+        (document: Document) => document.id !== deletedDocumentId
       );
       employeeForm.setValue("documentsInfo", restDocuments);
       return;
@@ -227,7 +236,7 @@ const useEmployeeManagement = (id?: string, employeeData?: User) => {
     if (isEdited) {
       const editedDocumentId = data.id;
 
-      const updatedDocuments = currentDocuments.map((document) =>
+      const updatedDocuments = currentDocuments.map((document: Document) =>
         document.id === editedDocumentId ? data : document
       );
       employeeForm.setValue("documentsInfo", updatedDocuments);
@@ -247,7 +256,7 @@ const useEmployeeManagement = (id?: string, employeeData?: User) => {
     if (isDeleted) {
       const deletedContactId = data;
       const restContacts = currentContacts.filter(
-        (contact) => contact.id !== deletedContactId
+        (contact: Contact) => contact.id !== deletedContactId
       );
       employeeForm.setValue("contactsInfo", restContacts);
       return;
@@ -260,7 +269,7 @@ const useEmployeeManagement = (id?: string, employeeData?: User) => {
     if (isEdited) {
       const editedContactId = data.id;
 
-      const updatedContacts = currentContacts.map((contact) =>
+      const updatedContacts = currentContacts.map((contact: Contact) =>
         contact.id === editedContactId ? data : contact
       );
       employeeForm.setValue("contactsInfo", updatedContacts);

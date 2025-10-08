@@ -4,9 +4,9 @@ export type Qualification = {
   nameOfInstitution: string;
   level: string;
   type: string;
-  startDate: Date | null;
-  endDate: Date | null;
-  expiryDate: Date | null;
+  startDate?: Date | null | string;
+  endDate?: Date | null | string;
+  expiryDate?: Date | null | string;
   comment?: string;
 } & BaseType;
 

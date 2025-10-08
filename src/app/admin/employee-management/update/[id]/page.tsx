@@ -20,6 +20,12 @@ const UpdateEmployeePage = ({ params }: UpdateEmployeePageProps) => {
     return <SpinnerLoader />;
   }
 
-  return <EmployeeForm data={getEmployeeQuery?.data?.data} />;
+  return (
+    <EmployeeForm
+      data={getEmployeeQuery?.data?.data}
+      isUpdate={true}
+      userId={id}
+    />
+  );
 };
 export default UpdateEmployeePage;

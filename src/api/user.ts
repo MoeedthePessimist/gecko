@@ -46,6 +46,6 @@ export const updateEmployee = async (data: {
   id: string;
   payload: UpdateEmployeeRequestType;
 }): Promise<UpdateEmployeeRequestType> => {
-  const response = await api.put(API.UPDATE_EMPLOYEE(data.id), data.payload);
+  const response = await api.patch(API.UPDATE_EMPLOYEE(data.id), data.payload);
   return response.data;
 };

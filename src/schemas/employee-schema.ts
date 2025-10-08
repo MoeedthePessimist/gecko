@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z, ZodObject, ZodType } from "zod";
 import { bankFormSchema } from "./bank-schema";
 import { jobFormSchema } from "./job-schema";
 import { employementFormSchema } from "./employement-schema";
@@ -9,45 +9,49 @@ import { workTableSchema } from "./work-table-schema";
 import { leaveTableSchema } from "./leave-table-schema";
 import { levySchema } from "./levy-schema";
 
-export const accountFormSchema = z
-  .object({
-    name: z.string().nonempty("Please enter employee name"),
-    identityNumber: z
-      .string()
-      .nonempty("Please enter employee identity number"),
-    identityType: z.string().nonempty("Please select an identity type"),
-    dateOfBirth: z.date().optional(),
-    gender: z.string().nonempty("Please select employee gender"),
-    race: z.string().nonempty("Please select employee race"),
-    mobileNumber: z.string().nonempty("Please enter a phone number"),
-    email: z.string().email("Please enter a valid employee email"),
-    password: z.string().min(6, "Password must be at least 6 characters"),
-    repeatPassword: z.string(),
-    optionalEmail: z.string().optional(),
-    allowLogin: z.boolean(),
-  })
-  .refine((data) => data.password === data.repeatPassword, {
-    message: "Passwords do not match",
-    path: ["repeatPassword"],
-  });
+export const accountFormSchema = (isUpdate?: boolean) =>
+  z
+    .object({
+      name: z.string().nonempty("Please enter employee name"),
+      identityNumber: z
+        .string()
+        .nonempty("Please enter employee identity number"),
+      identityType: z.string().nonempty("Please select an identity type"),
+      dateOfBirth: z.date().optional(),
+      gender: z.string().nonempty("Please select employee gender"),
+      race: z.string().nonempty("Please select employee race"),
+      mobileNumber: z.string().nonempty("Please enter a phone number"),
+      email: z.string().email("Please enter a valid employee email"),
+      password: isUpdate
+        ? z.string().optional()
+        : z.string().min(6, "Password must be at least 6 characters"),
+      repeatPassword: z.string(),
+      optionalEmail: z.string().optional(),
+      allowLogin: z.boolean(),
+    })
+    .refine((data) => data.password === data.repeatPassword, {
+      message: "Passwords do not match",
+      path: ["repeatPassword"],
+    });
 
-export const generalFormSchema = z.object({
-  addressType: z.string().optional(),
-  houseNo: z.string().optional(),
-  levelNo: z.string().optional(),
-  unitNo: z.string().optional(),
-  address: z.string().nonempty("Please enter employee address"),
-  city: z.string().optional(),
-  state: z.string().optional(),
-  country: z.string().optional(),
-  nationality: z.string().optional(),
-  maritalStatus: z.string().optional(),
-  role: z.string().nonempty("Please select employee role"),
-  homeTelephoneNumber: z.string().optional(),
-  workTelephoneNumber: z.string().optional(),
-  isNonResidentialDirector: z.string().optional(),
-  bank: bankFormSchema,
-});
+export const generalFormSchema = (isUpdate?: boolean) =>
+  z.object({
+    addressType: z.string().optional(),
+    houseNo: z.string().optional(),
+    levelNo: z.string().optional(),
+    unitNo: z.string().optional(),
+    address: z.string().nonempty("Please enter employee address"),
+    city: z.string().optional(),
+    state: z.string().optional(),
+    country: z.string().optional(),
+    nationality: z.string().optional(),
+    maritalStatus: z.string().optional(),
+    role: z.string().nonempty("Please select employee role"),
+    homeTelephoneNumber: z.string().optional(),
+    workTelephoneNumber: z.string().optional(),
+    isNonResidentialDirector: z.string().optional(),
+    bank: bankFormSchema(isUpdate),
+  });
 
 export const settingFormSchema = z.object({
   cpfTable: z.string().optional(),
@@ -70,18 +74,19 @@ export const settingFormSchema = z.object({
   deductionEcfSinda: z.number().optional(),
 });
 
-export const employeeFormSchema = z.object({
-  accountInfo: accountFormSchema,
-  generalInfo: generalFormSchema,
-  settingsInfo: settingFormSchema,
-  jobInfo: jobFormSchema,
-  employementInfo: employementFormSchema,
-  qualificationsInfo: z.array(qualificationFormSchema),
-  contactsInfo: z.array(contactFormSchema),
-  documentsInfo: z.array(documentFormSchema),
-});
+export const employeeFormSchema = (isUpdate?: boolean): ZodType =>
+  z.object({
+    accountInfo: accountFormSchema(isUpdate),
+    generalInfo: generalFormSchema(isUpdate),
+    settingsInfo: settingFormSchema,
+    jobInfo: jobFormSchema,
+    employementInfo: employementFormSchema,
+    qualificationsInfo: z.array(qualificationFormSchema),
+    contactsInfo: z.array(contactFormSchema),
+    documentsInfo: z.array(documentFormSchema),
+  });
 
-export type EmployeeFormInputs = z.infer<typeof employeeFormSchema>;
+export type EmployeeFormInputs = z.infer<ReturnType<typeof employeeFormSchema>>;
 export type SettingFormInputs = z.infer<typeof settingFormSchema>;
-export type AccountFormInputs = z.infer<typeof accountFormSchema>;
-export type GeneralFormInputs = z.infer<typeof generalFormSchema>;
+export type AccountFormInputs = z.infer<ReturnType<typeof accountFormSchema>>;
+export type GeneralFormInputs = z.infer<ReturnType<typeof generalFormSchema>>;
