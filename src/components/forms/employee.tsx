@@ -41,6 +41,7 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
     onMutateDocument,
     createEmployeeMutation,
     updateEmployeeMutation,
+    onProfileImageUpload,
   } = useEmployeeManagement(undefined, data, isUpdate);
 
   const { getCompanyAdditionalDataQuery } = useCompany();
@@ -76,7 +77,10 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
 
   return (
     <Form {...employeeForm} handleSubmit={employeeForm.handleSubmit}>
-      <ImageUploader />
+      <ImageUploader
+        onImageUpload={onProfileImageUpload}
+        currentImage={employeeForm.watch("accountInfo.avatar")}
+      />
       <div className="flex flex-col">
         <EmployeeAccountInformationForm
           control={employeeForm.control as Control<EmployeeFormInputs>}

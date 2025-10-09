@@ -31,12 +31,14 @@ import { rolesEnum } from "@/enums/roles.enum";
 import { Qualification } from "@/types/qualification.type";
 import { Document } from "@/types/document.type";
 import { Contact } from "@/types/contact.type";
+import { StringValidation } from "zod";
 
 const useEmployeeManagement = (
   id?: string,
   employeeData?: User,
   isUpdate?: boolean
 ) => {
+  console.log(employeeData?.avatar);
   const employeeForm = useForm({
     resolver: zodResolver(employeeFormSchema(isUpdate)),
     defaultValues: {
@@ -53,6 +55,7 @@ const useEmployeeManagement = (
         optionalEmail: employeeData?.optionalEmail || "",
         allowLogin: employeeData?.allowLogin || false,
         dateOfBirth: new Date(employeeData?.dateOfBirth || new Date()),
+        avatar: employeeData?.avatar || "",
       },
       generalInfo: {
         houseNo: employeeData?.houseNo || "",
@@ -279,6 +282,10 @@ const useEmployeeManagement = (
     employeeForm.setValue("contactsInfo", [...currentContacts, data]);
   };
 
+  const onProfileImageUpload = (fileName: string) => {
+    employeeForm.setValue("accountInfo.avatar", fileName);
+  };
+
   return {
     employeeForm,
     onSubmitEmployeeForm,
@@ -293,6 +300,7 @@ const useEmployeeManagement = (
     deleteEmployeeMutation,
     updateEmployeeMutation,
     getEmployeeQuery,
+    onProfileImageUpload,
   };
 };
 

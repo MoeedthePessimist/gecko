@@ -28,6 +28,7 @@ export const accountFormSchema = (isUpdate?: boolean) =>
       repeatPassword: z.string(),
       optionalEmail: z.string().optional(),
       allowLogin: z.boolean(),
+      avatar: z.string().optional(),
     })
     .refine((data) => data.password === data.repeatPassword, {
       message: "Passwords do not match",
