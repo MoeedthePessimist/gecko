@@ -1,4 +1,4 @@
-export enum banskEnum {
+export enum banksEnum {
   BANK_OF_AMERICA = "Bank of America",
   JPMORGAN_CHASE = "JPMorgan Chase",
   WELLS_FARGO = "Wells Fargo",
@@ -28,11 +28,11 @@ export enum banskEnum {
   ANZ = "Australia and New Zealand Banking Group",
 }
 
-export const banksList = Object.values(banskEnum).sort((a, b) =>
+export const banksList = Object.values(banksEnum).sort((a, b) =>
   a.localeCompare(b)
 );
 
-export const banksListWithCode = Object.entries(banskEnum).map(
+export const banksListWithCode = Object.entries(banksEnum).map(
   ([code, name]) => ({
     code: name,
     name,

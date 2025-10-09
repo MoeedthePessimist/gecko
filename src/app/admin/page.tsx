@@ -1,21 +1,69 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { useAuthContext } from "@/context/auth-context";
-import useAuth from "@/hooks/use-auth";
+import AccumulationCard from "@/components/dashboard-cards/accumulation-card";
+import LeaveCard from "@/components/dashboard-cards/leave-card";
+import { Card } from "@/components/ui/card";
 import React from "react";
 
 const AdminPage = () => {
-  const { isLoggedIn, user, role } = useAuthContext();
-
-  console.log(isLoggedIn, "isLoggedIn");
-  const { logout } = useAuth();
   return (
-    <div>
-      <p>Login Status: {isLoggedIn ? "Logged In" : "Not logged in"}</p>
-      <p>Name: {user && user.name}</p>
-      <p>Role: {role && role}</p>
-      <Button onClick={logout}>Logout</Button>
+    <div className="flex flex-col w-full gap-2">
+      {/* Leave notification */}
+      <LeaveCard />
+
+      {/*
+       * claims
+       * commissions
+       * medical leave
+       * annual leaves
+       */}
+
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <AccumulationCard
+          title="Claims"
+          accumulationContent="$25,000"
+          accumulationPercentage="+20.1%"
+        />
+        <AccumulationCard
+          title="Commissions"
+          accumulationContent="$135,000"
+          accumulationPercentage="+20.1%"
+          colorClasses="bg-white text-primary"
+        />
+        <AccumulationCard
+          title="Medical Leave"
+          accumulationContent="30 Leaves"
+          accumulationPercentage="+20.1%"
+        />
+        <AccumulationCard
+          title="Annual Leave"
+          accumulationContent="40 Leaves"
+          accumulationPercentage="+20.1%"
+          colorClasses="bg-white text-primary"
+        />
+      </div>
+
+      {/*
+       * employee salaries for the month
+       * remaining leave balance
+       */}
+
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Card className="flex items-center justify-center">
+          Employee Salary for the month
+        </Card>
+        <div className="flex flex-col gap-4">
+          <Card className="flex items-center justify-center">
+            Remaining Leave Balance
+          </Card>
+          <Card className="flex justify-center items-center">
+            {/* <Calendar /> */}
+            Calendar
+          </Card>
+        </div>
+      </div>
+
+      {/* Calendar showing leave dates, and public holidays */}
     </div>
   );
 };

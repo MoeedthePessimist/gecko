@@ -1,19 +1,20 @@
 "use client";
 import { cn } from "@/lib/utils";
 import React from "react";
-import Logo from "./ui/logo";
-import links from "../../public/data/header-links.json";
+import Logo from "../ui/logo";
+import links from "../../../public/data/header-links.json";
 import HeaderLink from "./header-link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuthContext } from "@/context/auth-context";
-import AppButton from "./app-button";
+import AppButton from "../app-button";
 import { ROUTES } from "@/constants/routes";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { Separator } from "./ui/separator";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import Link from "next/link";
-import useAuth from "@/hooks/use-auth";
 import Image from "next/image";
-import Avatar from "./avatar";
+import UserMenuPopover from "../user-menu-popover";
+import useAuth from "@/hooks/use-auth";
+import Avatar from "../avatar";
+import { Separator } from "../ui/separator";
 
 const Header = () => {
   const pathname = usePathname();
@@ -60,15 +61,7 @@ const Header = () => {
   };
 
   if (pathname.includes(ROUTES.ADMIN) || pathname.includes(ROUTES.EMPLOYEE))
-    return (
-      <div
-        className={cn(
-          "w-full px-5 h-12 fixed z-10 flex justify-end items-center"
-        )}
-      >
-        {userMenuPopover()}
-      </div>
-    );
+    return null;
 
   return (
     <div className={cn("w-full border-b-2 px-5 h-12 fixed z-10 bg-white")}>
@@ -104,7 +97,7 @@ const Header = () => {
               />
             </div>
           ) : (
-            userMenuPopover()
+            <UserMenuPopover />
           )}
 
           <Popover>
