@@ -11,7 +11,7 @@ export const employeeStatusesList = Object.values(employeeStatusesEnum).sort(
 
 export const employeeStatusesListWithCode = Object.entries(
   employeeStatusesEnum
-).map(([code, name]) => ({
+).map(([_, name]) => ({
   code: name,
   name,
 }));
@@ -29,7 +29,7 @@ export const allowanceCommissionStatusesList = Object.values(
 
 export const allowanceCommissionStatusesListWithCode = Object.entries(
   allowanceCommissionStatusesEnum
-).map(([code, name]) => ({
+).map(([_, name]) => ({
   code: name,
   name,
 }));
@@ -46,7 +46,7 @@ export const todoStatusesList = Object.values(todoStatusesEnum).sort((a, b) =>
 );
 
 export const todoStatusesListWithCode = Object.entries(todoStatusesEnum).map(
-  ([code, name]) => ({
+  ([_, name]) => ({
     code: name,
     name,
   })

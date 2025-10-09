@@ -9,7 +9,7 @@ export const workDayTypesList = Object.values(workDayTypesEnum).sort((a, b) =>
 );
 
 export const workDayTypesListWithCode = Object.entries(workDayTypesEnum).map(
-  ([code, name]) => ({
+  ([_, name]) => ({
     code: name,
     name,
   })

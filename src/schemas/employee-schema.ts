@@ -1,4 +1,4 @@
-import { z, ZodObject, ZodType } from "zod";
+import { z, ZodType } from "zod";
 import { bankFormSchema } from "./bank-schema";
 import { jobFormSchema } from "./job-schema";
 import { employementFormSchema } from "./employement-schema";

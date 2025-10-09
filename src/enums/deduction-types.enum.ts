@@ -13,7 +13,7 @@ export const deductionTypesList = Object.values(deductionTypesEnum).sort(
 );
 export const deductionTypesListWithCode = Object.entries(
   deductionTypesEnum
-).map(([code, name]) => ({
+).map(([_, name]) => ({
   code: name,
   name,
 }));

@@ -13,7 +13,7 @@ export const identitiesList = Object.values(identitiesEnum).sort((a, b) =>
 );
 
 export const identitiesListWithCode = Object.entries(identitiesEnum).map(
-  ([code, name]) => ({
+  ([_, name]) => ({
     code: name,
     name,
   })

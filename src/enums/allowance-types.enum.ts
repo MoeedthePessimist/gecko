@@ -9,7 +9,7 @@ export const allowanceCommissionTypesList = Object.values(
 
 export const allowanceCommissionTypesWithCode = Object.entries(
   allowanceCommissionTypesEnum
-).map(([code, name]) => ({
+).map(([_, name]) => ({
   code: name,
   name,
 }));
@@ -29,7 +29,7 @@ export const allowanceSpecialTypesList = Object.values(
 
 export const allowanceSpecialTypesWithCode = Object.entries(
   allowanceSpecialTypesEnum
-).map(([code, name]) => ({
+).map(([_, name]) => ({
   code: name,
   name,
 }));

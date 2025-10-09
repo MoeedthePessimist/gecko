@@ -23,7 +23,7 @@ export const relationsList = Object.values(relationsEnum).sort((a, b) =>
 );
 
 export const relationsListWithCode = Object.entries(relationsEnum).map(
-  ([code, name]) => ({
+  ([_, name]) => ({
     code: name,
     name,
   })

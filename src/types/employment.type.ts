@@ -1,6 +1,5 @@
 import { employmentTypesEnum } from "@/enums/employment-types.enum";
 import { employeeStatusesEnum } from "@/enums/statuses.enum";
-import { User } from "./user.type";
 import { BaseType } from "./base.type";
 
 export type Employment = BaseType & {

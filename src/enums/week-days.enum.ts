@@ -13,7 +13,7 @@ export const weekDaysList = Object.values(weekDaysEnum).sort((a, b) =>
 );
 
 export const weekDaysListWithCode = Object.entries(weekDaysEnum).map(
-  ([code, name]) => ({
+  ([_, name]) => ({
     code: name,
     name,
   })

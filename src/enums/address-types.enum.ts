@@ -10,7 +10,7 @@ export const addressTypesList = Object.values(addressTypesEnum).sort((a, b) =>
 );
 
 export const addressTypesListWithCode = Object.entries(addressTypesEnum).map(
-  ([code, name]) => ({
+  ([_, name]) => ({
     code: name,
     name,
   })

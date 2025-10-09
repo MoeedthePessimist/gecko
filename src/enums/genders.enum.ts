@@ -11,7 +11,7 @@ export const gendersList = Object.values(gendersEnum).sort((a, b) =>
 );
 
 export const gendersListWithCode = Object.entries(gendersEnum).map(
-  ([code, name]) => ({
+  ([_, name]) => ({
     code: name,
     name,
   })

@@ -201,7 +201,7 @@ export const countriesList = Object.values(countriesEnum).sort((a, b) =>
   a.localeCompare(b)
 );
 export const countriesListWithCode = Object.entries(countriesEnum).map(
-  ([code, name]) => ({
+  ([_, name]) => ({
     code: name,
     name,
   })

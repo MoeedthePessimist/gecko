@@ -31,7 +31,6 @@ import { rolesEnum } from "@/enums/roles.enum";
 import { Qualification } from "@/types/qualification.type";
 import { Document } from "@/types/document.type";
 import { Contact } from "@/types/contact.type";
-import { StringValidation } from "zod";
 
 const useEmployeeManagement = (
   id?: string,

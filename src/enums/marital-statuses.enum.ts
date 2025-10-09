@@ -16,7 +16,7 @@ export const maritalStatusesList = Object.values(maritalStatusesEnum).sort(
 
 export const maritalStatusesListWithCode = Object.entries(
   maritalStatusesEnum
-).map(([code, name]) => ({
+).map(([_, name]) => ({
   code: name,
   name,
 }));

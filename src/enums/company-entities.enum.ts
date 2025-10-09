@@ -21,7 +21,7 @@ export const companyEntitiesList = Object.values(companyEntitiesEnum).sort(
 );
 export const companyEntitiesListWithCode = Object.entries(
   companyEntitiesEnum
-).map(([code, name]) => ({
+).map(([_, name]) => ({
   code: name,
   name,
 }));

@@ -199,7 +199,7 @@ export const nationalitiesList = Object.values(nationalitiesEnum).sort((a, b) =>
 );
 
 export const nationalitiesListWithCode = Object.entries(nationalitiesEnum).map(
-  ([code, name]) => ({
+  ([_, name]) => ({
     code: name,
     name,
   })

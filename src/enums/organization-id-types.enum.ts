@@ -19,7 +19,7 @@ export const organizationIdTypesList = Object.values(
 
 export const organizationIdTypesListWithCode = Object.entries(
   organizationIdTypesEnum
-).map(([code, name]) => ({
+).map(([_, name]) => ({
   code: name,
   name,
 }));

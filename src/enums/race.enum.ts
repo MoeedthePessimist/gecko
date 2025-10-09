@@ -12,9 +12,7 @@ export const raceList = Object.values(raceEnum).sort((a, b) =>
   a.localeCompare(b)
 );
 
-export const raceListWithCode = Object.entries(raceEnum).map(
-  ([code, name]) => ({
-    code: name,
-    name,
-  })
-);
+export const raceListWithCode = Object.entries(raceEnum).map(([_, name]) => ({
+  code: name,
+  name,
+}));

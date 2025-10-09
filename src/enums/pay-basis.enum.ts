@@ -11,7 +11,7 @@ export const payBasisList = Object.values(payBasisEnum).sort((a, b) =>
 );
 
 export const payBasisListWithCode = Object.entries(payBasisEnum).map(
-  ([code, name]) => ({
+  ([, name]) => ({
     code: name,
     name,
   })

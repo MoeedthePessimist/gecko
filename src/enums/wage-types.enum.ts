@@ -8,7 +8,7 @@ export const wageTypesList = Object.values(wageTypesEnum).sort((a, b) =>
 );
 
 export const wageTypesWithCode = Object.entries(wageTypesEnum).map(
-  ([code, name]) => ({
+  ([_, name]) => ({
     code: name,
     name,
   })

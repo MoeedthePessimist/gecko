@@ -32,9 +32,7 @@ export const banksList = Object.values(banksEnum).sort((a, b) =>
   a.localeCompare(b)
 );
 
-export const banksListWithCode = Object.entries(banksEnum).map(
-  ([code, name]) => ({
-    code: name,
-    name,
-  })
-);
+export const banksListWithCode = Object.entries(banksEnum).map(([_, name]) => ({
+  code: name,
+  name,
+}));

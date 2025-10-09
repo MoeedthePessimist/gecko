@@ -45,7 +45,7 @@ export const industriesList = Object.values(industriesEnum).sort((a, b) =>
 );
 
 export const industriesListWithCode = Object.entries(industriesEnum).map(
-  ([code, name]) => ({
+  ([_, name]) => ({
     code: name,
     name,
   })

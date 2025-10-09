@@ -17,7 +17,6 @@ const EmployeeManagementPage = () => {
       isFetching: isFetchingEmployees,
       isRefetching: isRefetchingEmployees,
       refetch: refetchEmployeesData,
-      error: employeesError,
     },
     deleteEmployeeMutation,
   } = useEmployeeManagement();

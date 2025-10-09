@@ -7,9 +7,7 @@ export const rolesList = Object.values(rolesEnum).sort((a, b) =>
   a.localeCompare(b)
 );
 
-export const rolesListWithCode = Object.entries(rolesEnum).map(
-  ([code, name]) => ({
-    code: name,
-    name,
-  })
-);
+export const rolesListWithCode = Object.entries(rolesEnum).map(([_, name]) => ({
+  code: name,
+  name,
+}));

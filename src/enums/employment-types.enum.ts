@@ -10,7 +10,7 @@ export enum employmentTypesEnum {
 export const employmentTypesList = Object.values(employmentTypesEnum);
 
 export const employmentTypesWithCode = Object.entries(employmentTypesEnum).map(
-  ([code, name]) => ({
+  ([_, name]) => ({
     code: name,
     name,
   })
