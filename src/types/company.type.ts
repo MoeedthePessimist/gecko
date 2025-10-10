@@ -31,3 +31,8 @@ export type Company = BaseType & {
   resignations?: string[];
   terminationsTypes?: string[];
 };
+
+export type CompanyWithNecessaryFields = Omit<
+  Company,
+  "isActive" | "isArchived" | "createDateTime" | "lastChangedDateTime"
+>;

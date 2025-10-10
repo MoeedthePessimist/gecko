@@ -8,6 +8,8 @@ type AppButtonProps = {
   textOptions?: HTMLAttributes<HTMLParagraphElement>;
   isLoading?: boolean;
   title: string;
+  icon?: React.ReactNode;
+  iconPosition?: "start" | "end";
 };
 
 const AppButton: React.FC<AppButtonProps> = ({
@@ -15,6 +17,8 @@ const AppButton: React.FC<AppButtonProps> = ({
   textOptions = {},
   isLoading,
   title,
+  icon,
+  iconPosition,
 }) => {
   const { className: buttonClassName, ...restButtonOptions } = buttonOptions;
 
@@ -30,7 +34,11 @@ const AppButton: React.FC<AppButtonProps> = ({
       {isLoading ? (
         <SpinnerLoader size="sm" showText={false} />
       ) : (
-        <p {...textOptions}>{title}</p>
+        <div className="flex gap-2 justify-center items-center">
+          {iconPosition === "start" && icon && icon}
+          <p {...textOptions}>{title}</p>
+          {iconPosition === "end" && icon && icon}
+        </div>
       )}
     </Button>
   );

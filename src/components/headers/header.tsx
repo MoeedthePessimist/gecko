@@ -12,6 +12,9 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import Link from "next/link";
 import Image from "next/image";
 import UserMenuPopover from "../user-menu-popover";
+import useAuth from "@/hooks/use-auth";
+import Avatar from "../avatar";
+import { Separator } from "../ui/separator";
 
 const Header = () => {
   const pathname = usePathname();
@@ -22,7 +25,40 @@ const Header = () => {
     router.push(route);
   };
 
-  const { isLoggedIn } = useAuthContext();
+  const { isLoggedIn, user } = useAuthContext();
+
+  const { logout } = useAuth();
+
+  const userMenuPopover = () => {
+    return (
+      <Popover>
+        <PopoverTrigger>
+          <Avatar
+            name={user?.name || ""}
+            avatar={user?.avatar || "https://github.com/shadcn.png"}
+          />
+        </PopoverTrigger>
+        <PopoverContent className="space-y-2">
+          <div className="flex gap-2 items-center">
+            <Avatar
+              name={user?.name || ""}
+              avatar={user?.avatar || "https://github.com/shadcn.png"}
+            />
+            <p>{user && user.name}</p>
+          </div>
+          <Separator />
+          <div className="flex flex-col gap-2 pt-4 px-2">
+            <Link className="text-sm" href="/">
+              Edit Profile
+            </Link>
+            <p className="text-sm cursor-pointer" onClick={logout}>
+              Logout
+            </p>
+          </div>
+        </PopoverContent>
+      </Popover>
+    );
+  };
 
   if (pathname.includes(ROUTES.ADMIN) || pathname.includes(ROUTES.EMPLOYEE))
     return null;

@@ -1,5 +1,20 @@
+import { EmployeeFormInputs } from "@/schemas/employee-schema";
 import { Company } from "./company.type";
+import { Contact } from "./contact.type";
+import { Document } from "./document.type";
+import { Qualification } from "./qualification.type";
 import { User } from "./user.type";
+import { SelectOptionsType } from "./common.type";
+
+type ApiResponseType<T> = {
+  data: T;
+  status: number;
+  success: boolean;
+};
+
+/*
+AUTH API TYPES
+*/
 
 export type LoginApiRequestType = {
   email: string;
@@ -18,6 +33,109 @@ export type RegisterApiRequestType = {
 
 export type RegisterApiResponseType = undefined;
 
+/*
+USER API TYPES
+*/
+
 export type MeApiResponseType = {
   user: User;
 };
+
+/*
+QUALIFICATTION API TYPES
+*/
+
+export type GetQualificationsApiResponseType = ApiResponseType<Qualification[]>;
+
+export type CreateQualificationApiRequestType = Omit<
+  Qualification,
+  "id" | "isActive" | "isArchived" | "createDateTime" | "lastChangedDateTime"
+>;
+
+export type CreateQualificationApiResponseType = ApiResponseType<Qualification>;
+
+export type UpdateQualificationApiRequestType =
+  CreateQualificationApiRequestType & {
+    id: string;
+  };
+
+export type UpdateQualificationApiResponseType = ApiResponseType<Qualification>;
+
+export type DeleteQualificationApiResponseType = ApiResponseType<string>;
+
+/*
+CONTACT API TYPES
+*/
+export type GetContactsApiResponseType = ApiResponseType<Contact[]>;
+
+export type CreateContactApiRequestType = Omit<
+  Contact,
+  "id" | "isActive" | "isArchived" | "createDateTime" | "lastChangedDateTime"
+>;
+
+export type CreateContactApiResponseType = ApiResponseType<Contact>;
+
+export type UpdateContactApiRequestType = CreateContactApiRequestType & {
+  id: string;
+};
+
+export type UpdateContactApiResponseType = ApiResponseType<Contact>;
+
+export type DeleteContactApiResponseType = ApiResponseType<string>;
+
+/*
+DOCUMENT API TYPES
+*/
+export type GetDocumentsApiResponseType = ApiResponseType<Document[]>;
+
+export type CreateDocumentApiRequestType = Omit<
+  Document,
+  "id" | "isActive" | "isArchived" | "createDateTime" | "lastChangedDateTime"
+>;
+
+export type CreateDocumentApiResponseType = ApiResponseType<Document>;
+
+export type UpdateDocumentApiRequestType = CreateDocumentApiRequestType & {
+  id: string;
+};
+
+export type UpdateDocumentApiResponseType = ApiResponseType<Document>;
+
+export type DeleteDocumentApiResponseType = ApiResponseType<string>;
+
+/*
+UPLOAD API TYPES
+*/
+export type UploadFileApiResponseType = ApiResponseType<{
+  fileName: string;
+  fileSize: string | number;
+}>;
+
+/**
+ * EMPLOYEE API TYPES
+ */
+export type CreateEmployeeRequestType = EmployeeFormInputs;
+export type CreateEmployeeResponseType = ApiResponseType<User>;
+
+export type GetEmployeesResponseType = ApiResponseType<Array<User>>;
+export type GetEmployeeResponseType = ApiResponseType<User>;
+
+export type DeleteEmployeeResponseType = ApiResponseType<string>;
+
+export type UpdateEmployeeRequestType = EmployeeFormInputs & { id: string };
+export type UpdateEmployeeResponseType = ApiResponseType<User>;
+
+/**
+ * COMPANY API TYPES
+ */
+
+export type GetCompanyAdditionalDataResponseType = ApiResponseType<{
+  cpfTables: Array<SelectOptionsType>;
+  workTables: Array<SelectOptionsType>;
+  levies: Array<SelectOptionsType>;
+  leaveTables: Array<SelectOptionsType>;
+  jobCategories: Array<SelectOptionsType>;
+  designations: Array<SelectOptionsType>;
+  departments: Array<SelectOptionsType>;
+  users: Array<SelectOptionsType>;
+}>;
