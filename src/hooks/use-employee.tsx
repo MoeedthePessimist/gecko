@@ -37,7 +37,6 @@ const useEmployeeManagement = (
   employeeData?: User,
   isUpdate?: boolean
 ) => {
-  console.log(employeeData?.avatar);
   const employeeForm = useForm({
     resolver: zodResolver(employeeFormSchema(isUpdate)),
     defaultValues: {

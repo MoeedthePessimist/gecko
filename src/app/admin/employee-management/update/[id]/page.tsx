@@ -1,31 +1,14 @@
-"use client";
 import EmployeeForm from "@/components/forms/employee";
-import SpinnerLoader from "@/components/ui/loader";
-import useEmployeeManagement from "@/hooks/use-employee";
-import { emit } from "process";
-import React from "react";
+import UpdateEmployeeFormWrapper from "@/components/update-employee-form-wrapper";
 
-interface UpdateEmployeePageProps {
-  params: {
-    id: string;
-  };
+import { use } from "react";
+
+export default function UpdateEmployeePage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = use(params);
+
+  return <UpdateEmployeeFormWrapper id={id} />;
 }
-
-const UpdateEmployeePage = ({ params }: UpdateEmployeePageProps) => {
-  const { id } = params;
-
-  const { getEmployeeQuery } = useEmployeeManagement(id);
-
-  if (getEmployeeQuery.isLoading) {
-    return <SpinnerLoader />;
-  }
-
-  return (
-    <EmployeeForm
-      data={getEmployeeQuery?.data?.data}
-      isUpdate={true}
-      userId={id}
-    />
-  );
-};
-export default UpdateEmployeePage;
