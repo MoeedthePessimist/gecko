@@ -1,5 +1,6 @@
 import axios from "axios";
 import { env } from "./env";
+import { locals } from "@/constants/locals";
 
 // Create an Axios instance
 const api = axios.create({
@@ -12,7 +13,8 @@ const api = axios.create({
 // Request interceptor to add token
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("authToken"); // or use a secure storage
+    const token = localStorage.getItem(locals.AUTH_TOKEN); // or use a secure storage
+    console.log(token);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

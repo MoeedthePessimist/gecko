@@ -26,8 +26,11 @@ const useAuth = () => {
       setRole(role);
       setIsLoggedIn(true);
       localStorage.setItem(locals.AUTH_TOKEN, data.accessToken);
-      if (role === rolesEnum.ADMIN) router.replace(ROUTES.ADMIN);
-      else if (role === rolesEnum.EMPLOYEE) router.replace(ROUTES.EMPLOYEE);
+      const token = localStorage.getItem(locals.AUTH_TOKEN);
+      if (token) {
+        if (role === rolesEnum.ADMIN) router.replace(ROUTES.ADMIN);
+        else if (role === rolesEnum.EMPLOYEE) router.replace(ROUTES.EMPLOYEE);
+      }
     },
     onError: (error: AxiosError) => {
       console.error(error);
