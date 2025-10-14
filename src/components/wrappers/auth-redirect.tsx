@@ -1,6 +1,5 @@
 "use client";
-
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTypedQuery } from "@/hooks/use-query";
 import { me } from "@/api/user";
@@ -10,7 +9,6 @@ import { rolesEnum } from "@/enums/roles.enum";
 import { ROUTES } from "@/constants/routes";
 import SpinnerLoader from "../ui/loader";
 import { locals } from "@/constants/locals";
-import { useQueryClient } from "@tanstack/react-query";
 
 type AuthRedirectProps = {
   children: React.ReactNode;
@@ -29,8 +27,6 @@ const AuthRedirect: React.FC<AuthRedirectProps> = ({ children }) => {
 
   const shouldFetch = !user && !!token;
 
-  console.log(shouldFetch);
-
   const { data, isSuccess, isFetching } = useTypedQuery<MeApiResponseType>({
     queryKey: ["me"],
     queryFn: me,
@@ -38,8 +34,6 @@ const AuthRedirect: React.FC<AuthRedirectProps> = ({ children }) => {
   });
 
   useEffect(() => {
-    console.log(isSuccess, data);
-
     if (isSuccess && shouldFetch) {
       const role = data.user.roles[0] as rolesEnum;
       setIsLoggedIn(true);
