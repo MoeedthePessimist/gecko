@@ -4,7 +4,7 @@ import { ROUTES } from "@/constants/routes";
 import { useAuthContext } from "@/context/auth-context";
 import { rolesEnum } from "@/enums/roles.enum";
 import { LoginApiResponseType } from "@/types/api.type";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 
@@ -12,6 +12,8 @@ const useAuth = () => {
   const router = useRouter();
 
   const { setIsLoggedIn, setUser, setRole } = useAuthContext();
+
+  const queryClient = useQueryClient();
 
   const {
     mutate: loginMutate,
@@ -54,6 +56,7 @@ const useAuth = () => {
   });
 
   const logout = () => {
+    queryClient.invalidateQueries({ queryKey: ["/me"] });
     localStorage.clear();
     setIsLoggedIn(false);
     setUser(null);

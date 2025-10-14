@@ -6,8 +6,11 @@ import { rolesEnum } from "@/enums/roles.enum";
 import useAuth from "@/hooks/use-auth";
 import { useTypedQuery } from "@/hooks/use-query";
 import { MeApiResponseType } from "@/types/api.type";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SpinnerLoader from "../ui/loader";
+import { locals } from "@/constants/locals";
+import { redirect } from "next/navigation";
+import { ROUTES } from "@/constants/routes";
 
 type AuthProtectedRouteProps = {
   children: React.ReactNode;
@@ -51,8 +54,6 @@ const AuthProtectedRoute: React.FC<AuthProtectedRouteProps> = ({
   if (isSuccess && data) {
     return <>{children}</>;
   }
-
-  return null;
 };
 
 export default AuthProtectedRoute;

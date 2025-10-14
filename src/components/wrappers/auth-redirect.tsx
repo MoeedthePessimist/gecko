@@ -20,32 +20,27 @@ const AuthRedirect: React.FC<AuthRedirectProps> = ({ children }) => {
   const router = useRouter();
   const { setIsLoggedIn, setRole, setUser } = useAuthContext();
 
-  const queryClient = useQueryClient();
+  const { user } = useAuthContext();
 
-  queryClient.invalidateQueries({ queryKey: ["me"] });
+  const token =
+    typeof window !== "undefined"
+      ? localStorage.getItem(locals.AUTH_TOKEN)
+      : null;
 
-  // state for token
-  const [token, setToken] = useState<string | null>(null);
+  const shouldFetch = !user && !!token;
+
+  console.log(shouldFetch);
 
   const { data, isSuccess, isFetching } = useTypedQuery<MeApiResponseType>({
     queryKey: ["me"],
     queryFn: me,
-    staleTime: 0,
-    gcTime: 0,
-    refetchOnMount: false,
-    enabled: !!token,
+    enabled: shouldFetch,
   });
 
-  // ✅ only access localStorage on client
   useEffect(() => {
-    const storedToken = localStorage.getItem(locals.AUTH_TOKEN);
-    setToken(storedToken);
-  }, []);
+    console.log(isSuccess, data);
 
-  useEffect(() => {
-    console.log(data, isSuccess, token);
-
-    if (isSuccess && data && token) {
+    if (isSuccess && shouldFetch) {
       const role = data.user.roles[0] as rolesEnum;
       setIsLoggedIn(true);
       setUser(data.user);
@@ -58,11 +53,7 @@ const AuthRedirect: React.FC<AuthRedirectProps> = ({ children }) => {
         return router.replace(ROUTES.EMPLOYEE);
       }
     }
-  }, [isSuccess, data, router, setIsLoggedIn, setRole, setUser]);
-
-  useEffect(() => {
-    console.log(token, "token inside the useeffect");
-  }, [token]);
+  }, [isSuccess, data]);
 
   if (isFetching) {
     return (
