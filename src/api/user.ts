@@ -9,7 +9,6 @@ import {
   MeApiResponseType,
   UpdateEmployeeRequestType,
 } from "@/types/api.type";
-import { deleteContact } from "./contacts";
 
 export const me = async (): Promise<MeApiResponseType> => {
   const response = await api.get(API.ME);
