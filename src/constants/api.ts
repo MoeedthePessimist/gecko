@@ -22,4 +22,8 @@ export const API = {
   UPDATE_EMPLOYEE: (id: string) => `user/employee/${id}`,
   GET_COMPANY_ADDITIONAL_DATA: (companyId: string) =>
     `/company/data/${companyId}`,
+  GET_COMMISSIONS: () => `commission`,
+  CREATE_COMMISSION: "commission",
+  UPDATE_COMMISSION: (id: string) => `commission/${id}`,
+  DELETE_COMMISSION: (id: string) => `commission/${id}`,
 };
