@@ -20,11 +20,13 @@ import { cn } from "@/lib/utils";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  title?: string;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  title,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -33,7 +35,12 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="overflow-hidden rounded-md border">
+    <div className="overflow-hidden border rounded-xl">
+      {title && (
+        <h1 className="text-lg text-primary font-semibold mb-4 mt-4 ml-4">
+          {title}
+        </h1>
+      )}
       <Table>
         <TableHeader className="bg-primary">
           {table.getHeaderGroups().map((headerGroup) => (

@@ -128,11 +128,6 @@ const useEmployeeManagement = (
     },
   });
 
-  const getEmployeesQuery = useTypedQuery({
-    queryKey: QUERY_KEYS.EMPLOYEES,
-    queryFn: getEmployees,
-  });
-
   const deleteEmployeeMutation = useMutation({
     mutationFn: deleteEmployee,
     onSuccess: (data) => {
@@ -294,7 +289,6 @@ const useEmployeeManagement = (
     onMutateDocument,
     onMutateContact,
     createEmployeeMutation,
-    getEmployeesQuery,
     deleteEmployeeMutation,
     updateEmployeeMutation,
     getEmployeeQuery,

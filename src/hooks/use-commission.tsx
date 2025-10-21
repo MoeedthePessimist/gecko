@@ -18,12 +18,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { commissionSchema } from "@/schemas/commission-schema";
 import { ColumnDef } from "@tanstack/react-table";
 import { Commission } from "@/types/commission.type";
-import { DeleteIcon, EditIcon, Trash2Icon } from "lucide-react";
+import { EditIcon, Trash2Icon } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const useCommission = () => {
+const useCommission = (fetchCommissions = false) => {
   const [selectedCommission, setSelectedCommission] =
     useState<Commission | null>(null);
+
+  const [mutationModal, setMutationModal] = useState<boolean>(false);
 
   const commissionForm = useForm({
     resolver: zodResolver(commissionSchema),
@@ -89,6 +91,7 @@ const useCommission = () => {
               onClick={() => {
                 setSelectedCommission(commission);
                 //TODO: open mutation modal
+                openMutationModal();
               }}
               className="cursor-pointer"
               width={16}
@@ -112,6 +115,7 @@ const useCommission = () => {
   const getCommissionsQuery = useTypedQuery({
     queryFn: getCommissions,
     queryKey: QUERY_KEYS.COMMISSIONS,
+    enabled: fetchCommissions,
   });
 
   const createCommissionMutation = useMutation({
@@ -144,6 +148,14 @@ const useCommission = () => {
     },
   });
 
+  const openMutationModal = () => {
+    setMutationModal(true);
+  };
+
+  const closeMutationModal = () => {
+    setMutationModal(false);
+  };
+
   return {
     getCommissionsQuery,
     createCommissionMutation,
@@ -151,6 +163,9 @@ const useCommission = () => {
     deleteCommissionMutation,
     commissionForm,
     commissionColumns,
+    openMutationModal,
+    closeMutationModal,
+    selectedCommissionid: selectedCommission?.id,
   };
 };
 
