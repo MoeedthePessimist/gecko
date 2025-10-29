@@ -2,14 +2,17 @@ import { login, register } from "@/api/auth";
 import { locals } from "@/constants/locals";
 import { ROUTES } from "@/constants/routes";
 import { useAuthContext } from "@/context/auth-context";
+import { useGlobalModal } from "@/context/error-context";
 import { rolesEnum } from "@/enums/roles.enum";
 import { LoginApiResponseType } from "@/types/api.type";
+import { AxiosErrorWithMessage } from "@/types/common.type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 
 const useAuth = () => {
   const router = useRouter();
+  const { showError, showSuccess } = useGlobalModal();
 
   const { setIsLoggedIn, setUser, setRole } = useAuthContext();
 
@@ -36,6 +39,7 @@ const useAuth = () => {
     },
     onError: (error: AxiosError) => {
       console.error(error);
+      showError("Invalid email or password. Please try again.");
       logout();
     },
   });
@@ -48,10 +52,14 @@ const useAuth = () => {
     mutationFn: register,
     retry: 1,
     onSuccess: () => {
-      router.replace(ROUTES.LOGIN);
+      showSuccess("Registration successful! Please login to continue.");
     },
-    onError: (error: AxiosError) => {
+    onError: (error: AxiosErrorWithMessage) => {
       console.error(error);
+      showError(
+        error?.response?.data?.message ||
+          "Registration failed. Please try again."
+      );
     },
   });
 
