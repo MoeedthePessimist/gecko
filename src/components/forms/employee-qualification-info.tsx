@@ -31,7 +31,6 @@ const EmployeeQualificationInformationForm: React.FC<
   EmployeeQualificationInformationFormProps
 > = ({ handleQualificationMutated, createdQualifications }) => {
   const {
-    queryQualifications: { data: qualificationsData, isLoading, isError },
     mutateQualification: {
       mutate: createQualification,
       isPending: isCreatingQualification,
