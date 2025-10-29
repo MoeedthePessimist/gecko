@@ -5,6 +5,7 @@ import QueryProvider from "../providers/query-provider";
 import { AuthProvider } from "../context/auth-context";
 import Header from "@/components/headers/header";
 import { cn } from "@/lib/utils";
+import { ErrorProvider } from "@/context/error-context";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,10 +28,12 @@ export default function RootLayout({
       <body className={`${poppins.className} antialiased`}>
         <QueryProvider>
           <AuthProvider>
-            <div className={cn("h-dvh max-h-dvh flex flex-col")}>
-              <Header />
-              <div className={cn("h-full")}>{children}</div>
-            </div>
+            <ErrorProvider>
+              <div className={cn("h-dvh max-h-dvh flex flex-col")}>
+                <Header />
+                <div className={cn("h-full")}>{children}</div>
+              </div>
+            </ErrorProvider>
           </AuthProvider>
         </QueryProvider>
       </body>

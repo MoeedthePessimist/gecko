@@ -10,17 +10,26 @@ import { AxiosError } from "axios";
 import { useTypedQuery } from "./use-query";
 import { QUERY_KEYS } from "@/constants/query-keys";
 import { useState } from "react";
+import { useGlobalModal } from "@/context/error-context";
+import { AxiosErrorWithMessage } from "@/types/common.type";
 
 const useContacts = () => {
   const [selectedContactId, setSelectedContactId] = useState<string>("");
+
+  const { showError, showSuccess } = useGlobalModal();
 
   const mutateContact = useMutation({
     mutationFn: createContact,
     onSuccess: (data: CreateContactApiResponseType) => {
       console.log("Contact created:", data);
+      showSuccess("Contact created successfully!");
     },
-    onError: (error: AxiosError) => {
+    onError: (error: AxiosErrorWithMessage) => {
       console.error("Error creating qualification:", error);
+      showError(
+        error.response?.data.message ||
+          "Failed to create contact. Please try again."
+      );
     },
   });
 
@@ -28,14 +37,30 @@ const useContacts = () => {
     mutationFn: updateContact,
     onSuccess: (data: CreateContactApiResponseType) => {
       console.log("Contact created:", data);
+      showSuccess("Contact updated successfully!");
     },
-    onError: (error: AxiosError) => {
+    onError: (error: AxiosErrorWithMessage) => {
       console.error("Error creating qualification:", error);
+      showError(
+        error.response?.data.message ||
+          "Failed to update contact. Please try again."
+      );
     },
   });
 
   const removeContact = useMutation({
     mutationFn: deleteContact,
+    onSuccess: (data) => {
+      console.log("Contact deleted:", data);
+      showSuccess("Contact deleted successfully!");
+    },
+    onError: (error: AxiosErrorWithMessage) => {
+      console.error("Error deleting qualification:", error);
+      showError(
+        error.response?.data.message ||
+          "Failed to delete contact. Please try again."
+      );
+    },
   });
 
   const queryContacts = useTypedQuery({

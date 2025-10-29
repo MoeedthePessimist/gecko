@@ -31,12 +31,16 @@ import { rolesEnum } from "@/enums/roles.enum";
 import { Qualification } from "@/types/qualification.type";
 import { Document } from "@/types/document.type";
 import { Contact } from "@/types/contact.type";
+import { AxiosErrorWithMessage } from "@/types/common.type";
+import { useGlobalModal } from "@/context/error-context";
 
 const useEmployeeManagement = (
   id?: string,
   employeeData?: User,
   isUpdate?: boolean
 ) => {
+  const { showError, showSuccess } = useGlobalModal();
+
   const employeeForm = useForm({
     resolver: zodResolver(employeeFormSchema(isUpdate)),
     defaultValues: {
@@ -122,9 +126,14 @@ const useEmployeeManagement = (
     mutationFn: createEmployee,
     onSuccess: (data) => {
       console.log(data);
+      showSuccess("Employee created successfully!");
     },
-    onError: (error: AxiosError) => {
+    onError: (error: AxiosErrorWithMessage) => {
       console.error(error);
+      showError(
+        error.response?.data.message ||
+          "Failed to create employee. Please try again."
+      );
     },
   });
 
@@ -147,9 +156,14 @@ const useEmployeeManagement = (
     mutationFn: updateEmployee,
     onSuccess: (data) => {
       console.log(data);
+      showSuccess("Employee updated successfully!");
     },
-    onError: (error: AxiosError) => {
+    onError: (error: AxiosErrorWithMessage) => {
       console.error(error);
+      showError(
+        error.response?.data.message ||
+          "Failed to update employee. Please try again."
+      );
     },
   });
 
