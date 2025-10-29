@@ -16,7 +16,6 @@ const useLogin = () => {
   });
 
   const onSubmit = (data: LoginFormInputs) => {
-    console.log("Login Data:", data);
     loginMutate(data);
   };
 
