@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertCircle, X } from "lucide-react";
+import { CheckCircle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -10,36 +10,28 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-interface ErrorModalProps {
+interface SuccessModalProps {
   isOpen: boolean;
-  errors: string[];
+  messages: string[];
   onClose: () => void;
-  onRetry?: () => void | Promise<void>;
   title?: string;
   description?: string;
 }
 
-export function ErrorModal({
+export function SuccessModal({
   isOpen,
-  errors,
+  messages,
   onClose,
-  onRetry,
-  title = "Something went wrong",
-  description = "Please review the errors below and try again.",
-}: ErrorModalProps) {
-  const handleRetry = async () => {
-    if (onRetry) {
-      await onRetry();
-    }
-  };
-
+  title = "Success!",
+  description = "Your action completed successfully.",
+}: SuccessModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-md">
         <DialogHeader>
           <div className="flex items-start gap-3">
             <div className="flex-shrink-0 mt-0.5">
-              <AlertCircle className="h-5 w-5 text-destructive" />
+              <CheckCircle className="h-5 w-5 text-green-600" />
             </div>
             <div className="flex-1">
               <DialogTitle>{title}</DialogTitle>
@@ -50,33 +42,26 @@ export function ErrorModal({
           </div>
         </DialogHeader>
 
-        {/* Error List */}
+        {/* Success Messages */}
         <div className="mt-4 space-y-2 max-h-64 overflow-y-auto">
-          {errors.map((error, index) => (
+          {messages.map((message, index) => (
             <div
               key={index}
-              className="flex gap-3 p-3 bg-destructive/10 rounded-lg border border-destructive/20"
+              className="flex gap-3 p-3 bg-green-50 rounded-lg border border-green-200"
             >
               <div className="flex-shrink-0 mt-0.5">
-                <div className="h-2 w-2 rounded-full bg-destructive mt-1" />
+                <div className="h-2 w-2 rounded-full bg-green-600 mt-1" />
               </div>
               <p className="text-sm text-foreground flex-1 break-words">
-                {error}
+                {message}
               </p>
             </div>
           ))}
         </div>
 
-        {/* Action Buttons */}
+        {/* Action Button */}
         <div className="mt-6 flex gap-2 justify-end">
-          <Button variant="outline" onClick={onClose}>
-            Close
-          </Button>
-          {onRetry && (
-            <Button onClick={handleRetry} className="gap-2">
-              Retry
-            </Button>
-          )}
+          <Button onClick={onClose}>Done</Button>
         </div>
       </DialogContent>
     </Dialog>
