@@ -1,17 +1,13 @@
 "use client";
-
 import { EmployeeFormInputs } from "@/schemas/employee-schema";
 import React from "react";
 import { Control } from "react-hook-form";
 import { Card, CardContent } from "../ui/card";
 import ControlledInput from "../controlled-input";
 import ControlledSelect from "../controlled-select";
-import {
-  identitiesList,
-  identitiesListWithCode,
-} from "@/enums/identities.enum";
-import { gendersList, gendersListWithCode } from "@/enums/genders.enum";
-import { raceList, raceListWithCode } from "@/enums/race.enum";
+import { identitiesListWithCode } from "@/enums/identities.enum";
+import { gendersListWithCode } from "@/enums/genders.enum";
+import { raceListWithCode } from "@/enums/race.enum";
 import ControlledCheckbox from "../controlled-checkbox";
 import ControlledDatePicker from "../controlled-date-picker";
 
