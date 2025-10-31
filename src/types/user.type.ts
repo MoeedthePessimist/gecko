@@ -61,6 +61,8 @@ export type User = BaseType & {
   noShgContribution?: boolean;
   useAttendanceRecords?: boolean;
   isNonResidentialDirector?: string;
+  homeTelephoneNumber?: string;
+  workTelephoneNumber?: string;
 
   // Relations
   bank?: Bank | BankWithNecessaryFields;

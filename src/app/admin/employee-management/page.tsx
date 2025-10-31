@@ -44,7 +44,7 @@ const EmployeeManagementPage = () => {
         </Link>
       </div>
       {/* Employee Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
         {(isFetchingEmployees || isRefetchingEmployees) && <SpinnerLoader />}
         {employeesData &&
           employeesData.data.map((employee) => (

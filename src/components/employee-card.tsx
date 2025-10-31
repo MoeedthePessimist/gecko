@@ -70,7 +70,7 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
           />
         </div>
       </CardHeader>
-      <CardContent className="grid grid-cols-2 md:grid-cols-3 mt-10 gap-4">
+      <CardContent className="grid grid-cols-2 lg:grid-cols-3 mt-10 gap-4">
         <TitleValuePair title="ID" value={employee?.identityNumber || "N/A"} />
         <TitleValuePair title="Name" value={employee?.name || "N/A"} />
         <TitleValuePair title="Email" value={employee?.email || "N/A"} />
@@ -85,7 +85,7 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
         <TitleValuePair title="Phone" value={employee?.mobileNumber || "N/A"} />
       </CardContent>
 
-      <CardFooter className="grid grid-cols-2 gap-4">
+      <CardFooter className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <AppButton
           buttonOptions={{
             className:

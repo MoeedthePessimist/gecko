@@ -33,6 +33,8 @@ import { Document } from "@/types/document.type";
 import { Contact } from "@/types/contact.type";
 import { AxiosErrorWithMessage } from "@/types/common.type";
 import { useGlobalModal } from "@/context/error-context";
+import { useRouter } from "next/navigation";
+import { ADMIN_ROUTES } from "@/constants/routes";
 
 const useEmployeeManagement = (
   id?: string,
@@ -40,6 +42,7 @@ const useEmployeeManagement = (
   isUpdate?: boolean
 ) => {
   const { showError, showSuccess } = useGlobalModal();
+  const router = useRouter();
 
   const employeeForm = useForm({
     resolver: zodResolver(employeeFormSchema(isUpdate)),
@@ -71,6 +74,13 @@ const useEmployeeManagement = (
           : "",
         isNonResidentialDirector: employeeData?.isNonResidentialDirector || "",
         bank: employeeData?.bank || undefined,
+        addressType: employeeData?.addressType || undefined,
+        country: employeeData?.country || undefined,
+        postalCode: employeeData?.postalCode || "",
+        nationality: employeeData?.nationality || undefined,
+        maritalStatus: employeeData?.maritalStatus || undefined,
+        homeTelephoneNumber: employeeData?.homeTelephoneNumber || "",
+        workTelephoneNumber: employeeData?.workTelephoneNumber || "",
       },
       settingsInfo: {
         cpfTable: undefined,
@@ -127,6 +137,8 @@ const useEmployeeManagement = (
     onSuccess: (data) => {
       console.log(data);
       showSuccess("Employee created successfully!");
+      employeeForm.reset();
+      router.push(ADMIN_ROUTES.EMPLOYEE_MANAGEMENT);
     },
     onError: (error: AxiosErrorWithMessage) => {
       console.error(error);
