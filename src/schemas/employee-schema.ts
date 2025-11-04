@@ -84,14 +84,14 @@ export const settingFormSchema = z.object({
   cpfTable: z.string().optional(),
   employerPaysCpf: z.boolean().optional(),
   prEffectiveDate: z.date().optional(),
-  cpfNo: z
+  cpfNumber: z
     .string()
     .regex(
       CPF_NUMBER_REGEX,
       "Please enter a valid CPF number (Example: 123.456.789-09)"
     )
     .optional(),
-  taxNo: z
+  taxNumber: z
     .string()
     .regex(
       TAX_NUMBER_REGEX,

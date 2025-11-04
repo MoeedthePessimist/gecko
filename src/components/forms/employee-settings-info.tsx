@@ -54,13 +54,13 @@ const EmployeeSettingsInformationForm: React.FC<
 
         <ControlledInput<EmployeeFormInputs>
           control={control}
-          name={"settingsInfo.cpfNo"}
+          name={"settingsInfo.cpfNumber"}
           label="CPF Number"
           placeholder="Enter CPF Number"
         />
         <ControlledInput<EmployeeFormInputs>
           control={control}
-          name={"settingsInfo.taxNo"}
+          name={"settingsInfo.taxNumber"}
           placeholder="Enter Tax Number"
           label="Tax Number"
         />

@@ -19,6 +19,8 @@ import {
 } from "./qualification.type";
 import { Contact, ContactWithNecessaryFields } from "./contact.type";
 import { Document, DocumentWithNecessaryFields } from "./document.type";
+import { CpfTable, CpfTableWithNecessaryFields } from "./cpf-table.type";
+import { Levy, LevyWithNecessaryFields } from "./levy.type";
 
 export type User = BaseType & {
   name: string;
@@ -69,6 +71,8 @@ export type User = BaseType & {
   job?: Job | JobWithNecessaryFields;
   workTable?: WorkTable | WorkTableWithNecessaryFields;
   leaveTable?: LeaveTable | LeaveTableWithNecessaryFields;
+  cpfTable?: CpfTable | CpfTableWithNecessaryFields;
+  levy?: Levy | LevyWithNecessaryFields;
   employment?: Employment | EmploymentWithNecessaryFields;
   qualifications?: Array<Qualification | QualificationWithNecessaryFields>;
   contacts?: Array<Contact | ContactWithNecessaryFields>;
