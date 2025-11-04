@@ -6,22 +6,13 @@ import { Control } from "react-hook-form";
 import { Card, CardContent } from "../ui/card";
 import ControlledInput from "../controlled-input";
 import ControlledSelect from "../controlled-select";
-import {
-  addressTypesList,
-  addressTypesListWithCode,
-} from "@/enums/address-types.enum";
-import { countriesList, countriesListWithCode } from "@/enums/countries.enum";
-import {
-  nationalitiesList,
-  nationalitiesListWithCode,
-} from "@/enums/nationalities.enum";
-import {
-  maritalStatusesList,
-  maritalStatusesListWithCode,
-} from "@/enums/marital-statuses.enum";
-import { banksList, banksListWithCode } from "@/enums/banks.enum";
-import { rolesList, rolesListWithCode } from "@/enums/roles.enum";
-import { BOOLEAN_OPTIONS, booleanOptionsWithCode } from "@/constants/options";
+import { addressTypesListWithCode } from "@/enums/address-types.enum";
+import { countriesListWithCode } from "@/enums/countries.enum";
+import { nationalitiesListWithCode } from "@/enums/nationalities.enum";
+import { maritalStatusesListWithCode } from "@/enums/marital-statuses.enum";
+import { banksListWithCode } from "@/enums/banks.enum";
+import { rolesListWithCode } from "@/enums/roles.enum";
+import { booleanOptionsWithCode } from "@/constants/options";
 
 type EmployeeGeneralInformationFormProps = {
   control: Control<EmployeeFormInputs>;

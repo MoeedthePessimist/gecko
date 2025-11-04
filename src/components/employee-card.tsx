@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import Avatar from "./avatar";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 import TitleValuePair from "./title-value-pair";
@@ -11,6 +11,7 @@ import { User } from "@/types/user.type";
 import { useAuthContext } from "@/context/auth-context";
 import useEmployeeManagement from "@/hooks/use-employee";
 import { useRouter } from "next/navigation";
+import { useGlobalModal } from "@/context/error-context";
 
 type EmployeeCardProps = {
   employee?: User;
@@ -28,6 +29,9 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
 
   const navigation = useRouter();
 
+  const { showConfirmation, showError, showSuccess, closeConfirmation } =
+    useGlobalModal();
+
   const {
     mutate: deleteEmployee,
     isPending: isDeletingEmployee,
@@ -43,6 +47,33 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
     }
 
     return;
+  };
+
+  const handleDeleteEmployee = () => {
+    if (employee?.id) {
+      deleteEmployee(employee.id);
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      showSuccess("Employee deleted successfully.");
+      closeConfirmation();
+    }
+    if (isError) {
+      showError("Failed to delete employee. Please try again.");
+    }
+  }, [isSuccess, isError]);
+
+  const onDelete = () => {
+    showConfirmation(
+      "Are you sure you want to delete this employee? This action cannot be undone.",
+      handleDeleteEmployee,
+      {
+        confirmText: "Delete Employee",
+        isDestructive: true,
+      }
+    );
   };
 
   return (
@@ -70,7 +101,7 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
           />
         </div>
       </CardHeader>
-      <CardContent className="grid grid-cols-2 md:grid-cols-3 mt-10 gap-4">
+      <CardContent className="grid grid-cols-2 lg:grid-cols-3 mt-10 gap-4">
         <TitleValuePair title="ID" value={employee?.identityNumber || "N/A"} />
         <TitleValuePair title="Name" value={employee?.name || "N/A"} />
         <TitleValuePair title="Email" value={employee?.email || "N/A"} />
@@ -85,7 +116,7 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
         <TitleValuePair title="Phone" value={employee?.mobileNumber || "N/A"} />
       </CardContent>
 
-      <CardFooter className="grid grid-cols-2 gap-4">
+      <CardFooter className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <AppButton
           buttonOptions={{
             className:
@@ -103,11 +134,7 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
             className:
               "bg-white text-red-500 border-2 border-red-500 hover:bg-red-500 hover:text-white",
             disabled: isOwner,
-            onClick: () => {
-              if (employee?.id) {
-                deleteEmployee(employee.id);
-              }
-            },
+            onClick: onDelete,
           }}
           isLoading={isDeletingEmployee}
           title="Delete"

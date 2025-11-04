@@ -8,6 +8,13 @@ import { documentFormSchema } from "./document-schema";
 import { workTableSchema } from "./work-table-schema";
 import { leaveTableSchema } from "./leave-table-schema";
 import { levySchema } from "./levy-schema";
+import {
+  CPF_NUMBER_REGEX,
+  IDENTITY_NUMBER_REGEX,
+  MOBILE_NUMBER_REGEX,
+  PHONE_NUMBER_REGEX,
+  TAX_NUMBER_REGEX,
+} from "@/constants/regex";
 
 export const accountFormSchema = (isUpdate?: boolean) =>
   z
@@ -15,12 +22,19 @@ export const accountFormSchema = (isUpdate?: boolean) =>
       name: z.string().nonempty("Please enter employee name"),
       identityNumber: z
         .string()
+        .regex(IDENTITY_NUMBER_REGEX, "Please enter a valid identity number")
         .nonempty("Please enter employee identity number"),
       identityType: z.string().nonempty("Please select an identity type"),
       dateOfBirth: z.date().optional(),
       gender: z.string().nonempty("Please select employee gender"),
       race: z.string().nonempty("Please select employee race"),
-      mobileNumber: z.string().nonempty("Please enter a phone number"),
+      mobileNumber: z
+        .string()
+        .nonempty("Please enter a mobile number")
+        .regex(
+          MOBILE_NUMBER_REGEX,
+          "Please enter a valid mobile number (Example: +923001234567, 447911123456)"
+        ),
       email: z.string().email("Please enter a valid employee email"),
       password: isUpdate
         ? z.string().optional()
@@ -48,8 +62,20 @@ export const generalFormSchema = (isUpdate?: boolean) =>
     nationality: z.string().optional(),
     maritalStatus: z.string().optional(),
     role: z.string().nonempty("Please select employee role"),
-    homeTelephoneNumber: z.string().optional(),
-    workTelephoneNumber: z.string().optional(),
+    homeTelephoneNumber: z
+      .string()
+      .regex(
+        PHONE_NUMBER_REGEX,
+        "Please enter a valid telephone number (Example: +1 234-567-8901, (021) 3456789, 1234567890)"
+      )
+      .optional(),
+    workTelephoneNumber: z
+      .string()
+      .regex(
+        PHONE_NUMBER_REGEX,
+        "Please enter a valid telephone number (Example: +1 234-567-8901, (021) 3456789, 1234567890)"
+      )
+      .optional(),
     isNonResidentialDirector: z.string().optional(),
     bank: bankFormSchema(isUpdate),
   });
@@ -58,8 +84,20 @@ export const settingFormSchema = z.object({
   cpfTable: z.string().optional(),
   employerPaysCpf: z.boolean().optional(),
   prEffectiveDate: z.date().optional(),
-  cpfNo: z.string().optional(),
-  taxNo: z.string().optional(),
+  cpfNumber: z
+    .string()
+    .regex(
+      CPF_NUMBER_REGEX,
+      "Please enter a valid CPF number (Example: 123.456.789-09)"
+    )
+    .optional(),
+  taxNumber: z
+    .string()
+    .regex(
+      TAX_NUMBER_REGEX,
+      "Please enter a valid tax number (Example: AB123456C, 123456789012345)"
+    )
+    .optional(),
   workTable: workTableSchema.optional(),
   leaveTable: leaveTableSchema.optional(),
   levy: levySchema.optional(),

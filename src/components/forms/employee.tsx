@@ -50,6 +50,15 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
 
   const onSubmit = (data: EmployeeFormInputs) => {
     if (isUpdate) {
+      if (data.accountInfo.password === "") {
+        delete data.accountInfo.password;
+      }
+      if (data.generalInfo.bank.bankAccountNumber === "") {
+        delete data.generalInfo.bank.bankAccountNumber;
+      }
+      if (data.generalInfo.bank.bankSwiftCode === "") {
+        delete data.generalInfo.bank.bankSwiftCode;
+      }
       updateEmployeeMutation.mutate({
         id: userId,
         payload: {
