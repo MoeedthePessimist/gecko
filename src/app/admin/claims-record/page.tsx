@@ -1,7 +1,48 @@
-import React from "react";
+"use client";
+
+import CustomDialogTrigger from "@/components/custom-dialog-trigger";
+import ClaimForm from "@/components/forms/claim";
+import { DialogContent, DialogTitle, Dialog } from "@/components/ui/dialog";
+import { Form } from "@/components/ui/form";
+import useClaims, { initialFormState } from "@/hooks/use-claims";
+import { PlusCircle } from "lucide-react";
+import React, { useState } from "react";
 
 const ClaimsRecordPage = () => {
-  return <div>ClaimsRecordPage</div>;
+  const {
+    openMutationModal,
+    setOpenMutationModal,
+    claimForm,
+    selectedClaimId,
+    setSelectedClaimId,
+  } = useClaims();
+
+  const openModal = () => {
+    claimForm.reset({
+      ...initialFormState,
+    });
+    setSelectedClaimId("");
+    setOpenMutationModal(true);
+  };
+  return (
+    <div>
+      <Dialog open={openMutationModal}>
+        <CustomDialogTrigger
+          title="Add New Claim"
+          icon={<PlusCircle />}
+          iconPosition="start"
+          containerClasses="bg-accent text-white text-sm float-right md:max-w-[300px] self-end"
+          openModal={openModal}
+        />
+        <DialogContent>
+          <DialogTitle>Add Employee Qualification</DialogTitle>
+          <Form {...claimForm}>
+            <ClaimForm control={claimForm.control} watch={claimForm.watch} />
+          </Form>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
 };
 
 export default ClaimsRecordPage;

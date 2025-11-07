@@ -119,6 +119,7 @@ interface MultiSelectProps<TFieldValues extends FieldValues>
    */
   options: MultiSelectOption[] | MultiSelectGroup[];
 
+  label?: string;
   placeholder?: string;
   animation?: number;
   animationConfig?: AnimationConfig;
