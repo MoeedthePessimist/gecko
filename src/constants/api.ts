@@ -23,4 +23,7 @@ export const API = {
   GET_COMPANY_ADDITIONAL_DATA: (companyId: string) =>
     `/company/data/${companyId}`,
   GET_CLAIM_TYPES: `claim-type`,
+  GET_CLAIMS: `claim`,
+  MUTATE_CLAIM: `claim`,
+  DELETE_CLAIM: (id: string) => `claim/${id}`,
 };

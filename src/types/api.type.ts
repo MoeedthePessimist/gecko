@@ -6,6 +6,7 @@ import { Qualification } from "./qualification.type";
 import { User } from "./user.type";
 import { SelectOptionsType } from "./common.type";
 import { ClaimTypeWithNecessaryFields } from "./claim-type.type";
+import { Claim, ClaimWithNecessaryFields } from "./claim.type";
 
 type ApiResponseType<T> = {
   data: T;
@@ -148,3 +149,16 @@ export type GetCompanyAdditionalDataResponseType = ApiResponseType<{
 export type GetClaimTypesResponse = ApiResponseType<
   Array<ClaimTypeWithNecessaryFields>
 >;
+
+/**
+ * CLAIM API TYPES
+ */
+
+export type GetClaimsResponse = ApiResponseType<
+  Array<ClaimWithNecessaryFields>
+>;
+
+export type MutateClaimRequest = ClaimWithNecessaryFields;
+export type MutateClaimResponse = ApiResponseType<Claim>;
+
+export type DeleteClaimResponse = ApiResponseType<boolean>;

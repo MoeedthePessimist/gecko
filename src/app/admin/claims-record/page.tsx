@@ -1,5 +1,4 @@
 "use client";
-
 import AppButton from "@/components/app-button";
 import CustomDialogTrigger from "@/components/custom-dialog-trigger";
 import ClaimForm from "@/components/forms/claim";
@@ -13,7 +12,6 @@ import { Form } from "@/components/ui/form";
 import useClaims, { initialFormState } from "@/hooks/use-claims";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { PlusCircle } from "lucide-react";
-import React, { useState } from "react";
 
 const ClaimsRecordPage = () => {
   const {
@@ -22,7 +20,9 @@ const ClaimsRecordPage = () => {
     claimForm,
     selectedClaimId,
     setSelectedClaimId,
-  } = useClaims();
+  } = useClaims({
+    getClaimsEnabled: true,
+  });
 
   const openModal = () => {
     claimForm.reset({

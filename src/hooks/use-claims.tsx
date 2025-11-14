@@ -3,14 +3,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { rolesEnum } from "@/enums/roles.enum";
-import { SelectOptionsType } from "@/types/common.type";
+import { AxiosErrorWithMessage, SelectOptionsType } from "@/types/common.type";
 import { User } from "@/types/user.type";
-import { useQuery } from "@tanstack/react-query";
-import { GetClaimTypesResponse } from "@/types/api.type";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { GetClaimsResponse, GetClaimTypesResponse } from "@/types/api.type";
 import { QUERY_KEYS } from "@/constants/query-keys";
-import useAuth from "./use-auth";
 import { useAuthContext } from "@/context/auth-context";
 import { getClaimTypes } from "@/api/claim-type";
+import { deleteClaim, getClaims, mutateClaim } from "@/api/claim";
+import { Claim } from "@/types/claim.type";
+import { useGlobalModal } from "@/context/error-context";
 
 export const initialFormState = {
   id: "",
@@ -28,7 +30,15 @@ export type MultiSelectOptionType = {
   value: string;
 };
 
-const useClaims = () => {
+type UseClaimsProps = {
+  getClaimTypesEnabled?: boolean;
+  getClaimsEnabled?: boolean;
+};
+
+const useClaims = ({
+  getClaimTypesEnabled,
+  getClaimsEnabled,
+}: UseClaimsProps) => {
   const claimForm = useForm({
     resolver: zodResolver(claimFormSchema),
     defaultValues: {
@@ -37,10 +47,48 @@ const useClaims = () => {
   });
 
   const { user } = useAuthContext();
+  const { showError, showSuccess } = useGlobalModal();
 
   const getClaimTypesQuery = useQuery<GetClaimTypesResponse>({
     queryKey: QUERY_KEYS.CLAIM_TYPES(user?.company?.id || ""),
     queryFn: getClaimTypes,
+    enabled: getClaimTypesEnabled,
+  });
+
+  const getClaimsQuery = useQuery<GetClaimsResponse>({
+    queryKey: QUERY_KEYS.CLAIMS(user?.company?.id || ""),
+    queryFn: getClaims,
+    enabled: getClaimsEnabled,
+  });
+
+  const mutateClaimMutation = useMutation({
+    mutationFn: mutateClaim,
+    onSuccess: (data) => {
+      console.log("Claim mutated:", data);
+      showSuccess("Claim mutated successfully!");
+    },
+    onError: (error: AxiosErrorWithMessage) => {
+      console.error("Error mutating claim:", error);
+      showError(
+        error.response?.data.message ||
+          "Failed to mutate claim. Please try again."
+      );
+    },
+  });
+
+  const deleteClaimMutation = useMutation({
+    mutationFn: deleteClaim,
+    onSuccess: (data) => {
+      console.log("Claim deleted:", data);
+      showSuccess("Claim deleted successfully!");
+    },
+    onError: (error: AxiosErrorWithMessage) => {
+      console.error("Error deleting claim:", error);
+      showError(
+        error.response?.data.message ||
+          "Failed to delete claim. Please try again."
+      );
+    },
   });
 
   const [openMutationModal, setOpenMutationModal] = useState<boolean>(false);
@@ -48,6 +96,7 @@ const useClaims = () => {
   const [admins, setAdmins] = useState<Array<MultiSelectOptionType>>([]);
   const [users, setUsers] = useState<Array<SelectOptionsType>>([]);
   const [claimTypes, setClaimTypes] = useState<Array<SelectOptionsType>>([]);
+  const [claims, setClaims] = useState<Array<Claim>>([]);
 
   const getAdminsWithSelectedFields = (
     fetchedUsers: Array<User>
@@ -74,6 +123,11 @@ const useClaims = () => {
     getClaimTypesQuery,
     claimTypes,
     setClaimTypes,
+    mutateClaimMutation,
+    deleteClaimMutation,
+    getClaimsQuery,
+    claims,
+    setClaims,
   };
 };
 

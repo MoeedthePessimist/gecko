@@ -33,7 +33,9 @@ const ClaimForm: React.FC<ClaimFormProps> = ({ control, watch }) => {
     },
     claimTypes,
     setClaimTypes,
-  } = useClaims();
+  } = useClaims({
+    getClaimTypesEnabled: true,
+  });
 
   const {
     getEmployeesQuery: {
