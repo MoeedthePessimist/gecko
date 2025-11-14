@@ -81,7 +81,7 @@ const ClaimForm: React.FC<ClaimFormProps> = ({ control, watch }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 my-4">
+    <div className="grid grid-cols-1 gap-4 my-4 max-h-[300px] overflow-scroll">
       <ControlledSelect
         name="name"
         control={control}
@@ -116,7 +116,7 @@ const ClaimForm: React.FC<ClaimFormProps> = ({ control, watch }) => {
         control={control}
         name="emailTo"
         options={admins}
-        placeholder="Please select admins to email to"
+        placeholder="Please select admins"
         label="Email To"
       />
 
