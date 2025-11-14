@@ -3,7 +3,8 @@ export const QUERY_KEYS = {
   QUALIFICATIONS: ["qualifications"],
   CONTACTS: ["contacts"],
   DOCUMENTS: ["documents"],
-  EMPLOYEES: ["employees"],
+  USERS: (query: string) => ["employees", query],
   EMPLOYEE: (id: string) => ["employee", id],
   COMPANY_ADDITIONAL_DATA: (id: string) => ["company-additional-data", id],
+  CLAIM_TYPES: (id: string) => ["claim-types", id],
 };

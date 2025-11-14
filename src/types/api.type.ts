@@ -5,6 +5,7 @@ import { Document } from "./document.type";
 import { Qualification } from "./qualification.type";
 import { User } from "./user.type";
 import { SelectOptionsType } from "./common.type";
+import { ClaimTypeWithNecessaryFields } from "./claim-type.type";
 
 type ApiResponseType<T> = {
   data: T;
@@ -117,8 +118,8 @@ export type UploadFileApiResponseType = ApiResponseType<{
 export type CreateEmployeeRequestType = EmployeeFormInputs;
 export type CreateEmployeeResponseType = ApiResponseType<User>;
 
-export type GetEmployeesResponseType = ApiResponseType<Array<User>>;
-export type GetEmployeeResponseType = ApiResponseType<User>;
+export type GetUsersResponseType = ApiResponseType<Array<User>>;
+export type GetUserResponseType = ApiResponseType<User>;
 
 export type DeleteEmployeeResponseType = ApiResponseType<string>;
 
@@ -139,3 +140,11 @@ export type GetCompanyAdditionalDataResponseType = ApiResponseType<{
   departments: Array<SelectOptionsType>;
   users: Array<SelectOptionsType>;
 }>;
+
+/**
+ * CLAIM TYPE API TYPES
+ */
+
+export type GetClaimTypesResponse = ApiResponseType<
+  Array<ClaimTypeWithNecessaryFields>
+>;

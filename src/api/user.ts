@@ -4,8 +4,8 @@ import {
   CreateEmployeeRequestType,
   CreateEmployeeResponseType,
   DeleteEmployeeResponseType,
-  GetEmployeeResponseType,
-  GetEmployeesResponseType,
+  GetUserResponseType,
+  GetUsersResponseType,
   MeApiResponseType,
   UpdateEmployeeRequestType,
 } from "@/types/api.type";
@@ -22,14 +22,12 @@ export const createEmployee = async (
   return response.data;
 };
 
-export const getEmployees = async (): Promise<GetEmployeesResponseType> => {
-  const response = await api.get(API.GET_EMPLOYEES);
+export const getEmployees = async (): Promise<GetUsersResponseType> => {
+  const response = await api.get(API.GET_COMPANY_USERS(""));
   return response.data;
 };
 
-export const getEmployee = async (
-  id: string
-): Promise<GetEmployeeResponseType> => {
+export const getEmployee = async (id: string): Promise<GetUserResponseType> => {
   const response = await api.get(API.GET_EMPLOYEE(id));
   return response.data;
 };
@@ -46,5 +44,12 @@ export const updateEmployee = async (data: {
   payload: UpdateEmployeeRequestType;
 }): Promise<UpdateEmployeeRequestType> => {
   const response = await api.patch(API.UPDATE_EMPLOYEE(data.id), data.payload);
+  return response.data;
+};
+
+export const getCompanyAdmins = async (
+  query: string
+): Promise<GetUsersResponseType> => {
+  const response = await api.get(API.GET_COMPANY_USERS(query));
   return response.data;
 };

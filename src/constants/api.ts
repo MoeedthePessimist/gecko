@@ -16,10 +16,11 @@ export const API = {
   UPDATE_DOCUMENT: (id: string) => `/document/${id}`,
   DELETE_DOCUMENT: (id: string) => `/document/${id}`,
   CREATE_EMPLOYEE: "user/employee",
-  GET_EMPLOYEES: "user/employees",
+  GET_COMPANY_USERS: (query: string) => `user?${query}`,
   GET_EMPLOYEE: (id: string) => `user/employee/${id}`,
   DELETE_EMPLOYEE: (id: string) => `user/employee/${id}`,
   UPDATE_EMPLOYEE: (id: string) => `user/employee/${id}`,
   GET_COMPANY_ADDITIONAL_DATA: (companyId: string) =>
     `/company/data/${companyId}`,
+  GET_CLAIM_TYPES: `claim-type`,
 };

@@ -150,7 +150,7 @@ const useEmployeeManagement = (
   });
 
   const getEmployeesQuery = useTypedQuery({
-    queryKey: QUERY_KEYS.EMPLOYEES,
+    queryKey: QUERY_KEYS.USERS(""),
     queryFn: getEmployees,
   });
 

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Upload, File, X, CheckCircle } from "lucide-react";
+import { FormLabel } from "./ui/form";
 
 interface FileUploaderProps {
   onSelected?: (file: File) => void;
@@ -14,6 +15,7 @@ interface FileUploaderProps {
   acceptedFileTypes?: string[];
   maxFileSize?: number; // in MB
   className?: string;
+  label?: string;
 }
 
 export function FileUploader({
@@ -22,6 +24,7 @@ export function FileUploader({
   acceptedFileTypes = ["*"],
   maxFileSize = 10,
   className,
+  label,
 }: FileUploaderProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isDragOver, setIsDragOver] = useState(false);
@@ -113,7 +116,9 @@ export function FileUploader({
     selectedFile || (fileName ? { name: fileName, size: 0 } : null);
 
   return (
-    <div className={cn("w-full max-w-md mx-auto", className)}>
+    <div className={cn("w-full mx-auto", className)}>
+      {label && <FormLabel className="mb-2">{label}</FormLabel>}
+
       <Card
         className={cn(
           "relative border-2 border-dashed transition-all duration-200 cursor-pointer",
