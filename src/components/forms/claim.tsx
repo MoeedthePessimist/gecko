@@ -83,7 +83,7 @@ const ClaimForm: React.FC<ClaimFormProps> = ({ control, watch }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 my-4 max-h-[300px] overflow-scroll">
+    <div className="grid grid-cols-1 gap-4 my-4 max-h-[300px] overflow-y-scroll">
       <ControlledSelect
         name="name"
         control={control}

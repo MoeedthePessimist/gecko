@@ -47,12 +47,12 @@ const ClaimsRecordPage = () => {
             <ClaimForm control={claimForm.control} watch={claimForm.watch} />
           </Form>
 
-          <DialogFooter>
+          <DialogFooter className="flex flex-row justify-end">
             {selectedClaimId ? (
               <AppButton
                 title="Update Claim"
                 buttonOptions={{
-                  className: "bg-secondary text-white",
+                  className: "bg-secondary text-white max-w-auto",
                   // onClick: handleSubmit(onUpdate),
                 }}
                 // isLoading={isUpdatingQualification}
@@ -61,7 +61,7 @@ const ClaimsRecordPage = () => {
               <AppButton
                 title="Add Claim"
                 buttonOptions={{
-                  className: "bg-secondary text-white",
+                  className: "bg-secondary text-white max-w-auto",
                   // onClick: handleSubmit(onCreate),
                 }}
                 // isLoading={isCreatingQualification}
@@ -71,7 +71,7 @@ const ClaimsRecordPage = () => {
               <AppButton
                 title="Close"
                 buttonOptions={{
-                  className: "bg-accent text-white",
+                  className: "bg-accent text-white max-w-auto",
                   onClick: () => setOpenMutationModal(false),
                 }}
               />
