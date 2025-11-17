@@ -2,6 +2,7 @@
 import AppButton from "@/components/app-button";
 import CustomDialogTrigger from "@/components/custom-dialog-trigger";
 import ClaimForm from "@/components/forms/claim";
+import { DataTable } from "@/components/ui/data-table";
 import {
   DialogContent,
   DialogTitle,
@@ -10,8 +11,10 @@ import {
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
 import useClaims, { initialFormState } from "@/hooks/use-claims";
+import useUpload from "@/hooks/use-upload";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { PlusCircle } from "lucide-react";
+import { useEffect } from "react";
 
 const ClaimsRecordPage = () => {
   const {
@@ -20,9 +23,22 @@ const ClaimsRecordPage = () => {
     claimForm,
     selectedClaimId,
     setSelectedClaimId,
+    onMutate,
+    columns,
+    claims,
+    mutateClaimMutation: { isPending: isMutateClaimPending },
   } = useClaims({
     getClaimsEnabled: true,
   });
+
+  const {
+    uploadMutation: {
+      mutate: uploadMutate,
+      isPending: isUploadingPending,
+      isSuccess: isUploadSuccess,
+      data: uploadData,
+    },
+  } = useUpload();
 
   const openModal = () => {
     claimForm.reset({
@@ -31,8 +47,15 @@ const ClaimsRecordPage = () => {
     setSelectedClaimId("");
     setOpenMutationModal(true);
   };
+
+  useEffect(() => {
+    if (isUploadSuccess) {
+      claimForm.setValue("fileName", uploadData.data.fileName);
+    }
+  }, [isUploadSuccess]);
+
   return (
-    <div>
+    <div className="flex flex-col gap-6">
       <Dialog open={openMutationModal}>
         <CustomDialogTrigger
           title="Add New Claim"
@@ -44,29 +67,23 @@ const ClaimsRecordPage = () => {
         <DialogContent>
           <DialogTitle>Add Employee Qualification</DialogTitle>
           <Form {...claimForm}>
-            <ClaimForm control={claimForm.control} watch={claimForm.watch} />
+            <ClaimForm
+              control={claimForm.control}
+              watch={claimForm.watch}
+              uploadMutate={uploadMutate}
+            />
           </Form>
 
           <DialogFooter className="flex flex-row justify-end">
-            {selectedClaimId ? (
-              <AppButton
-                title="Update Claim"
-                buttonOptions={{
-                  className: "bg-secondary text-white max-w-auto",
-                  // onClick: handleSubmit(onUpdate),
-                }}
-                // isLoading={isUpdatingQualification}
-              />
-            ) : (
-              <AppButton
-                title="Add Claim"
-                buttonOptions={{
-                  className: "bg-secondary text-white max-w-auto",
-                  // onClick: handleSubmit(onCreate),
-                }}
-                // isLoading={isCreatingQualification}
-              />
-            )}
+            <AppButton
+              title={selectedClaimId ? "Update Claim" : "Add Claim"}
+              buttonOptions={{
+                className: "bg-secondary text-white max-w-auto",
+                onClick: claimForm.handleSubmit(onMutate),
+                disabled: isUploadingPending || isMutateClaimPending,
+              }}
+              isLoading={isMutateClaimPending}
+            />
             <DialogClose>
               <AppButton
                 title="Close"
@@ -79,6 +96,8 @@ const ClaimsRecordPage = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      <DataTable columns={columns} data={claims} />
     </div>
   );
 };

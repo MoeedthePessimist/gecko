@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const claimFormSchema = z.object({
   id: z.string().optional(),
-  name: z.string().nonempty("Please select a name"),
+  type: z.string().nonempty("Please select a name"),
   amount: z.number().nonnegative("Please enter a valid amount"),
   transactionDate: z.date().min(new Date(), "Please select a future date"),
   monthToApply: z.date().nullable(),

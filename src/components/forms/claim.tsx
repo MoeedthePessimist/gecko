@@ -1,24 +1,33 @@
 import React, { useEffect } from "react";
-import { Control, UseFormWatch, UseWatchProps } from "react-hook-form";
+import { Control, UseFormWatch } from "react-hook-form";
 import ControlledSelect from "../controlled-select";
 import ControlledInput from "../controlled-input";
 import ControlledDatePicker from "../controlled-date-picker";
 import { MultiSelect } from "../controlled-multi-select";
 import { FileUploader } from "../file-uploader";
-import useUpload from "@/hooks/use-upload";
 import { ClaimFormInputs } from "@/schemas/claim-schema";
 import useClaims from "@/hooks/use-claims";
 import SpinnerLoader from "../ui/loader";
 import useEmployeeManagement from "@/hooks/use-employee";
+import { UseMutateFunction } from "@tanstack/react-query";
+import { UploadFileApiResponseType } from "@/types/api.type";
 
 type ClaimFormProps = {
   control: Control<ClaimFormInputs>;
   watch: UseFormWatch<ClaimFormInputs>;
+  uploadMutate: UseMutateFunction<
+    UploadFileApiResponseType,
+    Error,
+    File,
+    unknown
+  >;
 };
 
-const ClaimForm: React.FC<ClaimFormProps> = ({ control, watch }) => {
-  const { uploadMutation } = useUpload();
-
+const ClaimForm: React.FC<ClaimFormProps> = ({
+  control,
+  watch,
+  uploadMutate,
+}) => {
   const {
     setAdmins,
     admins,
@@ -47,7 +56,7 @@ const ClaimForm: React.FC<ClaimFormProps> = ({ control, watch }) => {
   } = useEmployeeManagement();
 
   const handleUpload = (file: File) => {
-    uploadMutation.mutate(file);
+    uploadMutate(file);
   };
 
   useEffect(() => {
@@ -83,9 +92,9 @@ const ClaimForm: React.FC<ClaimFormProps> = ({ control, watch }) => {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 my-4 max-h-[300px] lg:max-h-none overflow-y-scroll lg:overflow-auto">
+    <div className="grid grid-cols-1 gap-4 my-4 max-h-[300px] lg:max-h-[500px] overflow-y-scroll lg:overflow-auto">
       <ControlledSelect
-        name="name"
+        name="type"
         control={control}
         label="Name"
         placeholder="Please select a name/type"
