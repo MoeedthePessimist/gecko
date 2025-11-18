@@ -6,11 +6,14 @@ import SearchBar from "@/components/search-bar";
 import SpinnerLoader from "@/components/ui/loader";
 import { ADMIN_ROUTES } from "@/constants/routes";
 import useEmployeeManagement from "@/hooks/use-employee";
+import useGetEmployees from "@/hooks/use-get-employees";
 import { PlusCircle } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect } from "react";
 
 const EmployeeManagementPage = () => {
+  const { deleteEmployeeMutation } = useEmployeeManagement();
+
   const {
     getEmployeesQuery: {
       data: employeesData,
@@ -18,8 +21,7 @@ const EmployeeManagementPage = () => {
       isRefetching: isRefetchingEmployees,
       refetch: refetchEmployeesData,
     },
-    deleteEmployeeMutation,
-  } = useEmployeeManagement();
+  } = useGetEmployees();
 
   useEffect(() => {
     if (deleteEmployeeMutation.isSuccess) {

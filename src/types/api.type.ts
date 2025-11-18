@@ -5,6 +5,7 @@ import { Document } from "./document.type";
 import { Qualification } from "./qualification.type";
 import { User } from "./user.type";
 import { SelectOptionsType } from "./common.type";
+import { Commission } from "./commission.type";
 
 type ApiResponseType<T> = {
   data: T;
@@ -139,3 +140,17 @@ export type GetCompanyAdditionalDataResponseType = ApiResponseType<{
   departments: Array<SelectOptionsType>;
   users: Array<SelectOptionsType>;
 }>;
+
+/**
+ * COMMISSION API TYPES
+ */
+
+export type GetCommissionDataResponseType = ApiResponseType<Array<Commission>>;
+
+export type CreateCommissionRequestType = Commission;
+export type CreateCommissionResponseType = ApiResponseType<Commission>;
+
+export type UpdateCommissionRequestType = { id: string; data: Commission };
+export type UpdateCommissionResponseType = ApiResponseType<Commission>;
+
+export type DeleteCommissionResponseType = ApiResponseType<string>;
