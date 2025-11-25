@@ -7,6 +7,7 @@ import { User } from "./user.type";
 import { SelectOptionsType } from "./common.type";
 import { ClaimTypeWithNecessaryFields } from "./claim-type.type";
 import { Claim, ClaimWithNecessaryFields } from "./claim.type";
+import { Commission } from "./commission.type";
 
 type ApiResponseType<T> = {
   data: T;
@@ -162,3 +163,15 @@ export type MutateClaimRequest = ClaimWithNecessaryFields;
 export type MutateClaimResponse = ApiResponseType<Claim>;
 
 export type DeleteClaimResponse = ApiResponseType<boolean>;
+ * COMMISSION API TYPES
+ */
+
+export type GetCommissionDataResponseType = ApiResponseType<Array<Commission>>;
+
+export type CreateCommissionRequestType = Commission;
+export type CreateCommissionResponseType = ApiResponseType<Commission>;
+
+export type UpdateCommissionRequestType = { id: string; data: Commission };
+export type UpdateCommissionResponseType = ApiResponseType<Commission>;
+
+export type DeleteCommissionResponseType = ApiResponseType<string>;

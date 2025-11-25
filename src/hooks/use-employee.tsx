@@ -320,7 +320,6 @@ const useEmployeeManagement = (
     onMutateDocument,
     onMutateContact,
     createEmployeeMutation,
-    getEmployeesQuery,
     deleteEmployeeMutation,
     updateEmployeeMutation,
     getEmployeeQuery,

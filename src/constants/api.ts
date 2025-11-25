@@ -26,4 +26,9 @@ export const API = {
   GET_CLAIMS: `claim`,
   MUTATE_CLAIM: `claim`,
   DELETE_CLAIM: (id: string) => `claim/${id}`,
+  GET_COMMISSIONS: () => `commission`,
+  CREATE_COMMISSION: "commission",
+  UPDATE_COMMISSION: (id: string) => `commission/${id}`,
+  DELETE_COMMISSION: (id: string) => `commission/${id}`,
+
 };
