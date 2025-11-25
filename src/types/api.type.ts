@@ -6,6 +6,7 @@ import { Qualification } from "./qualification.type";
 import { User } from "./user.type";
 import { SelectOptionsType } from "./common.type";
 import { Commission } from "./commission.type";
+import { Leave, LeaveWithNecessaryFields } from "./leave.type";
 
 type ApiResponseType<T> = {
   data: T;
@@ -154,3 +155,16 @@ export type UpdateCommissionRequestType = { id: string; data: Commission };
 export type UpdateCommissionResponseType = ApiResponseType<Commission>;
 
 export type DeleteCommissionResponseType = ApiResponseType<string>;
+
+/**
+ * LEAVE API TYPES
+ */
+
+export type GetLeavesResponseType = ApiResponseType<Array<Leave>>;
+
+export type MutateleaveResponseType = ApiResponseType<Leave>;
+export type MutateLeaveRequestType = LeaveWithNecessaryFields;
+
+export type DeleteLeaveResponseType = ApiResponseType<string>;
+
+export type ApproveLeaveResponseType = ApiResponseType<Leave>;

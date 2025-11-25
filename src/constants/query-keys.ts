@@ -7,4 +7,6 @@ export const QUERY_KEYS = {
   EMPLOYEE: (id: string) => ["employee", id],
   COMPANY_ADDITIONAL_DATA: (id: string) => ["company-additional-data", id],
   COMMISSIONS: ["commissions"],
+  LEAVE_DETAILS: (id: string) => ["leave-details", id],
+  LEAVES: (id: string) => ["leaves", id],
 };

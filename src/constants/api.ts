@@ -26,4 +26,9 @@ export const API = {
   CREATE_COMMISSION: "commission",
   UPDATE_COMMISSION: (id: string) => `commission/${id}`,
   DELETE_COMMISSION: (id: string) => `commission/${id}`,
+  MUTATE_LEAVE: () => `leave`,
+  DELETE_LEAVE: (id: string) => `leave/${id}`,
+  APPROVE_LEAVE: (id: string) => `leave/approve/${id}`,
+  GET_LEAVES: () => `leave`,
+  GET_LEAVE_DETAILS: (id: string) => `leave/user/${id}`,
 };
