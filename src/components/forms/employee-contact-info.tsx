@@ -2,8 +2,8 @@
 import React, { useEffect } from "react";
 import ControlledInput from "../controlled-input";
 import ControlledSelect from "../controlled-select";
-import { gendersList, gendersListWithCode } from "@/enums/genders.enum";
-import { relationsList, relationsListWithCode } from "@/enums/relations.enum";
+import { gendersListWithCode } from "@/enums/genders.enum";
+import { relationsListWithCode } from "@/enums/relations.enum";
 import AppButton from "../app-button";
 import { Edit, PlusCircle, Trash } from "lucide-react";
 import { Dialog, DialogContent, DialogFooter, DialogTitle } from "../ui/dialog";

@@ -5,6 +5,8 @@ import { Document } from "./document.type";
 import { Qualification } from "./qualification.type";
 import { User } from "./user.type";
 import { SelectOptionsType } from "./common.type";
+import { ClaimTypeWithNecessaryFields } from "./claim-type.type";
+import { Claim, ClaimWithNecessaryFields } from "./claim.type";
 import { Commission } from "./commission.type";
 
 type ApiResponseType<T> = {
@@ -118,8 +120,8 @@ export type UploadFileApiResponseType = ApiResponseType<{
 export type CreateEmployeeRequestType = EmployeeFormInputs;
 export type CreateEmployeeResponseType = ApiResponseType<User>;
 
-export type GetEmployeesResponseType = ApiResponseType<Array<User>>;
-export type GetEmployeeResponseType = ApiResponseType<User>;
+export type GetUsersResponseType = ApiResponseType<Array<User>>;
+export type GetUserResponseType = ApiResponseType<User>;
 
 export type DeleteEmployeeResponseType = ApiResponseType<string>;
 
@@ -142,6 +144,25 @@ export type GetCompanyAdditionalDataResponseType = ApiResponseType<{
 }>;
 
 /**
+ * CLAIM TYPE API TYPES
+ */
+
+export type GetClaimTypesResponse = ApiResponseType<
+  Array<ClaimTypeWithNecessaryFields>
+>;
+
+/**
+ * CLAIM API TYPES
+ */
+
+export type GetClaimsResponse = ApiResponseType<
+  Array<ClaimWithNecessaryFields>
+>;
+
+export type MutateClaimRequest = ClaimWithNecessaryFields;
+export type MutateClaimResponse = ApiResponseType<Claim>;
+
+export type DeleteClaimResponse = ApiResponseType<boolean>;
  * COMMISSION API TYPES
  */
 

@@ -149,6 +149,11 @@ const useEmployeeManagement = (
     },
   });
 
+  const getEmployeesQuery = useTypedQuery({
+    queryKey: QUERY_KEYS.USERS(""),
+    queryFn: getEmployees,
+  });
+
   const deleteEmployeeMutation = useMutation({
     mutationFn: deleteEmployee,
     onSuccess: (data) => {
