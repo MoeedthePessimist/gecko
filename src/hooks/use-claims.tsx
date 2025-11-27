@@ -178,17 +178,6 @@ const useClaims = ({
   const [claimTypes, setClaimTypes] = useState<Array<SelectOptionsType>>([]);
   const [claims, setClaims] = useState<Array<Claim>>([]);
 
-  const getAdminsWithSelectedFields = (
-    fetchedUsers: Array<User>
-  ): Array<MultiSelectOptionType> => {
-    return fetchedUsers
-      .filter((users) => users.roles.includes(rolesEnum.ADMIN))
-      .map((admin) => ({
-        label: admin.name,
-        value: admin.email,
-      }));
-  };
-
   const onMutate = (data: ClaimFormInputs) => {
     if (!data.id) {
       delete data.id;
@@ -227,7 +216,6 @@ const useClaims = ({
     setOpenMutationModal,
     selectedClaimId,
     setSelectedClaimId,
-    getAdminsWithSelectedFields,
     admins,
     setAdmins,
     users,
