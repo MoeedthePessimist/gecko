@@ -2,7 +2,7 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { rolesEnum } from "@/enums/roles.enum";
 import { User } from "@/types/user.type";
-import { MultiSelectOptionType } from "@/hooks/use-claims";
+import { MultiSelectOptionType } from "@/types/common.type";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

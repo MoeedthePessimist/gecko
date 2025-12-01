@@ -3,7 +3,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { rolesEnum } from "@/enums/roles.enum";
-import { AxiosErrorWithMessage, SelectOptionsType } from "@/types/common.type";
+import {
+  AxiosErrorWithMessage,
+  MultiSelectOptionType,
+  SelectOptionsType,
+} from "@/types/common.type";
 import { User } from "@/types/user.type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { GetClaimsResponse, GetClaimTypesResponse } from "@/types/api.type";
@@ -25,11 +29,6 @@ export const initialFormState = {
   transactionDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
   monthToApply: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
   user: "",
-};
-
-export type MultiSelectOptionType = {
-  label: string;
-  value: string;
 };
 
 type UseClaimsProps = {

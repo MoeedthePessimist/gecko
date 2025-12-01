@@ -6,3 +6,8 @@ export type SelectOptionsType = {
 };
 
 export type AxiosErrorWithMessage = AxiosError<{ message: string }>;
+
+export type MultiSelectOptionType = {
+  label: string;
+  value: string;
+};

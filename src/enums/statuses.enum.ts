@@ -23,11 +23,11 @@ export enum applicationsStatusesEnum {
   CANCELLED = "Cancelled",
 }
 
-export const allowanceCommissionStatusesList = Object.values(
+export const applicationsStatusesEnumList = Object.values(
   applicationsStatusesEnum
 ).sort((a, b) => a.localeCompare(b));
 
-export const allowanceCommissionStatusesListWithCode = Object.entries(
+export const applicationsStatusesEnumListWithCode = Object.entries(
   applicationsStatusesEnum
 ).map(([code, name]) => ({
   code,

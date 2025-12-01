@@ -13,7 +13,7 @@ export const leaveFormSchema = z.object({
   emailTo: z.array(z.string().email("Please enter a valid email")).optional(),
   remarks: z.string().optional(),
   status: z.string().optional(),
-  userId: z.string().nonempty("Please select a user"),
+  user: z.string().nonempty("Please select a user"),
 });
 
 export type LeaveFormInputs = z.infer<typeof leaveFormSchema>;
