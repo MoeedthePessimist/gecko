@@ -79,7 +79,6 @@ const useLeave = (setLeaves: React.Dispatch<Array<Leave>>) => {
       header: "Employee",
       cell: ({ row }) => {
         const raw = row.getValue("user");
-        console.log(raw);
         const userId = typeof raw === "string" ? raw : (raw as any)?.id;
         const name = users.find((user) => user.code === userId)?.name;
         return <span>{name ? name : "-"}</span>;
@@ -132,11 +131,17 @@ const useLeave = (setLeaves: React.Dispatch<Array<Leave>>) => {
 
         return (
           <div
-            className={cn("rounded-full text-xs text-white w-fit px-2 py-1", {
-              "bg-red-400": raw === applicationsStatusesEnum.REJECTED,
-              "bg-green-400": raw === applicationsStatusesEnum.APPROVED,
-              "bg-yellow-400": raw === applicationsStatusesEnum.PENDING,
-            })}
+            className={cn(
+              "border-1 rounded-full font-semibold text-xs w-fit px-2 py-1",
+              {
+                "border-red-400 bg-red-400 text-white":
+                  raw === applicationsStatusesEnum.REJECTED,
+                "border-green-400 bg-green-400 text-white":
+                  raw === applicationsStatusesEnum.APPROVED,
+                "border-yellow-400 bg-yellow-400 text-white":
+                  raw === applicationsStatusesEnum.PENDING,
+              }
+            )}
           >
             {raw}
           </div>
@@ -210,6 +215,8 @@ const useLeave = (setLeaves: React.Dispatch<Array<Leave>>) => {
     },
   });
 
+  console.log(leaveForm.formState.errors, "form errors");
+
   const {
     uploadMutation: {
       mutate: uploadMutate,
@@ -276,6 +283,7 @@ const useLeave = (setLeaves: React.Dispatch<Array<Leave>>) => {
 
   useEffect(() => {
     if (getLeavesQuery.isSuccess) {
+      console.log(getLeavesQuery.data.data);
       setLeaves(getLeavesQuery.data.data);
     }
   }, [getLeavesQuery.isSuccess]);
