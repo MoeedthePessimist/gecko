@@ -9,7 +9,7 @@ export const leaveFormSchema = z.object({
   to: z.date().min(new Date(), "Please select a future date"),
   totalDays: z.number().min(1, "Total days must be at least 1"),
   monthToApply: z.date().nullable().optional(),
-  files: z.array(z.string()).optional(),
+  file: z.string().optional(),
   emailTo: z.array(z.string().email("Please enter a valid email")).optional(),
   remarks: z.string().optional(),
   status: z.string().optional(),

@@ -17,6 +17,7 @@ type ControlledInputProps<TFieldValues extends FieldValues> = {
   placeholder: string;
   classNames?: string;
   type?: HTMLInputTypeAttribute;
+  disabled?: boolean;
 };
 
 const ControlledInput = <TFieldValues extends FieldValues>({
@@ -26,11 +27,13 @@ const ControlledInput = <TFieldValues extends FieldValues>({
   placeholder,
   classNames,
   type = "text",
+  disabled = false,
 }: ControlledInputProps<TFieldValues>) => {
   return (
     <FormField
       control={control}
       name={name}
+      disabled={disabled}
       render={({ field }) => (
         <FormItem>
           {label && <FormLabel>{label}</FormLabel>}

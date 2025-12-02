@@ -18,16 +18,12 @@ import {
   applicationsStatusesEnumList,
   applicationsStatusesEnumListWithCode,
 } from "@/enums/statuses.enum";
+import LeaveTypesList from "../../../public/data/leave-types.json";
 
 type LeaveFormProps = {
   control: Control<LeaveFormInputs>;
   watch: UseFormWatch<LeaveFormInputs>;
-  uploadMutate: UseMutateFunction<
-    UploadFileApiResponseType,
-    Error,
-    File,
-    unknown
-  >;
+  handleUpload: any;
   admins: Array<MultiSelectOptionType>;
   users: Array<SelectOptionsType>;
 };
@@ -35,10 +31,11 @@ type LeaveFormProps = {
 const LeaveForm: React.FC<LeaveFormProps> = ({
   control,
   watch,
-  uploadMutate,
+  handleUpload,
   admins,
   users,
 }) => {
+  console.log(watch());
   return (
     <div className="grid grid-cols-1 gap-4 my-4 max-h-[300px] lg:max-h-[500px] overflow-y-scroll lg:overflow-auto">
       <ControlledSelect
@@ -46,7 +43,7 @@ const LeaveForm: React.FC<LeaveFormProps> = ({
         control={control}
         label="Name"
         placeholder="Please select a name/type"
-        list={[]}
+        list={LeaveTypesList}
       />
 
       <ControlledDatePicker
@@ -61,6 +58,15 @@ const LeaveForm: React.FC<LeaveFormProps> = ({
         name={"to"}
         label={"To Date"}
         placeholder="Please select a to date"
+      />
+
+      <ControlledInput
+        control={control}
+        name="totalDays"
+        placeholder="Total days of leave"
+        label="Total Days"
+        type="number"
+        disabled
       />
 
       <MultiSelect
@@ -87,11 +93,11 @@ const LeaveForm: React.FC<LeaveFormProps> = ({
         list={applicationsStatusesEnumListWithCode}
       />
 
-      {/* <FileUploader
-        onSelected={handleUpload}
-        fileName={watch("fileName")}
+      <FileUploader
+        // onSelected={handleUpload}
+        fileName={watch("file")}
         label="Attach File"
-      /> */}
+      />
     </div>
   );
 };

@@ -164,9 +164,9 @@ export type MutateClaimRequest = ClaimWithNecessaryFields;
 export type MutateClaimResponse = ApiResponseType<Claim>;
 
 export type DeleteClaimResponse = ApiResponseType<boolean>;
+/*
  * COMMISSION API TYPES
  */
-
 export type GetCommissionDataResponseType = ApiResponseType<Array<Commission>>;
 
 export type CreateCommissionRequestType = Commission;

@@ -11,17 +11,18 @@ import { getAdminsWithSelectedFields } from "@/lib/utils";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LeaveFormInputs, leaveFormSchema } from "@/schemas/leave-schema";
+import useUpload from "./use-upload";
 
 const initialFormState = {
   id: "",
   type: "",
   monthToApply: null,
   from: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
-  to: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
+  to: new Date(new Date().getTime() + 24 * 60 * 60 * 1000 * 2),
   totalDays: 0,
-  files: [] as string[],
+  file: "",
   emailTo: [] as string[],
-  userId: "",
+  user: "",
 };
 
 const useLeave = (setLeaves: React.Dispatch<Array<Leave>>) => {
@@ -77,6 +78,15 @@ const useLeave = (setLeaves: React.Dispatch<Array<Leave>>) => {
       );
     },
   });
+
+  const {
+    uploadMutation: {
+      mutate: uploadMutate,
+      isPending: isUploadingPending,
+      isSuccess: isUploadSuccess,
+      data: uploadData,
+    },
+  } = useUpload();
 
   const getLeavesQuery = useTypedQuery<GetLeavesResponseType>({
     queryKey: ["leaves"],
@@ -142,6 +152,28 @@ const useLeave = (setLeaves: React.Dispatch<Array<Leave>>) => {
     setOpenMutationModal(true);
   };
 
+  const handleUpload = (file: File) => {
+    uploadMutate(file);
+  };
+
+  useEffect(() => {
+    if (isUploadSuccess) {
+      leaveForm.setValue("file", uploadData.data.fileName);
+    }
+  }, [isUploadSuccess]);
+
+  useEffect(() => {
+    const from = leaveForm.watch("from");
+    const to = leaveForm.watch("to");
+
+    if (from && to) {
+      const days = Math.floor(
+        (to.getTime() - from.getTime()) / (1000 * 60 * 60 * 24)
+      );
+      leaveForm.setValue("totalDays", days);
+    }
+  }, [leaveForm.watch("from"), leaveForm.watch("to")]);
+
   return {
     selectLeave,
     clearSelectedLeave,
@@ -157,6 +189,8 @@ const useLeave = (setLeaves: React.Dispatch<Array<Leave>>) => {
     onDelete,
     isLeaveMutatePending: mutateLeaveMutation.isPending,
     isLeaveDeletePending: deleteLeaveMutation.isPending,
+    handleUpload,
+    isUploadingPending,
   };
 };
 

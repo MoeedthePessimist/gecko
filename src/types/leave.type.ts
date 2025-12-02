@@ -6,10 +6,10 @@ export type Leave = BaseType & {
   from: Date | string | null;
   to: Date | string | null;
   totalDays: number;
-  files?: string[];
+  file?: string;
   emailTo?: string[];
   remarks?: string;
-  userId: string;
+  user: string;
 };
 
 export type LeaveWithNecessaryFields = Omit<
