@@ -7,11 +7,14 @@ import React, { useEffect, useState } from "react";
 import { useTypedQuery } from "./use-query";
 import { GetLeavesResponseType } from "@/types/api.type";
 import useEmployeeManagement from "./use-employee";
-import { getAdminsWithSelectedFields } from "@/lib/utils";
+import { cn, getAdminsWithSelectedFields } from "@/lib/utils";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LeaveFormInputs, leaveFormSchema } from "@/schemas/leave-schema";
 import useUpload from "./use-upload";
+import { ColumnDef } from "@tanstack/react-table";
+import { Edit, Trash } from "lucide-react";
+import { applicationsStatusesEnum } from "@/enums/statuses.enum";
 
 const initialFormState = {
   id: "",
@@ -26,6 +29,134 @@ const initialFormState = {
 };
 
 const useLeave = (setLeaves: React.Dispatch<Array<Leave>>) => {
+  const columns: ColumnDef<LeaveWithNecessaryFields>[] = [
+    {
+      accessorKey: "type",
+      header: "Type",
+    },
+    {
+      accessorKey: "totalDays",
+      header: "Total days",
+    },
+    {
+      accessorKey: "from",
+      header: "From",
+      cell: ({ row }) => {
+        const raw = row.getValue("from");
+        const date = new Date(raw as Date);
+
+        return (
+          <span>
+            {date.toLocaleString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "2-digit",
+            })}
+          </span>
+        );
+      },
+    },
+    {
+      accessorKey: "to",
+      header: "To",
+      cell: ({ row }) => {
+        const raw = row.getValue("to");
+        const date = new Date(raw as Date);
+
+        return (
+          <span>
+            {date.toLocaleString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "2-digit",
+            })}
+          </span>
+        );
+      },
+    },
+    {
+      accessorKey: "user",
+      header: "Employee",
+      cell: ({ row }) => {
+        const raw = row.getValue("user");
+        console.log(raw);
+        const userId = typeof raw === "string" ? raw : (raw as any)?.id;
+        const name = users.find((user) => user.code === userId)?.name;
+        return <span>{name ? name : "-"}</span>;
+      },
+    },
+    {
+      accessorKey: "monthToApply",
+      header: "Month To Apply",
+      cell: ({ row }) => {
+        const raw = row.getValue("monthToApply");
+        const date = raw ? new Date(raw as Date) : null;
+
+        return (
+          <span>
+            {date
+              ? date.toLocaleString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                })
+              : "-"}
+          </span>
+        );
+      },
+    },
+    {
+      accessorKey: "emailTo",
+      header: "Email To",
+      cell: ({ row }) => {
+        const raw = row.getValue("emailTo");
+        const emailTo = Array.isArray(raw) ? raw : [];
+        return (
+          <div className="flex flex-col gap-1">
+            {emailTo.map((email: string) => (
+              <div
+                key={email}
+                className="bg-amber-50 text-black rounded-full text-xs w-fit px-2 py-1"
+              >
+                {admins.find((admin) => admin.value === email)?.label}
+              </div>
+            ))}
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: "status",
+      header: "Status",
+      cell: ({ row }) => {
+        const raw = row.getValue("status") as string;
+
+        return (
+          <div
+            className={cn("rounded-full text-xs text-white w-fit px-2 py-1", {
+              "bg-red-400": raw === applicationsStatusesEnum.REJECTED,
+              "bg-green-400": raw === applicationsStatusesEnum.APPROVED,
+              "bg-yellow-400": raw === applicationsStatusesEnum.PENDING,
+            })}
+          >
+            {raw}
+          </div>
+        );
+      },
+    },
+    {
+      id: "actions",
+      cell: ({ row }) => {
+        const claim = row.original;
+        return (
+          <div className="flex gap-2 cursor-pointer">
+            <Edit size={20} onClick={() => onClickEdit(claim)} />
+            <Trash size={20} onClick={() => onClickDelete(claim.id)} />
+          </div>
+        );
+      },
+    },
+  ];
+
   const leaveForm = useForm({
     resolver: zodResolver(leaveFormSchema),
     defaultValues: { ...initialFormState },
@@ -123,6 +254,26 @@ const useLeave = (setLeaves: React.Dispatch<Array<Leave>>) => {
     );
   };
 
+  const onClickEdit = (leave: LeaveWithNecessaryFields) => {
+    leaveForm.reset({
+      ...leave,
+      from: new Date(leave?.from ?? ""),
+      to: new Date(leave?.to ?? ""),
+      monthToApply: new Date(leave?.monthToApply ?? ""),
+      user: typeof leave.user === "string" ? leave.user : leave.user.id,
+    });
+    setSelectedLeaveId(leave?.id || "");
+    setOpenMutationModal(true);
+  };
+
+  const onClickDelete = (id?: string) => {
+    if (id) {
+      showConfirmation("Are you sure you want to delete this claim", () => {
+        deleteLeaveMutation.mutate(id);
+      });
+    }
+  };
+
   useEffect(() => {
     if (getLeavesQuery.isSuccess) {
       setLeaves(getLeavesQuery.data.data);
@@ -191,6 +342,7 @@ const useLeave = (setLeaves: React.Dispatch<Array<Leave>>) => {
     isLeaveDeletePending: deleteLeaveMutation.isPending,
     handleUpload,
     isUploadingPending,
+    columns,
   };
 };
 

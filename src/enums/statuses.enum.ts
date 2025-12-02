@@ -30,7 +30,7 @@ export const applicationsStatusesEnumList = Object.values(
 export const applicationsStatusesEnumListWithCode = Object.entries(
   applicationsStatusesEnum
 ).map(([code, name]) => ({
-  code,
+  code: name,
   name,
 }));
 

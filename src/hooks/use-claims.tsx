@@ -2,13 +2,11 @@ import { ClaimFormInputs, claimFormSchema } from "@/schemas/claim-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { rolesEnum } from "@/enums/roles.enum";
 import {
   AxiosErrorWithMessage,
   MultiSelectOptionType,
   SelectOptionsType,
 } from "@/types/common.type";
-import { User } from "@/types/user.type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { GetClaimsResponse, GetClaimTypesResponse } from "@/types/api.type";
 import { QUERY_KEYS } from "@/constants/query-keys";

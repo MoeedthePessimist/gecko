@@ -1,4 +1,5 @@
 import { BaseType } from "./base.type";
+import { User } from "./user.type";
 
 export type Leave = BaseType & {
   type: string;
@@ -9,7 +10,7 @@ export type Leave = BaseType & {
   file?: string;
   emailTo?: string[];
   remarks?: string;
-  user: string;
+  user: string | User;
 };
 
 export type LeaveWithNecessaryFields = Omit<

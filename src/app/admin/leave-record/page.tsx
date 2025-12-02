@@ -1,7 +1,7 @@
 "use client";
-
 import AppButton from "@/components/app-button";
 import CustomDialogTrigger from "@/components/custom-dialog-trigger";
+import { DataTable } from "@/components/data-table";
 import LeaveForm from "@/components/forms/leave";
 import {
   Dialog,
@@ -12,11 +12,10 @@ import {
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
 import useLeave from "@/hooks/use-leave";
-import useUpload from "@/hooks/use-upload";
 import { LeaveWithNecessaryFields } from "@/types/leave.type";
 
 import { PlusCircle } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const LeaveRecordPage = () => {
   const [leaves, setLeaves] = useState<Array<LeaveWithNecessaryFields>>([]);
@@ -35,6 +34,7 @@ const LeaveRecordPage = () => {
     isUploadingPending,
     admins,
     users,
+    columns,
   } = useLeave(setLeaves);
 
   return (
@@ -81,6 +81,7 @@ const LeaveRecordPage = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+      <DataTable columns={columns} data={leaves} />
     </div>
   );
 };

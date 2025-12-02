@@ -23,7 +23,7 @@ import LeaveTypesList from "../../../public/data/leave-types.json";
 type LeaveFormProps = {
   control: Control<LeaveFormInputs>;
   watch: UseFormWatch<LeaveFormInputs>;
-  handleUpload: any;
+  handleUpload: (file: File) => void;
   admins: Array<MultiSelectOptionType>;
   users: Array<SelectOptionsType>;
 };
@@ -35,7 +35,7 @@ const LeaveForm: React.FC<LeaveFormProps> = ({
   admins,
   users,
 }) => {
-  console.log(watch());
+  console.log(applicationsStatusesEnumListWithCode);
   return (
     <div className="grid grid-cols-1 gap-4 my-4 max-h-[300px] lg:max-h-[500px] overflow-y-scroll lg:overflow-auto">
       <ControlledSelect
@@ -66,7 +66,7 @@ const LeaveForm: React.FC<LeaveFormProps> = ({
         placeholder="Total days of leave"
         label="Total Days"
         type="number"
-        disabled
+        contentEditable={false}
       />
 
       <MultiSelect
@@ -94,7 +94,7 @@ const LeaveForm: React.FC<LeaveFormProps> = ({
       />
 
       <FileUploader
-        // onSelected={handleUpload}
+        onSelected={handleUpload}
         fileName={watch("file")}
         label="Attach File"
       />
