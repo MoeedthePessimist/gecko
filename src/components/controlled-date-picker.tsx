@@ -62,6 +62,7 @@ const ControlledDatePicker = <TFieldValues extends FieldValues>({
                 //   date > new Date() || date < new Date("1900-01-01")
                 // }
                 captionLayout="dropdown"
+                className={"pointer-events-auto"}
               />
             </PopoverContent>
           </Popover>
