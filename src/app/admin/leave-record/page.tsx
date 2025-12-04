@@ -47,7 +47,7 @@ const LeaveRecordPage = () => {
           containerClasses="bg-accent text-white text-sm float-right md:max-w-[300px] self-end"
           openModal={openModal}
         />
-        <DialogContent>
+        <DialogContent className="min-w-[300px] md:min-w-[500px] lg:min-w-[1000px]">
           <DialogTitle>Add Employee Leave</DialogTitle>
           <Form {...leaveForm}>
             <LeaveForm

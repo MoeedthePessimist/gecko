@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Control, UseFormWatch } from "react-hook-form";
 import ControlledSelect from "../controlled-select";
 import ControlledInput from "../controlled-input";
@@ -6,19 +6,10 @@ import ControlledDatePicker from "../controlled-date-picker";
 import { MultiSelect } from "../controlled-multi-select";
 import { FileUploader } from "../file-uploader";
 import { LeaveFormInputs } from "@/schemas/leave-schema";
-import useClaims from "@/hooks/use-claims";
-import SpinnerLoader from "../ui/loader";
-import useEmployeeManagement from "@/hooks/use-employee";
-import { UseMutateFunction } from "@tanstack/react-query";
-import { UploadFileApiResponseType } from "@/types/api.type";
-import { getAdminsWithSelectedFields } from "@/lib/utils";
 import { MultiSelectOptionType, SelectOptionsType } from "@/types/common.type";
-import {
-  applicationsStatusesEnum,
-  applicationsStatusesEnumList,
-  applicationsStatusesEnumListWithCode,
-} from "@/enums/statuses.enum";
+import { applicationsStatusesEnumListWithCode } from "@/enums/statuses.enum";
 import LeaveTypesList from "../../../public/data/leave-types.json";
+import LeaveInfoPanel from "../leave-info-panel";
 
 type LeaveFormProps = {
   control: Control<LeaveFormInputs>;
@@ -35,69 +26,73 @@ const LeaveForm: React.FC<LeaveFormProps> = ({
   admins,
   users,
 }) => {
-  console.log(applicationsStatusesEnumListWithCode);
   return (
-    <div className="grid grid-cols-1 gap-4 my-4 max-h-[300px] lg:max-h-[500px] overflow-y-scroll lg:overflow-auto">
-      <ControlledSelect
-        name="type"
-        control={control}
-        label="Name"
-        placeholder="Please select a name/type"
-        list={LeaveTypesList}
-      />
+    <div className="grid grid-cols-1 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 my-4 max-h-[300px] lg:max-h-[500px] overflow-y-scroll lg:overflow-auto">
+        <ControlledSelect
+          name="type"
+          control={control}
+          label="Name"
+          placeholder="Please select a name/type"
+          list={LeaveTypesList}
+        />
 
-      <ControlledDatePicker
-        control={control}
-        name={"from"}
-        label={"From Date"}
-        placeholder="Please select a from date"
-      />
+        <ControlledDatePicker
+          control={control}
+          name={"from"}
+          label={"From Date"}
+          placeholder="Please select a from date"
+        />
 
-      <ControlledDatePicker
-        control={control}
-        name={"to"}
-        label={"To Date"}
-        placeholder="Please select a to date"
-      />
+        <ControlledDatePicker
+          control={control}
+          name={"to"}
+          label={"To Date"}
+          placeholder="Please select a to date"
+        />
 
-      <ControlledInput
-        control={control}
-        name="totalDays"
-        placeholder="Total days of leave"
-        label="Total Days"
-        type="number"
-        contentEditable={false}
-      />
+        <ControlledInput
+          control={control}
+          name="totalDays"
+          placeholder="Total days of leave"
+          label="Total Days"
+          type="number"
+          contentEditable={false}
+        />
 
-      <MultiSelect
-        control={control}
-        name="emailTo"
-        options={admins}
-        placeholder="Please select admins"
-        label="Email To"
-      />
+        <MultiSelect
+          control={control}
+          name="emailTo"
+          options={admins}
+          placeholder="Please select admins"
+          label="Email To"
+        />
 
-      <ControlledSelect
-        control={control}
-        name="user"
-        placeholder="Please select an employee"
-        label="Employee"
-        list={users}
-      />
+        <ControlledSelect
+          control={control}
+          name="user"
+          placeholder="Please select an employee"
+          label="Employee"
+          list={users}
+        />
 
-      <ControlledSelect
-        control={control}
-        name="status"
-        placeholder="Please select the application status"
-        label="Status"
-        list={applicationsStatusesEnumListWithCode}
-      />
+        <ControlledSelect
+          control={control}
+          name="status"
+          placeholder="Please select the application status"
+          label="Status"
+          list={applicationsStatusesEnumListWithCode}
+        />
 
-      <FileUploader
-        onSelected={handleUpload}
-        fileName={watch("file")}
-        label="Attach File"
-      />
+        <FileUploader
+          onSelected={handleUpload}
+          fileName={watch("file")}
+          label="Attach File"
+        />
+      </div>
+      <div className="grid grid-cols-1 gap-4 my-4 max-h-[300px] lg:max-h-[500px] overflow-y-scroll lg:overflow-auto">
+        <LeaveInfoPanel />
+      </div>
     </div>
   );
 };

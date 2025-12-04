@@ -215,8 +215,6 @@ const useLeave = (setLeaves: React.Dispatch<Array<Leave>>) => {
     },
   });
 
-  console.log(leaveForm.formState.errors, "form errors");
-
   const {
     uploadMutation: {
       mutate: uploadMutate,
