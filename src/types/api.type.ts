@@ -189,3 +189,12 @@ export type MutateLeaveRequestType = LeaveWithNecessaryFields;
 export type DeleteLeaveResponseType = ApiResponseType<string>;
 
 export type ApproveLeaveResponseType = ApiResponseType<Leave>;
+
+export type UserLeaveDetailsType = {
+  totalLeavesTaken: number;
+  leavesCarriedForward: number;
+  user: User;
+};
+
+export type MutateGetUserLeaveDetailsResponseType =
+  ApiResponseType<UserLeaveDetailsType>;

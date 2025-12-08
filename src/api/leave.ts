@@ -2,6 +2,7 @@ import api from "@/configs/axios";
 import { API } from "@/constants/api";
 import {
   GetLeavesResponseType,
+  MutateGetUserLeaveDetailsResponseType,
   MutateLeaveRequestType,
   MutateleaveResponseType,
 } from "@/types/api.type";
@@ -32,4 +33,11 @@ export const deleteLeave = async (
   return response.data;
 };
 
-// export const getLeaveDetails = async (): Promise<
+export const getLeaveDetails = async (
+  id: string
+): Promise<MutateGetUserLeaveDetailsResponseType> => {
+  const response = await api.get<MutateGetUserLeaveDetailsResponseType>(
+    API.GET_LEAVE_DETAILS(id)
+  );
+  return response.data;
+};

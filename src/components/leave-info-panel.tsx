@@ -37,12 +37,12 @@ const LeaveInfoPanel: React.FC<LeaveInfoPanelProps> = ({
       icon: Calendar,
       color: "text-blue-600",
     },
-    {
-      label: "Date Left",
-      value: dateLeft || "N/A",
-      icon: Clock,
-      color: "text-gray-600",
-    },
+    // {
+    //   label: "Date Left",
+    //   value: dateLeft || "N/A",
+    //   icon: Clock,
+    //   color: "text-gray-600",
+    // },
     {
       label: "Leave Table",
       value: leaveTable,
@@ -61,18 +61,18 @@ const LeaveInfoPanel: React.FC<LeaveInfoPanelProps> = ({
       icon: Mail,
       color: "text-green-600",
     },
-    {
-      label: "Leave Entitlement",
-      value: leaveEntitlement,
-      icon: TrendingUp,
-      color: "text-indigo-600",
-    },
-    {
-      label: "Balance Entitlement For This Calendar Year",
-      value: balanceEntitlement,
-      icon: TrendingUp,
-      color: "text-teal-600",
-    },
+    // {
+    //   label: "Leave Entitlement",
+    //   value: leaveEntitlement,
+    //   icon: TrendingUp,
+    //   color: "text-indigo-600",
+    // },
+    // {
+    //   label: "Balance Entitlement For This Calendar Year",
+    //   value: balanceEntitlement,
+    //   icon: TrendingUp,
+    //   color: "text-teal-600",
+    // },
   ];
 
   return (

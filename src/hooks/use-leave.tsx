@@ -1,11 +1,16 @@
-import { deleteLeave, getLeaves, mutateLeave } from "@/api/leave";
+import {
+  deleteLeave,
+  getLeaveDetails,
+  getLeaves,
+  mutateLeave,
+} from "@/api/leave";
 import { useGlobalModal } from "@/context/error-context";
 import { AxiosErrorWithMessage } from "@/types/common.type";
 import { Leave, LeaveWithNecessaryFields } from "@/types/leave.type";
 import { useMutation } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { useTypedQuery } from "./use-query";
-import { GetLeavesResponseType } from "@/types/api.type";
+import { GetLeavesResponseType, UserLeaveDetailsType } from "@/types/api.type";
 import useEmployeeManagement from "./use-employee";
 import { cn, getAdminsWithSelectedFields } from "@/lib/utils";
 import { useForm } from "react-hook-form";
@@ -28,7 +33,10 @@ const initialFormState = {
   user: "",
 };
 
-const useLeave = (setLeaves: React.Dispatch<Array<Leave>>) => {
+const useLeave = (
+  setLeaves: React.Dispatch<Array<Leave>>,
+  setSelectedUserDetails: React.Dispatch<UserLeaveDetailsType>
+) => {
   const columns: ColumnDef<LeaveWithNecessaryFields>[] = [
     {
       accessorKey: "type",
@@ -215,6 +223,21 @@ const useLeave = (setLeaves: React.Dispatch<Array<Leave>>) => {
     },
   });
 
+  const getUserLeaveDetailsMutation = useMutation({
+    mutationFn: getLeaveDetails,
+    onSuccess: (data) => {
+      console.log(data, "User leave details data");
+      setSelectedUserDetails(data.data);
+    },
+    onError: (error: AxiosErrorWithMessage) => {
+      console.error(error);
+      // showError(
+      //   error.response?.data.message ||
+      //     "Failed to update employee. Please try again."
+      // );
+    },
+  });
+
   const {
     uploadMutation: {
       mutate: uploadMutate,
@@ -330,6 +353,12 @@ const useLeave = (setLeaves: React.Dispatch<Array<Leave>>) => {
       leaveForm.setValue("totalDays", days);
     }
   }, [leaveForm.watch("from"), leaveForm.watch("to")]);
+
+  useEffect(() => {
+    if (!!leaveForm.watch("user")) {
+      getUserLeaveDetailsMutation.mutate(leaveForm.watch("user"));
+    }
+  }, [leaveForm.watch("user")]);
 
   return {
     selectLeave,

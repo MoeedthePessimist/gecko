@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
 import useLeave from "@/hooks/use-leave";
+import { UserLeaveDetailsType } from "@/types/api.type";
 import { LeaveWithNecessaryFields } from "@/types/leave.type";
 
 import { PlusCircle } from "lucide-react";
@@ -19,6 +20,8 @@ import { useState } from "react";
 
 const LeaveRecordPage = () => {
   const [leaves, setLeaves] = useState<Array<LeaveWithNecessaryFields>>([]);
+  const [selectedUserDetails, setSelectedUserDetails] =
+    useState<UserLeaveDetailsType | null>(null);
 
   const {
     openMutationModal,
@@ -35,7 +38,7 @@ const LeaveRecordPage = () => {
     admins,
     users,
     columns,
-  } = useLeave(setLeaves);
+  } = useLeave(setLeaves, setSelectedUserDetails);
 
   return (
     <div className="flex flex-col gap-6">
@@ -56,6 +59,7 @@ const LeaveRecordPage = () => {
               handleUpload={handleUpload}
               admins={admins}
               users={users}
+              selectedUserLeaveDetails={selectedUserDetails}
             />
           </Form>
 

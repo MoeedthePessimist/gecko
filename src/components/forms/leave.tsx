@@ -10,6 +10,7 @@ import { MultiSelectOptionType, SelectOptionsType } from "@/types/common.type";
 import { applicationsStatusesEnumListWithCode } from "@/enums/statuses.enum";
 import LeaveTypesList from "../../../public/data/leave-types.json";
 import LeaveInfoPanel from "../leave-info-panel";
+import { UserLeaveDetailsType } from "@/types/api.type";
 
 type LeaveFormProps = {
   control: Control<LeaveFormInputs>;
@@ -17,6 +18,7 @@ type LeaveFormProps = {
   handleUpload: (file: File) => void;
   admins: Array<MultiSelectOptionType>;
   users: Array<SelectOptionsType>;
+  selectedUserLeaveDetails: UserLeaveDetailsType | null;
 };
 
 const LeaveForm: React.FC<LeaveFormProps> = ({
@@ -25,7 +27,10 @@ const LeaveForm: React.FC<LeaveFormProps> = ({
   handleUpload,
   admins,
   users,
+  selectedUserLeaveDetails,
 }) => {
+  console.log(selectedUserLeaveDetails, "selected user leave details");
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2">
       <div className="grid grid-cols-1 gap-4 my-4 max-h-[300px] lg:max-h-[500px] overflow-y-scroll lg:overflow-auto">
@@ -91,7 +96,18 @@ const LeaveForm: React.FC<LeaveFormProps> = ({
         />
       </div>
       <div className="grid grid-cols-1 gap-4 my-4 max-h-[300px] lg:max-h-[500px] overflow-y-scroll lg:overflow-auto">
-        <LeaveInfoPanel />
+        <LeaveInfoPanel
+          dateJoin={new Date(
+            selectedUserLeaveDetails?.user?.createDateTime || ""
+          )?.toLocaleString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "2-digit",
+          })}
+          leaveTable={selectedUserLeaveDetails?.user.leaveTable?.title || "N/A"}
+          taken={selectedUserLeaveDetails?.totalLeavesTaken || 0}
+          carriedForward={selectedUserLeaveDetails?.leavesCarriedForward || 0}
+        />
       </div>
     </div>
   );
