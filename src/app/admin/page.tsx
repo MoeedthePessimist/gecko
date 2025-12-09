@@ -1,9 +1,28 @@
 "use client";
 
+import DashboardCalendar from "@/components/dashboard-big-calendar";
 import AccumulationCard from "@/components/dashboard-cards/accumulation-card";
 import LeaveCard from "@/components/dashboard-cards/leave-card";
 import { Card } from "@/components/ui/card";
+import { CalendarEventType } from "@/types/common.type";
 import React from "react";
+
+const events: CalendarEventType[] = [
+  {
+    id: "1",
+    title: "Sick Leave - John",
+    start: new Date(2025, 11, 12),
+    end: new Date(2025, 11, 14),
+    type: "Annual leave",
+  },
+  {
+    id: "2",
+    title: "National Day",
+    start: new Date(2025, 11, 23),
+    end: new Date(2025, 11, 23),
+    type: "Study leave",
+  },
+];
 
 const AdminPage = () => {
   return (
@@ -64,6 +83,7 @@ const AdminPage = () => {
       </div>
 
       {/* Calendar showing leave dates, and public holidays */}
+      <DashboardCalendar events={events} />
     </div>
   );
 };
