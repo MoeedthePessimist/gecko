@@ -11,7 +11,7 @@ import AppButton from "../app-button";
 import { DialogClose } from "@radix-ui/react-dialog";
 import useCommission from "@/hooks/use-commission";
 import { SelectOptionsType } from "@/types/common.type";
-import { allowanceCommissionStatusesListWithCode } from "@/enums/statuses.enum";
+import { applicationsStatusesEnumListWithCode } from "@/enums/statuses.enum";
 import SpinnerLoader from "../ui/loader";
 
 type CommissionRecordFormProps = {
@@ -92,7 +92,7 @@ const CommissionRecordForm: React.FC<CommissionRecordFormProps> = ({
           name={`status`}
           placeholder="Select Status"
           label="Status"
-          list={allowanceCommissionStatusesListWithCode}
+          list={applicationsStatusesEnumListWithCode}
         />
         <ControlledSelect<CommissionFormInputs>
           control={control as Control<CommissionFormInputs>}
