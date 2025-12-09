@@ -11,6 +11,7 @@ import SpinnerLoader from "../ui/loader";
 import useEmployeeManagement from "@/hooks/use-employee";
 import { UseMutateFunction } from "@tanstack/react-query";
 import { UploadFileApiResponseType } from "@/types/api.type";
+import { getAdminsWithSelectedFields } from "@/lib/utils";
 
 type ClaimFormProps = {
   control: Control<ClaimFormInputs>;
@@ -31,7 +32,6 @@ const ClaimForm: React.FC<ClaimFormProps> = ({
   const {
     setAdmins,
     admins,
-    getAdminsWithSelectedFields,
     users,
     setUsers,
     getClaimTypesQuery: {

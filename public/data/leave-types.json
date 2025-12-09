@@ -1,0 +1,12 @@
+[
+  { "code": "Annual leave", "name": "Annual leave" },
+  { "code": "Sick leave", "name": "Sick leave" },
+  { "code": "Maternity leave", "name": "Maternity leave" },
+  { "code": "Paternity leave", "name": "Paternity leave" },
+  { "code": "Unpaid leave", "name": "Unpaid leave" },
+  { "code": "Compassionate leave", "name": "Compassionate leave" },
+  { "code": "Study leave", "name": "Study leave" },
+  { "code": "Emergency leave", "name": "Emergency leave" },
+  { "code": "Hospitalization leave", "name": "Hospitalization leave" },
+  { "code": "Replacement leave", "name": "Replacement leave" }
+]

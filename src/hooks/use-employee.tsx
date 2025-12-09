@@ -324,6 +324,7 @@ const useEmployeeManagement = (
     updateEmployeeMutation,
     getEmployeeQuery,
     onProfileImageUpload,
+    getEmployeesQuery,
   };
 };
 

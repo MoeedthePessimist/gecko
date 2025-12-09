@@ -2,9 +2,11 @@ import { ClaimFormInputs, claimFormSchema } from "@/schemas/claim-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { rolesEnum } from "@/enums/roles.enum";
-import { AxiosErrorWithMessage, SelectOptionsType } from "@/types/common.type";
-import { User } from "@/types/user.type";
+import {
+  AxiosErrorWithMessage,
+  MultiSelectOptionType,
+  SelectOptionsType,
+} from "@/types/common.type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { GetClaimsResponse, GetClaimTypesResponse } from "@/types/api.type";
 import { QUERY_KEYS } from "@/constants/query-keys";
@@ -25,11 +27,6 @@ export const initialFormState = {
   transactionDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
   monthToApply: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
   user: "",
-};
-
-export type MultiSelectOptionType = {
-  label: string;
-  value: string;
 };
 
 type UseClaimsProps = {
@@ -178,17 +175,6 @@ const useClaims = ({
   const [claimTypes, setClaimTypes] = useState<Array<SelectOptionsType>>([]);
   const [claims, setClaims] = useState<Array<Claim>>([]);
 
-  const getAdminsWithSelectedFields = (
-    fetchedUsers: Array<User>
-  ): Array<MultiSelectOptionType> => {
-    return fetchedUsers
-      .filter((users) => users.roles.includes(rolesEnum.ADMIN))
-      .map((admin) => ({
-        label: admin.name,
-        value: admin.email,
-      }));
-  };
-
   const onMutate = (data: ClaimFormInputs) => {
     if (!data.id) {
       delete data.id;
@@ -227,7 +213,6 @@ const useClaims = ({
     setOpenMutationModal,
     selectedClaimId,
     setSelectedClaimId,
-    getAdminsWithSelectedFields,
     admins,
     setAdmins,
     users,

@@ -17,6 +17,8 @@ type ControlledInputProps<TFieldValues extends FieldValues> = {
   placeholder: string;
   classNames?: string;
   type?: HTMLInputTypeAttribute;
+  disabled?: boolean;
+  contentEditable?: boolean;
 };
 
 const ControlledInput = <TFieldValues extends FieldValues>({
@@ -26,16 +28,20 @@ const ControlledInput = <TFieldValues extends FieldValues>({
   placeholder,
   classNames,
   type = "text",
+  disabled = false,
+  contentEditable = true,
 }: ControlledInputProps<TFieldValues>) => {
   return (
     <FormField
       control={control}
       name={name}
+      disabled={disabled}
       render={({ field }) => (
-        <FormItem>
+        <FormItem contentEditable={contentEditable}>
           {label && <FormLabel>{label}</FormLabel>}
           <FormControl>
             <Input
+              contentEditable={contentEditable}
               placeholder={placeholder}
               {...field}
               onChange={(e) => {

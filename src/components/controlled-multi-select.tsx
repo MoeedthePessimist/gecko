@@ -663,7 +663,7 @@ export const MultiSelect = React.forwardRef<
                 } options selected. ${placeholder}`}
                 aria-invalid={error ? "true" : "false"}
                 className={cn(
-                  "flex p-1 rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-inherit [&_svg]:pointer-events-auto",
+                  "flex p-1 rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-inherit [&_svg]:pointer-events-auto cursor-pointer",
                   autoSize ? "w-auto" : "w-full",
                   responsiveSettings.compactMode && "min-h-8 text-sm",
                   screenSize === "mobile" && "min-h-12 text-base",
@@ -873,6 +873,7 @@ export const MultiSelect = React.forwardRef<
             aria-label="Available options"
             className={cn(
               "w-auto p-0",
+              "pointer-events-auto",
               getPopoverAnimationClass(),
               screenSize === "mobile" && "w-[85vw] max-w-[280px]",
               screenSize === "tablet" && "w-[70vw] max-w-md",

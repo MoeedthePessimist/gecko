@@ -1,7 +1,93 @@
-import React from "react";
+"use client";
+import AppButton from "@/components/app-button";
+import CustomDialogTrigger from "@/components/custom-dialog-trigger";
+import { DataTable } from "@/components/data-table";
+import LeaveForm from "@/components/forms/leave";
+import {
+  Dialog,
+  DialogFooter,
+  DialogContent,
+  DialogClose,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Form } from "@/components/ui/form";
+import useLeave from "@/hooks/use-leave";
+import { UserLeaveDetailsType } from "@/types/api.type";
+import { LeaveWithNecessaryFields } from "@/types/leave.type";
+
+import { PlusCircle } from "lucide-react";
+import { useState } from "react";
 
 const LeaveRecordPage = () => {
-  return <div>LeaveRecordPage</div>;
+  const [leaves, setLeaves] = useState<Array<LeaveWithNecessaryFields>>([]);
+  const [selectedUserDetails, setSelectedUserDetails] =
+    useState<UserLeaveDetailsType | null>(null);
+
+  const {
+    openMutationModal,
+    setOpenMutationModal,
+    openModal,
+    selectedLeaveId,
+    leaveForm,
+    onDelete,
+    onMutate,
+    isLeaveMutatePending,
+    isLeaveDeletePending,
+    handleUpload,
+    isUploadingPending,
+    admins,
+    users,
+    columns,
+  } = useLeave(setLeaves, setSelectedUserDetails);
+
+  return (
+    <div className="flex flex-col gap-6">
+      <Dialog open={openMutationModal}>
+        <CustomDialogTrigger
+          title="Add New Leave"
+          icon={<PlusCircle />}
+          iconPosition="start"
+          containerClasses="bg-accent text-white text-sm float-right md:max-w-[300px] self-end"
+          openModal={openModal}
+        />
+        <DialogContent className="min-w-[300px] md:min-w-[500px] lg:min-w-[1000px]">
+          <DialogTitle>Add Employee Leave</DialogTitle>
+          <Form {...leaveForm}>
+            <LeaveForm
+              control={leaveForm.control}
+              watch={leaveForm.watch}
+              handleUpload={handleUpload}
+              admins={admins}
+              users={users}
+              selectedUserLeaveDetails={selectedUserDetails}
+            />
+          </Form>
+
+          <DialogFooter className="flex flex-row justify-end">
+            <AppButton
+              title={selectedLeaveId ? "Update Leave" : "Add Leave"}
+              buttonOptions={{
+                className: "bg-secondary text-white max-w-auto",
+                onClick: leaveForm.handleSubmit(onMutate),
+                disabled: isUploadingPending || isLeaveMutatePending,
+              }}
+              isLoading={isLeaveMutatePending}
+            />
+            <DialogClose>
+              <AppButton
+                title="Close"
+                buttonOptions={{
+                  className: "bg-accent text-white max-w-auto",
+                  onClick: () => setOpenMutationModal(false),
+                }}
+              />
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      <DataTable columns={columns} data={leaves} />
+    </div>
+  );
 };
 
 export default LeaveRecordPage;

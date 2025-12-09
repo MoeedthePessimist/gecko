@@ -65,7 +65,7 @@ const ClaimsRecordPage = () => {
           openModal={openModal}
         />
         <DialogContent>
-          <DialogTitle>Add Employee Qualification</DialogTitle>
+          <DialogTitle>Add Employee Claim</DialogTitle>
           <Form {...claimForm}>
             <ClaimForm
               control={claimForm.control}

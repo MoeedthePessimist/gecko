@@ -8,6 +8,7 @@ import { SelectOptionsType } from "./common.type";
 import { ClaimTypeWithNecessaryFields } from "./claim-type.type";
 import { Claim, ClaimWithNecessaryFields } from "./claim.type";
 import { Commission } from "./commission.type";
+import { Leave, LeaveWithNecessaryFields } from "./leave.type";
 
 type ApiResponseType<T> = {
   data: T;
@@ -163,9 +164,9 @@ export type MutateClaimRequest = ClaimWithNecessaryFields;
 export type MutateClaimResponse = ApiResponseType<Claim>;
 
 export type DeleteClaimResponse = ApiResponseType<boolean>;
+/*
  * COMMISSION API TYPES
  */
-
 export type GetCommissionDataResponseType = ApiResponseType<Array<Commission>>;
 
 export type CreateCommissionRequestType = Commission;
@@ -175,3 +176,25 @@ export type UpdateCommissionRequestType = { id: string; data: Commission };
 export type UpdateCommissionResponseType = ApiResponseType<Commission>;
 
 export type DeleteCommissionResponseType = ApiResponseType<string>;
+
+/**
+ * LEAVE API TYPES
+ */
+
+export type GetLeavesResponseType = ApiResponseType<Array<Leave>>;
+
+export type MutateleaveResponseType = ApiResponseType<Leave>;
+export type MutateLeaveRequestType = LeaveWithNecessaryFields;
+
+export type DeleteLeaveResponseType = ApiResponseType<string>;
+
+export type ApproveLeaveResponseType = ApiResponseType<Leave>;
+
+export type UserLeaveDetailsType = {
+  totalLeavesTaken: number;
+  leavesCarriedForward: number;
+  user: User;
+};
+
+export type MutateGetUserLeaveDetailsResponseType =
+  ApiResponseType<UserLeaveDetailsType>;

@@ -16,20 +16,20 @@ export const employeeStatusesListWithCode = Object.entries(
   name,
 }));
 
-export enum allowanceCommissionStatusesEnum {
+export enum applicationsStatusesEnum {
   PENDING = "Pending",
   APPROVED = "Approved",
   REJECTED = "Rejected",
   CANCELLED = "Cancelled",
 }
 
-export const allowanceCommissionStatusesList = Object.values(
-  allowanceCommissionStatusesEnum
+export const applicationsStatusesEnumList = Object.values(
+  applicationsStatusesEnum
 ).sort((a, b) => a.localeCompare(b));
 
-export const allowanceCommissionStatusesListWithCode = Object.entries(
-  allowanceCommissionStatusesEnum
-).map(([_, name]) => ({
+export const applicationsStatusesEnumListWithCode = Object.entries(
+  applicationsStatusesEnum
+).map(([code, name]) => ({
   code: name,
   name,
 }));

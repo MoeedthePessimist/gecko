@@ -9,4 +9,6 @@ export const QUERY_KEYS = {
   CLAIM_TYPES: (id: string) => ["claim-types", id],
   CLAIMS: (id: string) => ["claims", id],
   COMMISSIONS: ["commissions"],
+  LEAVE_DETAILS: (id: string) => ["leave-details", id],
+  LEAVES: (id: string) => ["leaves", id],
 };
