@@ -4,8 +4,11 @@ import DashboardCalendar from "@/components/dashboard-big-calendar";
 import AccumulationCard from "@/components/dashboard-cards/accumulation-card";
 import LeaveCard from "@/components/dashboard-cards/leave-card";
 import { Card } from "@/components/ui/card";
+import { DataTable } from "@/components/ui/data-table";
+import useLeave from "@/hooks/use-leave";
 import { CalendarEventType } from "@/types/common.type";
-import React from "react";
+import { LeaveWithNecessaryFields } from "@/types/leave.type";
+import React, { useState } from "react";
 
 const events: CalendarEventType[] = [
   {
@@ -25,10 +28,14 @@ const events: CalendarEventType[] = [
 ];
 
 const AdminPage = () => {
+  const [leaves, setLeaves] = useState<Array<LeaveWithNecessaryFields>>([]);
+  const { columns } = useLeave(setLeaves, undefined, true);
+
   return (
     <div className="flex flex-col w-full gap-2">
       {/* Leave notification */}
-      <LeaveCard />
+      {/* <LeaveCard /> */}
+      <DataTable columns={columns} data={leaves} />
 
       {/*
        * claims
