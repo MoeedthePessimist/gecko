@@ -35,4 +35,5 @@ export const API = {
   APPROVE_LEAVE: (id: string) => `leave/approve/${id}`,
   GET_LEAVES: () => `leave`,
   GET_LEAVE_DETAILS: (id: string) => `leave/user/${id}`,
+  GET_ADMIN_DASHBOARD_DATA: () => `dashboard`,
 };

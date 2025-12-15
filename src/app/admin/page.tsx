@@ -5,36 +5,28 @@ import AccumulationCard from "@/components/dashboard-cards/accumulation-card";
 import LeaveCard from "@/components/dashboard-cards/leave-card";
 import { Card } from "@/components/ui/card";
 import { DataTable } from "@/components/ui/data-table";
+import { rolesEnum } from "@/enums/roles.enum";
+import useDashboard from "@/hooks/use-dashboard";
 import useLeave from "@/hooks/use-leave";
 import { CalendarEventType } from "@/types/common.type";
 import { LeaveWithNecessaryFields } from "@/types/leave.type";
 import React, { useState } from "react";
 
-const events: CalendarEventType[] = [
-  {
-    id: "1",
-    title: "Sick Leave - John",
-    start: new Date(2025, 11, 12),
-    end: new Date(2025, 11, 14),
-    type: "Annual leave",
-  },
-  {
-    id: "2",
-    title: "National Day",
-    start: new Date(2025, 11, 23),
-    end: new Date(2025, 11, 23),
-    type: "Study leave",
-  },
-];
-
 const AdminPage = () => {
-  const [leaves, setLeaves] = useState<Array<LeaveWithNecessaryFields>>([]);
-  const { columns } = useLeave(setLeaves, undefined, true);
+  const {
+    leaves,
+    columns,
+    events,
+    totalAnnualLeaves,
+    totalClaimsAmount,
+    totalMedicalLeaves,
+  } = useDashboard(rolesEnum.ADMIN);
+
+  console.log(events);
 
   return (
     <div className="flex flex-col w-full gap-2">
       {/* Leave notification */}
-      {/* <LeaveCard /> */}
       <DataTable columns={columns} data={leaves} />
 
       {/*
@@ -44,26 +36,26 @@ const AdminPage = () => {
        * annual leaves
        */}
 
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <AccumulationCard
           title="Claims"
-          accumulationContent="$25,000"
+          accumulationContent={`$${totalClaimsAmount}`}
           accumulationPercentage="+20.1%"
         />
-        <AccumulationCard
+        {/* <AccumulationCard
           title="Commissions"
           accumulationContent="$135,000"
           accumulationPercentage="+20.1%"
           colorClasses="bg-white text-primary"
-        />
+        /> */}
         <AccumulationCard
           title="Medical Leave"
-          accumulationContent="30 Leaves"
+          accumulationContent={`${totalMedicalLeaves} Leaves`}
           accumulationPercentage="+20.1%"
         />
         <AccumulationCard
           title="Annual Leave"
-          accumulationContent="40 Leaves"
+          accumulationContent={`${totalAnnualLeaves} Leaves`}
           accumulationPercentage="+20.1%"
           colorClasses="bg-white text-primary"
         />
@@ -74,7 +66,7 @@ const AdminPage = () => {
        * remaining leave balance
        */}
 
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card className="flex items-center justify-center">
           Employee Salary for the month
         </Card>
@@ -83,11 +75,10 @@ const AdminPage = () => {
             Remaining Leave Balance
           </Card>
           <Card className="flex justify-center items-center">
-            {/* <Calendar /> */}
             Calendar
           </Card>
         </div>
-      </div>
+      </div> */}
 
       {/* Calendar showing leave dates, and public holidays */}
       <DashboardCalendar events={events} />
