@@ -198,3 +198,14 @@ export type UserLeaveDetailsType = {
 
 export type MutateGetUserLeaveDetailsResponseType =
   ApiResponseType<UserLeaveDetailsType>;
+
+/**
+ * DASHBOARD API
+ */
+
+export type GetAdminDashboardDataResponseType = ApiResponseType<{
+  annualLeavesCount: number;
+  medicalLeavesCount: number;
+  claimsTotal: number;
+  leaves: Array<LeaveWithNecessaryFields>;
+}>;

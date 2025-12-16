@@ -11,4 +11,5 @@ export const QUERY_KEYS = {
   COMMISSIONS: ["commissions"],
   LEAVE_DETAILS: (id: string) => ["leave-details", id],
   LEAVES: (id: string) => ["leaves", id],
+  ADMIN_DASHBOARD: (id: string) => ["admin-dashboard", id],
 };

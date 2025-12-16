@@ -35,7 +35,8 @@ const initialFormState = {
 
 const useLeave = (
   setLeaves: React.Dispatch<Array<Leave>>,
-  setSelectedUserDetails: React.Dispatch<UserLeaveDetailsType>
+  setSelectedUserDetails?: React.Dispatch<UserLeaveDetailsType>,
+  isDashboard?: boolean
 ) => {
   const columns: ColumnDef<LeaveWithNecessaryFields>[] = [
     {
@@ -161,10 +162,12 @@ const useLeave = (
       cell: ({ row }) => {
         const claim = row.original;
         return (
-          <div className="flex gap-2 cursor-pointer">
-            <Edit size={20} onClick={() => onClickEdit(claim)} />
-            <Trash size={20} onClick={() => onClickDelete(claim.id)} />
-          </div>
+          !isDashboard && (
+            <div className="flex gap-2 cursor-pointer">
+              <Edit size={20} onClick={() => onClickEdit(claim)} />
+              <Trash size={20} onClick={() => onClickDelete(claim.id)} />
+            </div>
+          )
         );
       },
     },
@@ -226,8 +229,7 @@ const useLeave = (
   const getUserLeaveDetailsMutation = useMutation({
     mutationFn: getLeaveDetails,
     onSuccess: (data) => {
-      console.log(data, "User leave details data");
-      setSelectedUserDetails(data.data);
+      setSelectedUserDetails && setSelectedUserDetails(data.data);
     },
     onError: (error: AxiosErrorWithMessage) => {
       console.error(error);
