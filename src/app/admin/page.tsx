@@ -1,16 +1,9 @@
 "use client";
-
 import DashboardCalendar from "@/components/dashboard-big-calendar";
 import AccumulationCard from "@/components/dashboard-cards/accumulation-card";
-import LeaveCard from "@/components/dashboard-cards/leave-card";
-import { Card } from "@/components/ui/card";
 import { DataTable } from "@/components/ui/data-table";
 import { rolesEnum } from "@/enums/roles.enum";
 import useDashboard from "@/hooks/use-dashboard";
-import useLeave from "@/hooks/use-leave";
-import { CalendarEventType } from "@/types/common.type";
-import { LeaveWithNecessaryFields } from "@/types/leave.type";
-import React, { useState } from "react";
 
 const AdminPage = () => {
   const {
@@ -40,23 +33,14 @@ const AdminPage = () => {
         <AccumulationCard
           title="Claims"
           accumulationContent={`$${totalClaimsAmount}`}
-          accumulationPercentage="+20.1%"
         />
-        {/* <AccumulationCard
-          title="Commissions"
-          accumulationContent="$135,000"
-          accumulationPercentage="+20.1%"
-          colorClasses="bg-white text-primary"
-        /> */}
         <AccumulationCard
           title="Medical Leave"
           accumulationContent={`${totalMedicalLeaves} Leaves`}
-          accumulationPercentage="+20.1%"
         />
         <AccumulationCard
           title="Annual Leave"
           accumulationContent={`${totalAnnualLeaves} Leaves`}
-          accumulationPercentage="+20.1%"
           colorClasses="bg-white text-primary"
         />
       </div>

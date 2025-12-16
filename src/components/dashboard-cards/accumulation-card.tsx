@@ -5,7 +5,7 @@ type AccumulationCardProps = {
   title: string;
   onClick?: () => void;
   accumulationContent: string;
-  accumulationPercentage: string;
+  accumulationPercentage?: string;
   colorClasses?: string;
 };
 
@@ -23,7 +23,9 @@ const AccumulationCard: React.FC<AccumulationCardProps> = ({
       </CardHeader>
       <CardContent>
         <p className="text-2xl font-bold">{accumulationContent}</p>
-        <p className="text-xs">{accumulationPercentage} from last month</p>
+        {accumulationPercentage && (
+          <p className="text-xs">{accumulationPercentage} from last month</p>
+        )}
       </CardContent>
     </Card>
   );
