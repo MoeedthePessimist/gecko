@@ -15,7 +15,8 @@ export const companyFormSchema = (isUpdate?: boolean) =>
     paidLeaves: z
       .number()
       .min(0, "Paid leaves must be a positive number")
-      .default(24),
+      .default(24)
+      .optional(),
     bank: bankFormSchema(isUpdate).optional(),
   });
 

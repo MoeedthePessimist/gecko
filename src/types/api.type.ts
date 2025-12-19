@@ -144,6 +144,11 @@ export type GetCompanyAdditionalDataResponseType = ApiResponseType<{
   users: Array<SelectOptionsType>;
 }>;
 
+export type MutateCompanyAdditionalDataResponseType = ApiResponseType<Company>;
+export type MutateCompanyAdditionalDataRequestType = {
+  data: Company;
+};
+
 /**
  * CLAIM TYPE API TYPES
  */

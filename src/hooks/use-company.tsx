@@ -1,13 +1,14 @@
 import { useTypedQuery } from "./use-query";
 import { QUERY_KEYS } from "@/constants/query-keys";
 import { useAuthContext } from "@/context/auth-context";
-import { getCompanyAdditionalData } from "@/api/company";
+import { getCompanyAdditionalData, mutateCompany } from "@/api/company";
 import { useGlobalModal } from "@/context/error-context";
 import { useRouter } from "next/router";
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CompanyFormInputs, companyFormSchema } from "@/schemas/company-schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { AxiosErrorWithMessage } from "@/types/common.type";
 
 const useCompany = () => {
   const { user } = useAuthContext();
@@ -50,8 +51,24 @@ const useCompany = () => {
     enabled: !!companyId,
   });
 
+  const mutateCompanyMutation = useMutation({
+    mutationFn: mutateCompany,
+    onSuccess: (data) => {
+      console.log("Company mutated:", data);
+      showSuccess("Company mutated successfully!");
+    },
+    onError: (error: AxiosErrorWithMessage) => {
+      console.error("Error mutating company:", error);
+      showError(
+        error.response?.data.message ||
+          "Failed to mutate company. Please try again."
+      );
+    },
+  });
+
   return {
     getCompanyAdditionalDataQuery,
+    mutateCompanyMutation,
   };
 };
 
