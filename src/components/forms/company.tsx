@@ -86,15 +86,6 @@ const CompanyForm: React.FC<CompanyFormProps> = ({ control }) => {
           label="UEN"
         />
 
-        {/* Paid Leaves */}
-        <ControlledInput<CompanyFormInputs>
-          control={control}
-          name={"paidLeaves"}
-          placeholder="Enter Paid Leaves"
-          label="Paid Leaves"
-          type="number"
-        />
-
         {/* Bank Section Header */}
         <div className="md:col-span-2 mt-4">
           <h3 className="text-lg font-semibold mb-2 text-gray-700">

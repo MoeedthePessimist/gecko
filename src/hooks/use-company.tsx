@@ -30,8 +30,7 @@ const useCompany = () => {
       organizationIdType: company?.organizationIdType || "",
       csn: company?.csn || "",
       uen: company?.uen || "",
-      logo: company?.logo || "",
-      paidLeaves: company?.paidLeaves ?? 24,
+
       bank:
         company?.bank && typeof company?.bank !== "string"
           ? {
@@ -43,8 +42,6 @@ const useCompany = () => {
           : undefined,
     },
   });
-
-  console.log(companyForm.formState.errors);
 
   const getCompanyAdditionalDataQuery = useTypedQuery({
     queryKey: [QUERY_KEYS.COMPANY_ADDITIONAL_DATA(companyId)],
@@ -70,7 +67,16 @@ const useCompany = () => {
   });
 
   const onSubmitCompanyForm = (data: CompanyFormInputs) => {
-    console.log(data);
+    const { bank, ...rest } = data;
+    const companyData = {
+      ...rest,
+      bankId: bank?.id || "",
+      bankName: bank?.bankName,
+      bankAccountNumber: bank?.bankAccountNumber,
+      bankSwiftCode: bank?.bankSwiftCode,
+    };
+
+    mutateCompanyMutation.mutate(companyData);
   };
 
   useEffect(() => {
@@ -85,8 +91,6 @@ const useCompany = () => {
         organizationIdType: company?.organizationIdType || "",
         csn: company?.csn || "",
         uen: company?.uen || "",
-        logo: company?.logo || "",
-        paidLeaves: company?.paidLeaves ?? 24,
         bank:
           company?.bank && typeof company?.bank !== "string"
             ? {

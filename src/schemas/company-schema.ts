@@ -18,7 +18,9 @@ export const companyFormSchema = (isUpdate?: boolean) =>
         "Please enter a valid telephone number (Example: +1 234-567-8901, (021) 3456789, 1234567890)"
       ),
     address: z.string().optional(),
-    organizationIdType: z.string().optional(),
+    organizationIdType: z
+      .string()
+      .nonempty("Please select organization ID type"),
     csn: z.string().optional(),
     uen: z
       .string()
@@ -27,12 +29,7 @@ export const companyFormSchema = (isUpdate?: boolean) =>
         "Please enter a valid UEN number (Example: T08LL0001A, 12345678A)"
       )
       .nonempty("Please enter a registration number"),
-    logo: z.string().optional(),
-    paidLeaves: z
-      .number()
-      .min(0, "Paid leaves must be a positive number")
-      .default(24)
-      .optional(),
+
     bank: bankFormSchema(isUpdate).optional(),
   });
 

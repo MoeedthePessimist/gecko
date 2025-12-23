@@ -10,8 +10,6 @@ const CompanyUpsertPage = () => {
   const { companyForm, mutateCompanyMutation, onSubmitCompanyForm } =
     useCompanyManagement();
 
-  console.log(companyForm.formState.errors);
-
   return (
     <div className="container mx-auto py-8 px-4">
       <Card>
@@ -32,7 +30,10 @@ const CompanyUpsertPage = () => {
               </Button>
               <Button
                 disabled={mutateCompanyMutation.isPending}
-                onClick={() => companyForm.handleSubmit(onSubmitCompanyForm)}
+                onClick={() => {
+                  console.log(companyForm.formState.errors);
+                  companyForm.handleSubmit(onSubmitCompanyForm)();
+                }}
               >
                 {mutateCompanyMutation.isPending ? (
                   <>

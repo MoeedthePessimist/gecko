@@ -3,6 +3,7 @@ import { API } from "@/constants/api";
 import { CompanyFormInputs } from "@/schemas/company-schema";
 import {
   GetCompanyAdditionalDataResponseType,
+  MutateCompanyAdditionalDataRequestType,
   MutateCompanyAdditionalDataResponseType,
 } from "@/types/api.type";
 
@@ -14,7 +15,7 @@ export const getCompanyAdditionalData = async (
 };
 
 export const mutateCompany = async (
-  data: CompanyFormInputs
+  data: MutateCompanyAdditionalDataRequestType["data"]
 ): Promise<MutateCompanyAdditionalDataResponseType> => {
   const response = await api.post(API.MUTATE_COMPANY, data);
   return response.data;
