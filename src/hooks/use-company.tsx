@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AxiosErrorWithMessage } from "@/types/common.type";
 import { useEffect } from "react";
+import { User } from "@/types/user.type";
 
 const useCompany = () => {
   const { user, setUser } = useAuthContext();
@@ -54,6 +55,10 @@ const useCompany = () => {
     onSuccess: (data) => {
       console.log("Company mutated:", data);
       showSuccess("Company mutated successfully!");
+      setUser({
+        ...user,
+        company: data.data,
+      } as unknown as User);
 
       //Reset user's company in global context
     },
