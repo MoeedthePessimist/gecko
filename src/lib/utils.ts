@@ -23,8 +23,14 @@ export const getFirstAlphabets = (text: string) => {
     .join("");
 };
 
-export const formatRoles = (roles: rolesEnum[]): string[] =>
-  JSON.parse(roles[0]) as string[];
+export const formatRoles = (roles: rolesEnum[]): string[] => {
+  console.log(roles, "roles");
+  if (roles.length === 0) return [];
+  if (typeof roles[0] === "string") {
+    return roles as string[];
+  }
+  return JSON.parse(roles[0]) as string[];
+};
 
 export const getAdminsWithSelectedFields = (
   fetchedUsers: Array<User>
