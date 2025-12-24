@@ -22,6 +22,11 @@ export const API = {
   UPDATE_EMPLOYEE: (id: string) => `user/employee/${id}`,
   GET_COMPANY_ADDITIONAL_DATA: (companyId: string) =>
     `/company/data/${companyId}`,
+  // Company API endpoints
+  MUTATE_COMPANY: "/company",
+  GET_COMPANY: (id: string) => `/company/${id}`,
+  UPDATE_COMPANY: (id: string) => `/company/${id}`,
+  DELETE_COMPANY: (id: string) => `/company/${id}`,
   GET_CLAIM_TYPES: `claim-type`,
   GET_CLAIMS: `claim`,
   MUTATE_CLAIM: `claim`,

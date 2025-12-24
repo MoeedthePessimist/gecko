@@ -1,5 +1,5 @@
 import { EmployeeFormInputs } from "@/schemas/employee-schema";
-import { Company } from "./company.type";
+import { Company, CompanyWithNecessaryFields } from "./company.type";
 import { Contact } from "./contact.type";
 import { Document } from "./document.type";
 import { Qualification } from "./qualification.type";
@@ -143,6 +143,16 @@ export type GetCompanyAdditionalDataResponseType = ApiResponseType<{
   departments: Array<SelectOptionsType>;
   users: Array<SelectOptionsType>;
 }>;
+
+export type MutateCompanyAdditionalDataResponseType = ApiResponseType<Company>;
+export type MutateCompanyAdditionalDataRequestType = {
+  data: CompanyWithNecessaryFields & {
+    bankId: string;
+    bankName?: string;
+    bankAccountNumber?: string;
+    bankSwiftCode?: string;
+  };
+};
 
 /**
  * CLAIM TYPE API TYPES

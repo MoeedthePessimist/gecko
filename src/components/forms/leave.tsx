@@ -62,7 +62,6 @@ const LeaveForm: React.FC<LeaveFormProps> = ({
           placeholder="Total days of leave"
           label="Total Days"
           type="number"
-          contentEditable={false}
         />
 
         <MultiSelect

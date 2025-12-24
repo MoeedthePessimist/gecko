@@ -3,6 +3,7 @@ import { companyEntitiesEnum } from "@/enums/company-entities.enum";
 import { industriesEnum } from "@/enums/industries.enum";
 import { organizationIdTypesEnum } from "@/enums/organization-id-types.enum";
 import { User } from "./user.type";
+import { BankWithNecessaryFields } from "./bank.type";
 
 export type Company = BaseType & {
   name: string;
@@ -30,6 +31,9 @@ export type Company = BaseType & {
   payslips?: string[];
   resignations?: string[];
   terminationsTypes?: string[];
+  paidLeaves?: number;
+  bank?: string | BankWithNecessaryFields;
+  logo?: string;
 };
 
 export type CompanyWithNecessaryFields = Omit<
