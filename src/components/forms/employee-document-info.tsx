@@ -112,7 +112,7 @@ const EmployeeDocumentInformationForm: React.FC<
 
   useEffect(() => {
     if (uploadMutation.isSuccess) {
-      setValue("fileName", uploadMutation.data.data.fileName);
+      setValue("fileName", uploadMutation.data.data.url);
     }
   }, [uploadMutation.isSuccess]);
 

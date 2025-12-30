@@ -112,7 +112,9 @@ UPLOAD API TYPES
 */
 export type UploadFileApiResponseType = ApiResponseType<{
   fileName: string;
-  fileSize: string | number;
+  size: string | number;
+  url: string;
+  key: string;
 }>;
 
 /**

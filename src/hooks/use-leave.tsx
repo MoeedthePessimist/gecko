@@ -340,7 +340,7 @@ const useLeave = (
 
   useEffect(() => {
     if (isUploadSuccess) {
-      leaveForm.setValue("file", uploadData.data.fileName);
+      leaveForm.setValue("file", uploadData.data.url);
     }
   }, [isUploadSuccess]);
 

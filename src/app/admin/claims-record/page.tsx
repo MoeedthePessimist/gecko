@@ -50,7 +50,7 @@ const ClaimsRecordPage = () => {
 
   useEffect(() => {
     if (isUploadSuccess) {
-      claimForm.setValue("fileName", uploadData.data.fileName);
+      claimForm.setValue("fileName", uploadData.data.url);
     }
   }, [isUploadSuccess]);
 
