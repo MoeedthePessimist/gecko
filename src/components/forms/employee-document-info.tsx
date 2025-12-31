@@ -59,7 +59,7 @@ const EmployeeDocumentInformationForm: React.FC<
   const { uploadMutation } = useUpload();
 
   const handleUpload = (file: File) => {
-    uploadMutation.mutate(file);
+    uploadMutation.mutate({ file });
   };
 
   const onCreate = (document: DocumentFormInputs) => {

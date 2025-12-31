@@ -60,7 +60,7 @@ export default function ImageUploader({
         };
         reader.readAsDataURL(file);
 
-        uploadMutation.mutate(file);
+        uploadMutation.mutate({ file, isPublic: "true" });
       } catch (err) {
         setError("Failed to upload image");
         console.error("Upload error:", err);

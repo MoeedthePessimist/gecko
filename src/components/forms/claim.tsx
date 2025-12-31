@@ -19,7 +19,7 @@ type ClaimFormProps = {
   uploadMutate: UseMutateFunction<
     UploadFileApiResponseType,
     Error,
-    File,
+    { file: File; isPublic?: string },
     unknown
   >;
 };
@@ -56,7 +56,7 @@ const ClaimForm: React.FC<ClaimFormProps> = ({
   } = useEmployeeManagement();
 
   const handleUpload = (file: File) => {
-    uploadMutate(file);
+    uploadMutate({ file });
   };
 
   useEffect(() => {

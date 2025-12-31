@@ -335,7 +335,7 @@ const useLeave = (
   };
 
   const handleUpload = (file: File) => {
-    uploadMutate(file);
+    uploadMutate({ file });
   };
 
   useEffect(() => {
