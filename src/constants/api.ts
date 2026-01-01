@@ -10,7 +10,8 @@ export const API = {
   GET_CONTACT: "/contact",
   UPDATE_CONTACT: (id: string) => `/contact/${id}`,
   DELETE_CONTACT: (id: string) => `/contact/${id}`,
-  UPLOAD: "/upload",
+  UPLOAD: (isPublic?: string) =>
+    `/upload${isPublic ? `?isPublic=${isPublic}` : ""}`,
   CREATE_DOCUMENT: "/document",
   GET_DOCUMENT: "/document",
   UPDATE_DOCUMENT: (id: string) => `/document/${id}`,

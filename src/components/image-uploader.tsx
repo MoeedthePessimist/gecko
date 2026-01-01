@@ -26,7 +26,7 @@ export default function ImageUploader({
   className,
 }: ImageUploaderProps) {
   const [preview, setPreview] = useState<string | null>(
-    `${env.axios.CDN_URL}${currentImage}` || null
+    `${currentImage}` || null
   );
   const [, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -60,7 +60,7 @@ export default function ImageUploader({
         };
         reader.readAsDataURL(file);
 
-        uploadMutation.mutate(file);
+        uploadMutation.mutate({ file, isPublic: "true" });
       } catch (err) {
         setError("Failed to upload image");
         console.error("Upload error:", err);
@@ -92,7 +92,7 @@ export default function ImageUploader({
   useEffect(() => {
     if (uploadMutation.isSuccess) {
       console.log(uploadMutation.data.data);
-      onImageUpload && onImageUpload(uploadMutation.data.data.fileName);
+      onImageUpload && onImageUpload(uploadMutation.data.data.url);
     }
   }, [uploadMutation.isSuccess]);
 

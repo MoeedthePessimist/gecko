@@ -335,12 +335,12 @@ const useLeave = (
   };
 
   const handleUpload = (file: File) => {
-    uploadMutate(file);
+    uploadMutate({ file });
   };
 
   useEffect(() => {
     if (isUploadSuccess) {
-      leaveForm.setValue("file", uploadData.data.fileName);
+      leaveForm.setValue("file", uploadData.data.url);
     }
   }, [isUploadSuccess]);
 
